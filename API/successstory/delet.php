@@ -8,9 +8,9 @@ header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $userid = $data['UserID'];
-    if (isset($userid)) {
-        $sql = "DELETE FROM user WHERE RoleID=2 AND UserID=$userid";
+    $StoryID  = $data['StoryID'];
+    if (isset($StoryID)) {
+        $sql = "DELETE FROM successstory WHERE   	StoryID =$StoryID ";
 
         // Perform the database operation
         $result = mysqli_query($conn, $sql);

@@ -11,31 +11,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if required fields are set
     if (
-        isset($data['StoreID']) &&
-        isset($data['ProductName']) &&
-        isset($data['Description']) &&
-        isset($data['Price']) &&
-        isset($data['Quantity']) &&
-        isset($data['IsAntique'])
+        isset($data['UserID']) &&   // Assuming UserID is the parameter for the user
+        isset($data['StoryText'])   // Assuming StoryText is the text of the story
     ) {
         // Use prepared statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO product (StoreID, ProductName, Description, Price, Quantity, IsAntique) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("isssii", $data['StoreID'], $data['ProductName'], $data['Description'], $data['Price'], $data['Quantity'], $data['IsAntique']);
+        $stmt = $conn->prepare("INSERT INTO successstory (UserID, StoryText, DatePublished) VALUES (?, ?, NOW())");
+        $stmt->bind_param("is", $data['UserID'], $data['StoryText']);
 
         if ($stmt->execute()) {
-            echo "data inserted successfully";
+            echo "Story inserted successfully";
 
             // You should probably return the inserted data as JSON, so encode and echo it
             echo json_encode($data);
         } else {
-            echo "data not inserted: " . $stmt->error;
+            echo "Story not inserted: " . $stmt->error;
         }
 
         // Close the statement
         $stmt->close();
     } else {
-        echo "required fields not set";
+        echo "Required fields not set";
     }
 } else {
-    echo "request method false";
+    echo "Request method false";
 }
+?>
+<!-- {
+  "UserID": 5,   from  frontend
+  "StoryText": "This is a test story. It can be a longer piece of text describing the success story."
+} -->
