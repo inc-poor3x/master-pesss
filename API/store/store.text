@@ -1,0 +1,185 @@
+
+
+*********************************store************************************
+
+default URL:"localhost\Master-pes\master-pesss\API\store"
+
+1. create.php
+Method: POST
+Endpoint: localhost\Master-pes\master-pesss\API\store\create.php
+Description:
+Validates input data for creating a new store.
+Inserts a new store into the database.
+
+
+
+JSON Test Request:
+{
+  "UserID": 1,
+  "StoreName": "New Store",
+  "Category": "Electronics",
+  "IsActive": 1,
+  "StoreImage": "store_image_url.jpg"
+}
+
+
+
+
+JSON Success Response:
+{
+  "message": "Store created successfully"
+}
+
+
+JSON Error Response:
+{
+  "error": "Error creating store: Database error message here"
+}
+
+
+/////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////
+2. delete.php
+Method: DELETE
+Endpoint: localhost\Master-pes\master-pesss\API\store\delete.php
+Description:
+Deletes a store based on the provided store_id parameter from the request URL.
+
+JSON Success Response:
+{
+  "message": "Store deleted successfully"
+}
+
+
+JSON Error Response:
+{
+  "error": "Failed to delete store"
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+3. is_active.php
+Method: PUT
+Endpoint: localhost\Master-pes\master-pesss\API\store\is_active.php
+Description:
+Updates the IsActive status of a store based on the provided storeID and isActive parameters.
+
+JSON Test Request:
+{
+  "storeID": 1,
+  "isActive": 1
+}
+
+
+
+JSON Success Response:
+{
+    "success": "Store status updated successfully"
+}
+
+
+JSON Error Response:
+{
+    "error": "Error updating store status: Database error message here"
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+4. show.php
+Method: GET
+Endpoint: localhost\Master-pes\master-pesss\API\store\show.php
+Description:
+Retrieves information about either a specific store (if storeID is provided) or all active stores.
+
+JSON Success Response (Single Store):
+{
+  "StoreID": 1,
+  "UserID": 1,
+  "StoreName": "Sample Store",
+  "Category": "Clothing",
+  "StoreImage": "store_image_url.jpg",
+  "IsActive": 2
+}
+JSON Success Response (Multiple Stores):
+[
+  {
+    "StoreID": 1,
+    "UserID": 1,
+    "StoreName": "Sample Store",
+    "Category": "Clothing",
+    "StoreImage": "store_image_url.jpg",
+    "IsActive": 2
+  },
+  {
+    "StoreID": 2,
+    "UserID": 2,
+    "StoreName": "Another Store",
+    "Category": "Electronics",
+    "StoreImage": "store_image_url2.jpg",
+    "IsActive": 2
+  }
+]
+JSON Error Response:
+{
+  "error": "Active store not found"
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+5. update.php
+Method: PUT
+Endpoint: localhost\Master-pes\master-pesss\API\store\update.php
+Description:
+Updates information for a specific store based on the provided store_id and new data.
+
+JSON Test Request:
+{
+  "store_id": 1,
+  "new_store_name": "Updated Store",
+  "new_category": "Books",
+  "new_is_active": 1,
+  "new_store_image": "updated_store_image.jpg"
+}
+JSON Success Response:
+{
+  "message": "Store updated successfully"
+}
+JSON Error Response:
+
+{
+  "error": "Failed to update store. MySQL Error: Database error message here"
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+Additional Notes:
+The code includes headers for handling Cross-Origin Resource Sharing (CORS).
+Input data is received as JSON and is validated before processing.
+Prepared statements are used to prevent SQL injection.
+The update endpoint (update.php) allows partial updates based on the provided parameters.
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+Recommendations:
+Ensure that the database connection (conction.php) is correctly configured and secure.
+Implement authentication and authorization mechanisms to secure your API endpoints.
+Consider logging errors and activities for better troubleshooting.
+Review and test the code for potential security vulnerabilities.

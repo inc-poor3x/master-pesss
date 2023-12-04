@@ -15,10 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $storeName = $data['StoreName'];
         $category = $data['Category'];
         $isActive = $data['IsActive'];
+        $storeImage = !empty($data['StoreImage']) ? $data['StoreImage'] : null;
 
         // Insert new store into the database
-        $sql = "INSERT INTO `store` (`UserID`, `StoreName`, `Category`, `IsActive`) 
-                VALUES ('$userId', '$storeName', '$category', '$isActive')";
+        $sql = "INSERT INTO `store` (`UserID`, `StoreName`, `Category`, `StoreImage`, `IsActive`) 
+                VALUES ('$userId', '$storeName', '$category', '$storeImage', '$isActive')";
 
         if ($conn->query($sql) === TRUE) {
             echo json_encode(["message" => "Store created successfully"]);
@@ -31,12 +32,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     echo json_encode(["error" => "Invalid request method"]);
 }
-
 ?>
-
-<!-- {
-  "UserID": 5,
-  "StoreName": "Test Store",
-  "Category": "Electronics",
-  "IsActive": 1
-} -->

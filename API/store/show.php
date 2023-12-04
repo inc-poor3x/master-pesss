@@ -3,7 +3,7 @@
 include '../conction.php';
 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS");
+header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $storeId = $_GET['storeID'];
 
         // Use prepared statement to prevent SQL injection
-        $sql = "SELECT * FROM `store` WHERE `StoreID` = ?";
+        $sql = "SELECT * FROM `store` WHERE `StoreID` = ? AND `IsActive` = 2";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $storeId);
         $stmt->execute();
@@ -23,13 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $storeData = $result->fetch_assoc();
             echo json_encode($storeData);
         } else {
-            echo json_encode(["error" => "Store not found"]);
+            echo json_encode(["error" => "Active store not found"]);
         }
 
         $stmt->close();
     } else {
-        // If no specific storeID is provided, fetch and display all stores
-        $sql = "SELECT * FROM `store`";
+        // If no specific storeID is provided, fetch and display all active stores
+        $sql = "SELECT * FROM `store` WHERE `IsActive` = 2";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
             echo json_encode($stores);
         } else {
-            echo json_encode(["error" => "No stores found"]);
+            echo json_encode(["error" => "No active stores found"]);
         }
     }
 } else {

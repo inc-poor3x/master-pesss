@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $newStoreName = isset($requestData['new_store_name']) ? $requestData['new_store_name'] : null;
     $newCategory = isset($requestData['new_category']) ? $requestData['new_category'] : null;
     $newIsActive = isset($requestData['new_is_active']) ? $requestData['new_is_active'] : null;
+    $newStoreImage = isset($requestData['new_store_image']) ? $requestData['new_store_image'] : null;
 
-    if ($storeIdToUpdate && ($newStoreName || $newCategory || $newIsActive)) {
+    if ($storeIdToUpdate && ($newStoreName || $newCategory || $newIsActive || $newStoreImage)) {
         $updateClause = "";
 
         if ($newStoreName) {
@@ -30,6 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
         if ($newIsActive) {
             $updateClause .= "IsActive = $newIsActive, ";
+        }
+
+        if ($newStoreImage) {
+            $updateClause .= "StoreImage = '$newStoreImage', ";
         }
 
         // Remove trailing comma and space
@@ -58,9 +63,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 }
 
 ?>
-<!-- {
-    "store_id": 1,
-    "new_store_name": "Updated Store Name",
-    "new_category": "Updated Category",
-    "new_is_active": 1
-} -->
