@@ -1,0 +1,89 @@
+1. Create API:
+Endpoint: http://your_server/Master-pes/master-pesss/API/proudcte/create.php
+JSON Test:
+json
+
+{
+  "StoreID": 1,
+  "ProductName": "Sample Product",
+  "Description": "This is a sample product",
+  "Price": 19.99,
+  "Quantity": 10,
+  "IsAntique": false
+}
+Description:
+Method: POST
+Purpose: Create a new product.
+Required Fields:
+StoreID
+ProductName
+Description
+Price
+Quantity
+IsAntique
+Response: JSON with success message or error message.
+///////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+2. Delete API:
+Endpoint: http://your_server/Master-pes/master-pesss/API/proudcte/delete.php
+JSON Test:
+json
+
+{
+  "ProductID": 1
+}
+Description:
+Method: DELETE
+Purpose: Delete a product by ProductID.
+Required Fields:
+ProductID
+Response: JSON with success message if deleted successfully, or error message.
+///////////////////////////////////////////////////////////
+
+3. Show API:
+Endpoint: http://your_server/Master-pes/master-pesss/API/proudcte/show.php
+Description:
+Method: GET
+Purpose: Retrieve a list of all products.
+Response: JSON array containing product information or a message if no data is available.
+///////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+4. Update API:
+Endpoint: http://your_server/Master-pes/master-pesss/API/proudcte/update.php
+JSON Test:
+json
+
+{
+  "productID": 1,
+  "StoreID": 2,
+  "ProductName": "Updated Product",
+  "Description": "This product has been updated",
+  "Price": 24.99,
+  "Quantity": 15
+}
+Description:
+Method: PUT
+Purpose: Update an existing product by ProductID.
+Required Fields:
+productID
+Optional Fields:
+StoreID
+ProductName
+Description
+Price
+Quantity
+Response: JSON with success message if updated successfully, or error message.
+////////////////////////////////////////////////////////////////////////////////////////

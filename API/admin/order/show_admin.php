@@ -1,11 +1,3 @@
-<!-- SELECT o.*,u.UserName
-FROM `order` o
-JOIN `user` u ON u.UserID =o.UserID
-
-SELECT o.*,u.UserName
-FROM `order` o
-JOIN `user` u ON u.UserID =o.UserID
-WHERE o.UserID =5 -->
 
 
 <?php

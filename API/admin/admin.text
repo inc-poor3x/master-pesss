@@ -1,0 +1,223 @@
+1. Create Category
+Endpoint: /admin/category/create.php
+Description: Adds a new category to the system.
+Request Method: POST
+Request Body:
+json
+
+{
+  "Category_name": "ExampleCategory"
+}
+Response:
+json
+
+{
+  "message": "Category added successfully"
+}
+////////////////////////////////////////////////////////////
+2. Delete Category
+Endpoint: /admin/category/delete.php
+Description: Deletes a category by its ID.
+Request Method: POST
+Request Body:
+json
+
+{
+  "categoryID": 1
+}
+Response:
+json
+
+{
+  "message": "Category deleted successfully"
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+3. Show Categories
+Endpoint: /admin/category/show.php
+Description: Retrieves all categories.
+Request Method: GET
+Response:
+json
+
+[
+  {
+    "CategoryID": 1,
+    "Category_name": "ExampleCategory"
+  },
+  {
+    "CategoryID": 2,
+    "Category_name": "AnotherCategory"
+  }
+]
+////////////////////////////////////////////////////////////////////////////
+4. Show Orders (Admin)
+Endpoint: /admin/order/show_admin.php
+Description: Retrieves all orders with user information.
+Request Method: GET
+Response:
+json
+
+[
+  {
+    "OrderID": 1,
+    "UserID": 1,
+    "UserName": "ExampleUser",
+    "TotalPrice": 50.00,
+    "OrderDate": "2023-01-01 12:00:00"
+  },
+  // ...more orders
+]
+/////////////////////////////////////////////////////////////////////////////////
+5. Checkout Order Items
+Endpoint: /admin/order_item/checkout.php
+Description: Processes a user's cart and creates an order with order items.
+Request Method: POST
+Request Body:
+json
+
+{
+  "UserID": 1
+}
+Response:
+json
+
+{
+  "OrderID": 2,
+  "TotalAmount": 75.00
+}
+///////////////////////////////////////////////////////////////////////
+6. Show Order Items for a User
+Endpoint: /admin/order_item/show.php
+Description: Retrieves order items with user and product information for a specific user.
+Request Method: POST
+Request Body:
+json
+
+{
+  "UserID": 1
+}
+Response:
+json
+
+[
+  {
+    "OrderItemID": 1,
+    "ProductID": 1,
+    "Quantity": 2,
+    "Price": 25.00,
+    "ProductName": "ExampleProduct"
+  },
+  // ...more order items
+]
+///////////////////////////////////////////////////////////////
+7. Delete Rating
+Endpoint: /admin/rating/delete.php
+Description: Deletes a rating by its ID.
+Request Method: DELETE
+Request Body:
+json
+
+{
+  "RatingID": 1
+}
+Response:
+
+Review deleted successfully
+/////////////////////////////////////////////////////////////////////////
+8. Show Ratings for a Product
+Endpoint: /admin/rating/show.php
+Description: Retrieves ratings for a specific product.
+Request Method: GET
+Request Body:
+json
+
+{
+  "ProductID": 1
+}
+Response:
+json
+
+[
+  {
+    "RatingID": 1,
+    "UserID": 1,
+    "UserName": "ExampleUser",
+    "ProductID": 1,
+    "Rating": 4,
+    "Comment": "Great product!"
+  },
+  // ...more ratings
+]
+//////////////////////////////////////////////////////////////
+9. Create User
+Endpoint: /admin/user_crud/create.php
+Description: Adds a new user to the system.
+Request Method: POST
+Request Body:
+json
+
+{
+  "UserName": "NewUser",
+  "Password": "password123",
+  "Email": "newuser@example.com",
+  "imag": "profile.jpg",
+  "IsActive": 1
+}
+Response:
+kotlin
+
+data inserted successfully
+////////////////////////////////////////////////////////////////////////
+10. Delete User
+Endpoint: /admin/user_crud/delete.php
+Description: Deletes a user by their ID.
+Request Method: DELETE
+Request Body:
+json
+
+{
+  "UserID": 3
+}
+Response:
+json
+
+{
+  "success": true,
+  "message": "User deleted successfully"
+}
+//////////////////////////////////////////////////////////////////////
+11. Show Users
+Endpoint: /admin/user_crud/show.php
+Description: Retrieves all users.
+Request Method: GET
+Response:
+json
+
+[
+  {
+    "UserID": 1,
+    "UserName": "ExampleUser",
+    "Email": "user@example.com",
+    // ...more user details
+  },
+  // ...more users
+]
+//////////////////////////////////////////////////////////////
+12. Update User
+Endpoint: /admin/user_crud/update.php
+Description: Updates user information by their ID.
+Request Method: PUT
+Request Body:
+json
+
+{
+  "userID": 1,
+  "UserName": "UpdatedUser",
+  "Email": "updateduser@example.com"
+}
+Response:
+json
+
+{
+  "message": "Record updated successfully"
+}

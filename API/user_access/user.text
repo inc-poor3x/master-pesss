@@ -1,0 +1,125 @@
+
+
+1. Endpoint: cart.php (Adding/Subtracting Products from Cart):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/cart/cart.php
+Method: POST
+Description: This endpoint allows users to add or subtract products from their shopping cart.
+Test JSON:
+
+json
+
+{
+  "UserID": 123,
+  "ProductID": 456,
+  "Quantity": 2,
+  "SubOrSum": 1
+}
+//////////////////////////////////////////////////////////////////////////////////
+2. Endpoint: show_user.php (Get Products in Cart):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/order/show_user.php
+Method: POST
+Description: Retrieves the list of products in the user's shopping cart.
+Test JSON:
+
+json
+
+{
+  "UserID": 123
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+3. Endpoint: checkout.php (Create Order from Cart):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/order_item/checkout.php
+Method: POST
+Description: Creates an order from the items in the user's shopping cart.
+Test JSON:
+
+json
+
+{
+  "UserID": 123
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+4. Endpoint: creat.php (Create Rating):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/rating/creat.php
+Method: POST
+Description: Allows users to create a rating for a product.
+Test JSON:
+
+json
+
+{
+  "UserID": 789,
+  "ProductID": 101,
+  "RatingValue": 4,
+  "Comment": "Great product!"
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+5. Endpoint: delet.php (Delete Rating):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/rating/delet.php
+Method: DELETE
+Description: Deletes a user's rating for a product.
+Test JSON:
+
+json
+
+{
+  "RatingID": 123
+}
+/////////////////////////////////////////////////////////////////////
+6. Endpoint: show.php (Get Ratings for a Product):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/rating/show.php
+Method: GET
+Description: Retrieves ratings for a specific product.
+Test JSON:
+
+json
+
+{
+  "ProductID": 101
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+7. Endpoint: creat.php (Create Success Story):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/successstory/creat.php
+Method: POST
+Description: Allows users to create a success story.
+Test JSON:
+
+json
+
+{
+  "UserID": 789,
+  "StoryText": "This is a test success story."
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+8. Endpoint: delet.php (Delete Success Story):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/successstory/delet.php
+Method: DELETE
+Description: Deletes a user's success story.
+Test JSON:
+
+json
+
+{
+  "StoryID": 456
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+9. Endpoint: show.php (Get Success Stories):
+Endpoint URL: http://your-domain.com/Master-pes/master-pesss/API/user_access/successstory/show.php
+Method: GET
+Description: Retrieves success stories.
+Test JSON:
+
+json
+
+{}  // No additional parameters needed for fetching all stories
+
+
+
+
+
+
+
+
+
