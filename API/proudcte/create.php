@@ -16,12 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         isset($data['Description']) &&
         isset($data['Price']) &&
         isset($data['Quantity']) &&
-        isset($data['categoryID'])
+        isset($data['categoryID'])&&
+        isset($data['Image'])
        
     ) {
         // Use prepared statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO product (StoreID, ProductName, Description, Price, Quantity, categoryID) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("isssii", $data['StoreID'], $data['ProductName'], $data['Description'], $data['Price'], $data['Quantity'], $data['categoryID']);
+        $stmt = $conn->prepare("INSERT INTO product (StoreID, ProductName, Description, Price, Quantity, categoryID,Image) VALUES (?, ?, ?, ?, ?, ?,?)");
+        $stmt->bind_param("isssiis", $data['StoreID'], $data['ProductName'], $data['Description'], $data['Price'], $data['Quantity'], $data['categoryID'],$data['Image']);
         
 
         if ($stmt->execute()) {
