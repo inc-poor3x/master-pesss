@@ -10,35 +10,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
     // Validate required fields
-    if (!empty($data['StoreID']) && !empty($data['UserID'])) {
-        $storeId = intval($data['StoreID']);
+    if (!empty($data['UserID'])) {
         $userId = intval($data['UserID']);
 
-        // Your SQL query to retrieve order items with user, product, store, and category information
-        $sql = "SELECT oi.*, u.UserName, p.ProductName, s.StoreName, c.Category_name
-                FROM `orderitem` oi
-                JOIN `order` o ON oi.OrderID = o.OrderID
-                JOIN `user` u ON u.UserID = o.UserID
-                JOIN `product` p ON p.ProductID = oi.product
-                JOIN `store` s ON s.StoreID = p.StoreID
-                JOIN `category` c ON c.categoryID = p.categoryID
-                WHERE s.StoreID = $storeId AND u.UserID = $userId";
+        // Your SQL query to retrieve user details
+        $sql = "SELECT u.*, s.StoreName, s.Category as StoreCategory
+                FROM `user` u
+                LEFT JOIN `store` s ON u.UserID = s.UserID
+                WHERE u.UserID = $userId";
 
         $result = $conn->query($sql);
 
         if ($result) {
-            $orderItems = array();
+            $userDetails = $result->fetch_assoc();
 
-            while ($row = $result->fetch_assoc()) {
-                $orderItems[] = $row;
+            if ($userDetails) {
+                echo json_encode($userDetails);
+            } else {
+                echo json_encode(["error" => "User not found"]);
             }
-
-            echo json_encode($orderItems);
         } else {
             echo json_encode(["error" => "Error executing query: " . $conn->error]);
         }
     } else {
-        echo json_encode(["error" => "Invalid or missing StoreID or UserID parameter"]);
+        echo json_encode(["error" => "Invalid or missing UserID parameter"]);
     }
 } else {
     echo json_encode(["error" => "Invalid request method"]);

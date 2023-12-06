@@ -19,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         }
 
         if (!empty($data['Password'])) {
-            $updateFields[] = "`Password`='{$data['Password']}'";
+            // Hash the new password
+            $hashedPassword = password_hash($data['Password'], PASSWORD_DEFAULT);
+            $updateFields[] = "`Password`='$hashedPassword'";
         }
 
         if (!empty($data['Email'])) {
@@ -28,10 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 
         if (!empty($data['RoleID'])) {
             $updateFields[] = "`RoleID`='{$data['RoleID']}'";
-        }
-
-        if (!empty($data['IsActive'])) {
-            $updateFields[] = "`IsActive`='{$data['IsActive']}'";
         }
 
         if (!empty($data['imag'])) {
@@ -46,7 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
             // Execute the query
             // Assuming $conn is your database connection
             if ($conn->query($sql) === TRUE) {
-                echo json_encode(["message" => "Record updated successfully"]);
+                if ($conn->affected_rows > 0) {
+                    echo json_encode(["message" => "Record updated successfully"]);
+                } else {
+                    echo json_encode(["error" => "User with ID {$userId} not found"]);
+                }
             } else {
                 echo json_encode(["error" => "Error updating record: " . $conn->error]);
             }
@@ -62,3 +64,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 } else {
     echo json_encode(["error" => "Invalid request method"]);
 }
+?>

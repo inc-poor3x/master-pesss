@@ -14,15 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         isset($data['UserName']) &&
         isset($data['Password']) &&
         isset($data['Email']) &&
-        isset($data['imag']) &&
-        isset($data['IsActive'])
+        isset($data['imag'])
     ) {
         // Hash the password
         $hashedPassword = password_hash($data['Password'], PASSWORD_DEFAULT);
 
         // Use prepared statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO user (UserName, Password, Email, imag, IsActive) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssi", $data['UserName'], $hashedPassword, $data['Email'], $data['imag'], $data['IsActive']);
+        $stmt = $conn->prepare("INSERT INTO user (UserName, Password, Email, imag) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $data['UserName'], $hashedPassword, $data['Email'], $data['imag']);
 
         if ($stmt->execute()) {
             echo "data inserted successfully";
@@ -41,5 +40,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     echo "request method false";
 }
-
-
+?>

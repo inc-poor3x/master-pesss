@@ -30,7 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $orderItems[] = $row;
             }
 
-            echo json_encode($orderItems);
+            if (!empty($orderItems)) {
+                echo json_encode($orderItems);
+            } else {
+                echo json_encode(["message" => "No order items found for the specified user ID"]);
+            }
         } else {
             echo json_encode(["error" => "Error retrieving order items: " . $conn->error]);
         }

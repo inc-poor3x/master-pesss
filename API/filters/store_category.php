@@ -10,35 +10,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
     // Validate required fields
-    if (!empty($data['StoreID']) && !empty($data['CategoryID'])) {
-        $storeId = intval($data['StoreID']);
-        $categoryId = intval($data['CategoryID']);
+    if (!empty($data['Category'])) {
+        $category = $data['Category'];
 
-        // Your SQL query to retrieve order items with user, product, store, and category information
-        $sql = "SELECT oi.*, u.UserName, p.ProductName, s.StoreName, c.Category_name
-                FROM `orderitem` oi
-                JOIN `order` o ON oi.OrderID = o.OrderID
-                JOIN `user` u ON u.UserID = o.UserID
-                JOIN `product` p ON p.ProductID = oi.product
-                JOIN `store` s ON s.StoreID = p.StoreID
-                JOIN `category` c ON c.categoryID = p.categoryID
-                WHERE s.StoreID = $storeId AND c.categoryID = $categoryId";
+        // Your SQL query to retrieve stores based on the category
+        $sql = "SELECT s.*, u.UserName as OwnerName
+                FROM `store` s
+                JOIN `user` u ON u.UserID = s.UserID
+                WHERE s.Category = ?";
 
-        $result = $conn->query($sql);
+        // Use prepared statement to prevent SQL injection
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $category);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result) {
-            $orderItems = array();
+            $stores = array();
 
             while ($row = $result->fetch_assoc()) {
-                $orderItems[] = $row;
+                $stores[] = $row;
             }
 
-            echo json_encode($orderItems);
+            echo json_encode($stores);
         } else {
-            echo json_encode(["error" => "Error retrieving order items: " . $conn->error]);
+            echo json_encode(["error" => "Error retrieving stores: " . $conn->error]);
         }
+
+        $stmt->close();
     } else {
-        echo json_encode(["error" => "Invalid or missing StoreID or CategoryID parameter"]);
+        echo json_encode(["error" => "Invalid or missing Category parameter"]);
     }
 } else {
     echo json_encode(["error" => "Invalid request method"]);
