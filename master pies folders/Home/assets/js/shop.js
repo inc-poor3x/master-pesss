@@ -22,7 +22,7 @@
         productCard.innerHTML = ` <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
         <img src="${product.Image}" width="300" height="300" loading="lazy" alt="${product.ProductName}" class="img-cover">
 
-        <ul class="card-action-list">
+        <i class="card-action-list">
             <li>
                 <button class="card-action-btn" aria-label="add to cart" title="add to cart">
                     <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
@@ -38,7 +38,7 @@
                     <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
                 </button>
             </li>
-        </ul>
+        </i>
 
        
     </a>
