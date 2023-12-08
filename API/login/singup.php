@@ -38,8 +38,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<!-- {
-  "username": "test_user",
-  "password": "test_password",
-  "email": "test_user@example.com"
-} -->

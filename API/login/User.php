@@ -91,13 +91,16 @@ public function login($username, $password)
             $hashedPassword = $row['Password'];
 
             // Verify the password
-            if (password_verify($password, $hashedPassword)) {
-                // Include additional information in the response
-              
-                return ["success" => true, "message" => "Login successful.", "UserID" =>$row['UserID'], "RoleID" => $row['RoleID']];
-            } else {
-                return ["success" => false, "message" => "Incorrect password."];
-            }
+           // Verify the password
+   if (password_verify($password, $hashedPassword)) {
+    // Include additional information in the response
+    return ["success" => true, "message" => "Login successful.", "UserID" =>$row['UserID'], "RoleID" => $row['RoleID']];
+} else {
+  
+    
+    return ["success" => false, "message" => "Incorrect password."];
+}
+
         } else {
             return ["success" => false, "message" => "An unexpected error occurred."];
         }
