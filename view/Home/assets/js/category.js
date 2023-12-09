@@ -33,41 +33,80 @@ function displayProducts(products) {
 
 function createProductHTML(product) {
     return `
-    <li class="decoration">
+ <li class="decoration">
     <div class="product-card">
-        <a href="../../details.html" class="card-banner img-holder has-before" style="--width:300; --height:200;"> <!-- Adjusted height to 200px -->
-            <img src="${product.Image}" width="100" height="10" loading="lazy" alt="${product.ProductName}" class="img-cover">
+        <a href="details.html" class="card-banner img-holder has-before" style="--width:300; --height:200;"> <!-- Adjusted height to 200px -->
+            <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover">
             <ul class="card-action-list">
-
-            <li>
-                <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </li>
-
-            <li>
-                <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                <ion-icon name="bag-outline"></ion-icon>
-                                </button>
-            </li>
-
-            <li>
-                <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                    <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </li>
-        </ul>
-                    <a href="#" class="card-title">${product.ProductName}</a>
-
-                <p class="card-description">${product.Description}</p> <!-- Added product description -->
-
-                <div class="card-price">
-                    <del class="del">$2.00</del>
-                    <data class="price" value="${product.Price}">$${product.Price}.00</data>
-
+                <li>
+                    <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">
+                        <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                </li>
+                <li>
+                    <button class="card-action-btn add-to-wish-list" aria-label="add to wishlist" title="add to wishlist">
+                        <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                </li>
+                <!-- Add a button for "show more" -->
+                <li>
+                    <button class="card-action-btn show-more" aria-label="show more" title="show more">
+                        <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
+                    </button>
+                </li>
+            </ul>
+            <a href="#" class="card-title">${product.ProductName}</a>
+            <p class="card-description">${product.Description}</p> <!-- Added product description -->
+            <div class="card-price">
+                <del class="del">$2.00</del>
+                <data class="price" value="${product.Price}">$${product.Price}.00</data>
+            </div>
+            <!-- Add a section for more details (initially hidden) -->
+            <div class="more-details" style="display: none;">
+                <!-- Add more details content here -->
+                <p>Additional details go here...</p>
             </div>
         </a>
     </div>
 </li>
+
 `;
+}
+document.addEventListener('click', function (event) {
+    const addToCartButton = event.target.closest('.add-to-cart');
+    if (addToCartButton) {
+        const productId = addToCartButton.dataset.productId;
+        addToCart(productId);
+    }
+});
+
+function addToCart(productId) {
+    const userId = sessionStorage.getItem('UserID');
+
+    // Check if the user is logged in
+    if (!userId) {
+        console.error('User not logged in');
+        return;
+    }
+
+    // Fetch API to add the product to the cart
+    fetch('http://localhost/Master-pes/master-pesss/API/user_access/cart/cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            UserID: userId,
+            ProductID: productId,
+            SubOrSum: 1,
+            Quantity: 1,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data if needed
+            console.log('Product added to cart:',data.message);
+            console.log('Product added to cart:', data);
+        })
+        .catch(error => console.error('Error adding product to cart:', error));
 }

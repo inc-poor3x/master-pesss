@@ -36,3 +36,95 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Error fetching data:', error));
 });
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Add click event listener to the cart button
+//     document.getElementById('cartButton').addEventListener('click', function(event) {
+//         event.preventDefault();
+
+//         // Retrieve user ID from session storage
+//         var userID = sessionStorage.getItem('UserID');
+//         console.log('UserID');
+//         // Check if the user ID is available
+//         if (userID) {
+//             // Construct the API request payload
+//             var apiPayload = {
+//                 "Action": "getTotalInCart",
+//                 "UserID": userID
+//             };
+
+//             // Make the API request
+//             fetch('http://localhost/Master-pes/master-pesss/API/user_access/cart/cart.php', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(apiPayload)
+//             })
+//             .then(response => response.json())
+//             .then(data => {
+//                 // Check if the API request was successful
+//                 if (data.success) {
+//                     // Update the cart count on the button
+//                     var cartCountElement = document.querySelector('.count');
+//                     cartCountElement.textContent = data.data.Total;
+//                 } else {
+//                     // Handle the case when the API request is not successful
+//                     console.error('Error retrieving total from the cart:', data.message);
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error('Error making API request:', error);
+//             });
+//         } else {
+//             // Handle the case when the user ID is not available in session storage
+//             console.error('User ID not found in session storage.');
+//         }
+//     });
+// });
+document.addEventListener('DOMContentLoaded', function () {
+    // Retrieve user ID from session storage
+    var userID = sessionStorage.getItem('UserID');
+
+    // Check if the user ID is available
+    if (userID) {
+        // Construct the API request payload
+        var apiPayload = {
+            "Action": "getTotalInCart",
+            "UserID": userID
+        };
+
+        // Log the payload for debugging
+        console.log('API Payload:', apiPayload);
+
+        // Make the API request when the page loads
+        fetch('http://localhost/Master-pes/master-pesss/API/user_access/cart/total.php', {
+            method: 'POST', // Use POST method since you are sending data
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(apiPayload)
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Log the API response for debugging
+                console.log('API Response:', data);
+
+                // Check if the API request was successful
+                if (data.success) {
+                    // Update the cart count on the button
+                    var cartCountElement = document.getElementById('cartCount');
+                    cartCountElement.textContent = data.data.Total;
+                } else {
+                    // Handle the case when the API request is not successful
+                    console.error('Error retrieving total from the cart:', data.message);
+                }
+            })
+            .catch(error => {
+                // Handle network errors or other exceptions
+                console.error('Error making API request:', error);
+            });
+    } else {
+        // Handle the case when the user ID is not available in session storage
+        console.error('User ID not found in session storage.');
+    }
+});

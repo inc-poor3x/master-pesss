@@ -9,9 +9,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
 // Get the JSON data from the request body
-$cart = new Cart($conn);
-
-// Get the JSON data from the request body
 $inputData = json_decode(file_get_contents("php://input"), true);
 
 // Assuming you have the following data from the API request
@@ -22,6 +19,9 @@ if ($userID === null) {
     echo json_encode(["success" => false, "message" => "Missing or invalid user ID."]);
     exit;
 }
+
+// Initialize the Cart object outside the if block to avoid undefined variable error
+$cart = new Cart($conn);
 
 // Check the request method and perform the corresponding action
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -45,10 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (Exception $e) {
         echo json_encode(["success" => false, "message" => "Error: " . $e->getMessage()]);
     }
-} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Handle GET requests to retrieve products in the cart
+} 
+// Handle GET requests to retrieve products in the cart
+elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $result = $cart->getProductsInCart($userID);
+        $action = $inputData['Action'] ?? null;
+
+        if ($action === 'getProductsInCart') {
+            // Retrieve products in the cart
+            $result = $cart->getProductsInCart($userID);
+        } else {
+            throw new Exception("Invalid action.");
+        }
+
         echo json_encode($result);
     } catch (Exception $e) {
         echo json_encode(["success" => false, "message" => "Error: " . $e->getMessage()]);
@@ -59,5 +68,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Close the database connection
-$conn ->close();
+$conn->close();
 ?>
