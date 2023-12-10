@@ -33,10 +33,10 @@ function displayProducts(products) {
 
 function createProductHTML(product) {
     return `
- <li class="decoration">
+    <li class="decoration">
     <div class="product-card">
-        <a href="details.html" class="card-banner img-holder has-before" style="--width:300; --height:200;"> <!-- Adjusted height to 200px -->
-            <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover">
+        <div class="card-banner img-holder has-before" style="--width:300; --height:200;">
+            <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
             <ul class="card-action-list">
                 <li>
                     <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">
@@ -48,27 +48,30 @@ function createProductHTML(product) {
                         <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
                     </button>
                 </li>
-                <!-- Add a button for "show more" -->
                 <li>
                     <button class="card-action-btn show-more" aria-label="show more" title="show more">
                         <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
                     </button>
                 </li>
             </ul>
-            <a href="#" class="card-title">${product.ProductName}</a>
-            <p class="card-description">${product.Description}</p> <!-- Added product description -->
+            </div>
+            <a href="details.html" style="--width:300; --height:200;">
+            <span class="visually-hidden">${product.ProductName}</span>
+        </a>            <p class="card-description">${product.Description}</p>
             <div class="card-price">
                 <del class="del">$2.00</del>
                 <data class="price" value="${product.Price}">$${product.Price}.00</data>
             </div>
-            <!-- Add a section for more details (initially hidden) -->
             <div class="more-details" style="display: none;">
-                <!-- Add more details content here -->
                 <p>Additional details go here...</p>
             </div>
-        </a>
+        </div>
+    </div>
+ 
     </div>
 </li>
+
+
 
 `;
 }
