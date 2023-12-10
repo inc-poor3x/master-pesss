@@ -1,4 +1,111 @@
+let signupButtonNav = document.getElementById('sigupp');
+let loginButtonNav = document.getElementById('register');
+const isloggedin = sessionStorage.getItem("isLoggedIn");
+if (isloggedin == 'true') {
+  signupButtonNav.textContent = 'profile';
+  signupButtonNav.addEventListener('click', (e) => {
+    window.location.href = 'assets/userprofile/profile.html';
+  });
+  loginButtonNav.textContent = 'LOG OUT';
+  loginButtonNav.addEventListener('click', (e) => {
+    window.location.href = 'index.html';
+    sessionStorage.clear();
+  });
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Retrieve user ID from sessionStorage
+    const userId = sessionStorage.getItem("id");
+
+    // Fetch data from server
+    fetch('http://localhost/api/view_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // Include user ID in the request body
+        body: JSON.stringify({ id: userId }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data received:', data);
+
+            // Handle the data and populate the table
+            const tableBody = document.getElementById('cartTable').getElementsByTagName('tbody')[0];
+            const totalPriceCell = document.getElementById('totalPrice');
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            // Initialize total price after discount
+            let totalDiscountedPrice = 0;
+
+            // Check if data is an array or object
+            if (Array.isArray(data)) {
+                // Data is an array, proceed with array processing
+                data.forEach(item => {
+                    const newRow = tableBody.insertRow(tableBody.rows.length);
+                    newRow.innerHTML = `
+                            <td><img src="${item.image}" alt=""></td>
+                            <td>${item.name}</td>
+                            <td>${item.product_id}</td>
+                            <td>${item.price}</td>
+                            <td>${item.price_after_discount}</td>
+                            <td>${item.quantity}</td>
+                            <td><button onclick="removeItem(${item.product_id},${sessionStorage.getItem("id")})"><i class="fa-solid fa-trash"></i></button></td>
+                        `;
+
+                    // Accumulate the price after discount for each row
+                    totalDiscountedPrice += parseFloat(item.price_after_discount);
+                });
+
+                // Update total price after discount
+                totalPriceCell.textContent = `${totalDiscountedPrice} JD`;
+            } else if (typeof data === 'object') {
+                // Data is an object, handle it accordingly
+                // For example, you can create a single row for this object
+                const newRow = tableBody.insertRow(tableBody.rows.length);
+                newRow.innerHTML = `
+                        <td><img src="${data.image}" alt=""></td>
+                        <td>${data.name}</td>
+                        <td>${data.product_id}</td>
+                        <td>${data.price}</td>
+                        <td>${data.price_after_discount}</td>
+                        <td>${data.quantity}</td>
+                        <td><button onclick="removeItem(${data.product_id},${sessionStorage.getItem("id")})"><i class="fa-solid fa-trash"></i></button></td>
+                    `;
+
+                // Accumulate the price after discount for the single row
+                totalDiscountedPrice += parseFloat(data.price_after_discount);
+
+                // Update total price after discount
+                totalPriceCell.textContent = `${totalDiscountedPrice} JD`;
+            } else {
+                console.error('Data has an unexpected format:', data);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+
+    // Checkout button click event
+    document.getElementById("check").onclick = () => {
+        window.location.href = 'checkout.html';
+    };
+
+
+});
+//for checkout page
+// document.getElementById("check").onclick = () => {
+//     window.location.href = 'checkout.html';
+// };
+
+
 let carts = document.querySelectorAll('.add-to-cart');
+
 
 let products =[
     {
@@ -50,14 +157,16 @@ let products =[
         inCart:0
     },
 ]
+
+//itrations according the number of times 
 for(let i=0;i<carts.length;i++){
-    // console.log("my loop");//24 times 
     carts[i].addEventListener('click', () =>{
-        // console.log("added to cart");
-        cartnumbers(products[i]);
-    })
+         cartnumbers(products[i]);
+         totalcost(products[i]);
+    }) 
 }
 
+//loading the page function without strat count from 0 again//
 function onLoadCartNumber (){ //when loading the page !
     let productNumbers = localStorage.getItem('cartnumbers');
     if(productNumbers){
@@ -65,14 +174,12 @@ function onLoadCartNumber (){ //when loading the page !
     }
 
 }
-function cartnumbers(product ){
-    // console.log("The product clicked is " , product );
-    let productNumbers = localStorage.getItem('cartnumbers');
-    // console.log(productNumbers);
-    // console.log(typeof(productNumbers)); //string 
 
+//cart numbers function //
+function cartnumbers(product ){
+    let productNumbers = localStorage.getItem('cartnumbers');
     productNumbers = parseInt(productNumbers);//parseInt to convert from string to number 
-    // console.log(typeof(productNumbers));
+   
     if(productNumbers){
         localStorage.setItem('cartnumbers', productNumbers +1);
         document.querySelector('.add-to-cart-btn span').textContent= productNumbers+ 1;
@@ -87,12 +194,84 @@ function cartnumbers(product ){
 
 }
 function setItem(){
-    console.log("inside of setItems function");
-    console.log("my product is",product );
-    let cartitems = {
+let cartitems= localStorage.getItem('products in cart');
+    cartitems = JSON.parse(cartitems);//to convert from json file 
+
+    if(cartitems != null){
+        if(cartitems[product.tag] == undefined){
+            cartitems ={
+                ...cartitems,
+                [product.tag]:product
+            }
+        }
+        cartitems[product.tag].incart +=1;
+    } else{
+        product.inCart =1;
+        cartitems = {
+            [product.tag]:product
+        } 
+    }
+
    
-    } 
-    product.inCart =1;
-    localStorage.setItem("products in card",)
+    
+    localStorage.setItem("products in card",JSON.stringify(cartitems));
 }
+// total cost function //
+function totalcost(product){
+    let cartcost = localStorage.getItem('totalcost')
+    
+
+    if(cartcost != null){
+        cartcost = parseInt(cartcost);
+        localStorage.setItem('totalcost', cartcost + product.price)
+    } else{
+        localStorage.setItem("totalcost",product.price)
+    }
+        
+}
+
+function displaycard(){
+    let cartitems =localStorage.getItem("productIncarts");
+    cartitems =JSON.parse(cartitems);
+
+    let productcontainer =document.querySelector('.product-container-card');
+    let cartcost= localStorage.getItem('totalcost')
+    if(cartitems && productcontainer ){
+        productcontainer.innerHTML =`
+        `;
+        Object.values(cartitems).map(item =>{
+            productcontainer.innerHTML +=`
+            <div class="products-card">
+            <ion-icon name="close-circle-outline"></ion-icon>
+            <img src="../images/${item.tag}.jpg">
+            <span>${item.name}</span>
+            </div>
+            <div class="price-card"> $${item.price},00    </div>
+            <div class="quantity">
+            <ion-icon class="decrease" name="chevron-back-circle-outline"></ion-icon>
+            <span>${item.incart}</span>
+            <ion-icon class="increase" name="chevron-forward-circle-outline"></ion-icon>
+            </div>
+            <div class="total">
+                    $${item.incart * item.price },00
+
+            </div>
+            `
+
+        });
+
+        productcontainer.innerHTML += `
+            <div class="basketTotalContainer">
+            <h4 class="basketTotalTitle">
+            Basket Total
+            </h4>
+            <h4 class="basketTotal">
+                $${cartcost},00
+                </h4>
+        `
+        
+    } 
+}
+
 onLoadCartNumber (); // to keep the number of the cart same 
+displaycard();
