@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 04:44 PM
+-- Generation Time: Dec 10, 2023 at 10:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart` (
   `CartID` int(11) NOT NULL,
-  `ProductID` int(11) DEFAULT NULL,
+  `ProductID` int(11) NOT NULL,
   `UserID` int(11) DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL
+  `Quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -39,7 +39,9 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`CartID`, `ProductID`, `UserID`, `Quantity`) VALUES
-(8, 5, 5, 4);
+(9, 5, 5, 3),
+(11, 5, 46, 28),
+(13, 31, 46, 6);
 
 -- --------------------------------------------------------
 
@@ -203,8 +205,8 @@ INSERT INTO `store` (`StoreID`, `UserID`, `StoreName`, `Category`, `StoreImage`,
 (9, 5, 'Test Store', 'Electronics', 'path/to/your/image.jpg', '1'),
 (11, 22, 'Test Store', 'Electronics', 'path/to/store/image.jpg', '1'),
 (12, 30, 'Test Store', 'Test Category', '', '1'),
-(15, 35, 'John\'s Store', 'Electronics', 'http://example.com/store_image.jpg', '1'),
-(16, 38, 'fffffff', 'asssd', 'https://cdn.shopify.com/s/files/1/0070/7032/files/selling-handmade-goods.png?format=jpg&quality=90&v=1528140509', '1');
+(18, 42, 'huda', 'acss', 'https://multiwebpress.com/wp-content/uploads/2021/11/FullScreen-Video-Background-Autoplay-Muted-Loop-MultiWebPress.jpg', '1'),
+(19, 43, 'huda', 'acss', 'https://multiwebpress.com/wp-content/uploads/2021/11/FullScreen-Video-Background-Autoplay-Muted-Loop-MultiWebPress.jpg', '1');
 
 -- --------------------------------------------------------
 
@@ -258,14 +260,14 @@ INSERT INTO `user` (`UserID`, `UserName`, `Password`, `Email`, `RoleID`, `imag`)
 (28, 'test_user', '$2y$10$IxYBY8bLSdWR9/1mM5IOfehmH1pVvO2dX3IWrbxS8xciBeShJQkLK', 'test_user@example.com', 2, NULL),
 (29, 'testuser', '$2y$10$2ibYnbtuPCoPKL8a4FRlHOgEse30t9lM8BqaoHDikL9Tyi0ZQXgIC', 'test@example.com', 2, NULL),
 (30, 'testuser', '$2y$10$6wo.THxjDKES/.cabB/b2eQSLC1b0t1Ei39HiJrZJsB3rmBwUaXAi', 'test@example.com', 2, NULL),
-(31, 'john_doe', '$2y$10$6mMypwB4sreNyEusMSrQQeh0H3tKuxfsxo4JGWglyBnAyAzZIJ6vO', 'john.doe@example.com', 2, NULL),
-(32, 'ahnad', '12345678', 'test_user@example.com', 2, NULL),
-(33, 'aaaaa', '$2y$10$51lXlskdemN4SUAUUWZnEeLQzpB5937nPBtgf0tg8B66lNQpdNWna', 'test_user@example.com', 2, NULL),
-(34, 'aa', '$2y$10$sxoNSx79DRGKrMWXlPOvt.Y2HKL4PTadSJlcju01/V/kNBMMglyhy', 'test_user@example.com', 2, NULL),
-(35, 'ahmad,laith', '$2y$10$3wJ8MNNhJ0iBtXQB2Ls1JOwJn6QRmsAP9QNfPfQkaY.iPJpk0IlJS', 'john.doe@example.com', 2, NULL),
-(36, 'khaled', '$2y$10$lr1HHDEMIk4RiwwOdSTS0OCuTKw9ER4N/Vi2jKwrZzfmGpk.zV.JO', '3@gmail.com', 2, NULL),
-(37, 'Ahmad', '$2y$10$TJXy4zPFO2KsV5LroAoSXOXLVgUa5RNUQCzLD6NYfSNZhY7D5Puoi', '31901001045@std.bau.edu.jo', 2, NULL),
-(38, 'ahmad', '$2y$10$07meSo.wMVxdFbeGZ5TpROSXkoMRlQH6AlDtDWMNqZxy5cbV4yWfG', '31901001045@std.bau.edu.jo', 2, NULL);
+(41, 'huda', '$2y$10$TzU5jn.xuyoG2eHSnM0Xhu7BPbzoDDldpmkGMGmczmJuJWCdj1TmS', 'postmaster@localhost', 2, NULL),
+(42, 'huda', '$2y$10$53JZFxFW60UzvWiZwpzRpeVFuStd6hFct7xFICSBCbjHOXLpDrUvG', 'ahmad@admin.com', 2, NULL),
+(43, 'huda', '$2y$10$0eNgwvoib7xgcURfI5KKce4GlhlH7zmlt8S67cRsLofqS/XOnpdxq', 'ahmad@admin.com', 2, NULL),
+(44, 'ahmadtest ', '$2y$10$0J7K71sbzSeLGfjYXdtrcu7TpqGv1njLKG88NaNKRV752znERfzc2', 'ahmadalhmadeen123@gmail.com', 2, NULL),
+(45, 'ahmadtest ', '$2y$10$kP/rZ6doLNsUUWGpaajyXuxuBY05HBjzFD95ea.ZQiQ22t4v1E8D6', 'ahmadalhmadeen123@gmail.com', 2, NULL),
+(46, 'aa', '$2y$10$7kX8E8pDs7zEBxuO2HOA1OSh9J0o2r5UkRnDeviC5rSzJUMx4SwyW', 'test_user@example.com', 2, NULL),
+(47, 'aa', '$2y$10$uBjQ5JtR2oFX65eEAzxksuKf8h1W8QB.9J2mxX3Vh2nJ3bJRdrXym', '@example.com', 2, NULL),
+(48, 'aa', '$2y$10$WO3v4yrAuKOF/iupvSSegOBW0.bjLqyzg463j1COewCyLEVihcfSy', 'ahmad@example.com', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -376,7 +378,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -412,7 +414,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `StoreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `StoreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `successstory`
@@ -424,7 +426,7 @@ ALTER TABLE `successstory`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
