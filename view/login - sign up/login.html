@@ -26,6 +26,7 @@ body{
 }
 .wrapper{
     display: flex;
+
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -250,6 +251,16 @@ header{
         gap: 0;
     }
 }
+.register-container,
+.business-register-container {
+    position: absolute;
+    right: -100%; /* Adjust this value to hide the forms off-screen */
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease-in-out;
+}
+
     </style>
 </head>
 <body>
@@ -312,6 +323,8 @@ header{
         <!------------------- registration form -------------------------->
         <div class="register-container" id="register">
             <div class="top">
+                <!-- <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button> -->
+
                 <span>Have an account? <a href="#" onclick="login()">Login</a></span>
                 <header>Sign Up</header>
             </div>
@@ -330,50 +343,42 @@ header{
             <div class="input-box">
                 <button class="submit" onclick="registerUser()">Register</button>
             </div>
-            <div class="two-col">
-                <div class="one">
-                    <input type="checkbox" id="register-check">
-                    <label for="register-check"> Remember Me</label>
-                </div>
-                <div class="two">
-                    <label><a href="#">Terms & conditions</a></label>
-                </div>
-            </div>
+            
         </div>
 <!-------------------------------- buss----------------------------->
-<div class="business-register-container" id="business-register">
-    <div class="top">
-        <span>Already have an account? <a href="#" onclick="login()">Login</a></span>
-        <header>Business Sign Up</header>
+    <div class="business-register-container" id="business-register">
+        <div class="top">
+            <span>Already have an account? <a href="#" onclick="login()">Login</a></span>
+            <header>Business Sign Up</header>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" id="business-username" placeholder="Username">
+            <i class="bx bx-user"></i>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" id="business-email" placeholder="Email">
+            <i class="bx bx-envelope"></i>
+        </div>
+        <div class="input-box">
+            <input type="password" class="input-field" id="business-password" placeholder="Password">
+            <i class="bx bx-lock-alt"></i>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" id="business-store-name" placeholder="Store Name">
+            <i class="bx bx-store"></i>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" id="business-category" placeholder="Category">
+            <i class="bx bx-category"></i>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" id="business-store-image" placeholder="Store Image URL">
+            <i class="bx bx-image"></i>
+        </div>
+        <div class="input-box">
+            <button class="submit" onclick="registerBusinessAccount()">Register</button>
+        </div>
     </div>
-    <div class="input-box">
-        <input type="text" class="input-field" id="business-username" placeholder="Username">
-        <i class="bx bx-user"></i>
-    </div>
-    <div class="input-box">
-        <input type="text" class="input-field" id="business-email" placeholder="Email">
-        <i class="bx bx-envelope"></i>
-    </div>
-    <div class="input-box">
-        <input type="password" class="input-field" id="business-password" placeholder="Password">
-        <i class="bx bx-lock-alt"></i>
-    </div>
-    <div class="input-box">
-        <input type="text" class="input-field" id="business-store-name" placeholder="Store Name">
-        <i class="bx bx-store"></i>
-    </div>
-    <div class="input-box">
-        <input type="text" class="input-field" id="business-category" placeholder="Category">
-        <i class="bx bx-category"></i>
-    </div>
-    <div class="input-box">
-        <input type="text" class="input-field" id="business-store-image" placeholder="Store Image URL">
-        <i class="bx bx-image"></i>
-    </div>
-    <div class="input-box">
-        <button class="submit" onclick="registerBusinessAccount()">Register</button>
-    </div>
-</div>
     </div>
 <script>
    
@@ -390,51 +395,69 @@ header{
 </script>
 
 <script>
+    var a = document.getElementById("loginBtn");
+    var b = document.getElementById("registerBtn");
+    var c = document.getElementById("businessRegisterBtn");
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("business-register");
+    
+    // Hide registration and business registration forms initially
+  
+    y.style.right = "100%";
+    z.style.right = "100%";
 
-var a = document.getElementById("loginBtn");
-var b = document.getElementById("registerBtn");
-var c = document.getElementById("businessRegisterBtn");
-var x = document.getElementById("login");
-var y = document.getElementById("register");
-var z = document.getElementById("business-register");
+    function login() {
+        x.style.left = "4px";
+        y.style.right = "-2000px";
+        z.style.right = "100%";
+        a.className += " white-btn";
+        b.className = "btn";
+        c.className = "btn";
+        x.style.opacity = 1;
+        y.style.opacity = 0;
+        z.style.opacity = 0;
 
-function login() {
-    x.style.left = "4px";
-    y.style.right = "-520px";
-    z.style.right = "-520px"; // hide business registration form
-    a.className += " white-btn";
-    b.className = "btn";
-    c.className = "btn";
-    x.style.opacity = 1;
+           // Ensure other forms are hidden
     y.style.opacity = 0;
     z.style.opacity = 0;
-}
+    }
+    
+    function register() {
+        x.style.left = "-510px";
+        y.style.right = "5px";
+        z.style.right = "100px";
+        a.className = "btn";
+        b.className += " white-btn";
+        c.className = "btn";
+        x.style.opacity = 0;
+        y.style.opacity = 1;
+        z.style.opacity = 0;
+    }
+    
+    function registerBusiness() {
+        x.style.left = "-510px";
+        y.style.right = "100%";
+        z.style.right = "5px";
+        a.className = "btn";
+        b.className = "btn";
+        c.className += " white-btn";
+        x.style.opacity = 0;
+        y.style.opacity = 0;
+        z.style.opacity = 1;
 
-function register() {
-    x.style.left = "-510px";
-    y.style.right = "5px";
-    z.style.right = "-520px"; // hide business registration form
-    a.className = "btn";
-    b.className += " white-btn";
-    c.className = "btn";
-    x.style.opacity = 0;
-    y.style.opacity = 1;
-    z.style.opacity = 0;
-}
-
-function registerBusiness() {
-    x.style.left = "-510px";
-    y.style.right = "-520px";
-    z.style.right = "5px"; // show business registration form
-    a.className = "btn";
-    b.className = "btn";
-    c.className += " white-btn";
+        // Ensure other forms are hidden
     x.style.opacity = 0;
     y.style.opacity = 0;
-    z.style.opacity = 1;
-}
-
-</script>
+    }
+    
+    const registerbtn = document.getElementById("registerBtn");
+    
+    registerbtn.addEventListener("click", function (event) {
+        event.target.style.display = "inline-block";
+    });
+    </script>
+    
 <script src="../Home/assets/js/login.js"></script>
 </body>
 </html>
