@@ -1,116 +1,74 @@
-// const apiUrl = 'http://localhost/master-pesss/API/product/show.php';
+ document.addEventListener('DOMContentLoaded', function () {
+        // Extract categoryID from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryID = urlParams.get('categoryID') || 2; // Default to 2 if not present in the URL
 
+        // Fetch products based on category
+        fetch(`http://localhost/Master-pes/master-pesss/API/proudcte/show.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                categoryID: categoryID,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data and generate product cards
+                displayProducts(data);
+            })
+            .catch(error => console.error('Error fetching products:', error));
+    });
 
-  // Function to fetch API data and update the products div
-  async function fetchProducts() {
-    try {
-      const response = await fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php'); // Replace 'url/to/your/api' with your actual API endpoint
-      const data = await response.json();
+    function displayProducts(products) {
+        const productList = document.querySelector('.product-list');
 
-      // Reference to the products div
-      const productsDiv = document.getElementById('products');
+        // Generate HTML for each product
+        const productsHTML = products.map(product => createProductHTML(product)).join('');
 
-      // Clear existing content in the products div
-      productsDiv.innerHTML = '';
-
-      // Loop through the data and create HTML for each product
-      data.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card'; // Add your custom product card class
-
-        // Set inner HTML based on your existing card structure
-        productCard.innerHTML = ` <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-        <img src="${product.Image}" width="300" height="300" loading="lazy" alt="${product.ProductName}" class="img-cover">
-
-        <i class="card-action-list">
-            <li>
-                <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </li>
-            <li>
-                <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-                    <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </li>
-            <li>
-                <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
-                    <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </li>
-        </i>
-
-       
-    </a>
-
-    <div class="card-content">
-        <h3 class="h3">
-            <a href="" class="card-title">${product.ProductName}</a>
-        </h3>
-        <div class="card-price">
-            ${product.Discount ? `<del class="del">$${product.Price}</del>` : ''}
-            <data class="price" value="${product.Price}">$${product.Price}</data>
-        </div>
-    </div>
-        `;
-
-        // Append the product card to the products div
-        productsDiv.appendChild(productCard);
-      });
-    } catch (error) {
-      console.error('Error fetching data:', error);
+        // Add the generated HTML to the product list
+        productList.innerHTML = productsHTML;
     }
-  }
 
-  // Call the fetchProducts function when the page loads
-  document.addEventListener('DOMContentLoaded', fetchProducts);
-
-
-//   card.innerHTML = `
-    // <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-    //     <img src="${product.Image}" width="300" height="300" loading="lazy" alt="${product.ProductName}" class="img-cover">
-
-    //     <ul class="card-action-list">
-    //         <li>
-    //             <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-    //                 <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-    //             </button>
-    //         </li>
-    //         <li>
-    //             <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-    //                 <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-    //             </button>
-    //         </li>
-    //         <li>
-    //             <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
-    //                 <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-    //             </button>
-    //         </li>
-    //     </ul>
-
-    //     <ul class="badge-list">
-    //         <li>
-    //             <div class="badge orange">${product.Sale ? 'Sale' : ''}</div>
-    //         </li>
-    //         <li>
-    //             <div class="badge cyan">${product.Discount ? `-${product.Discount}%` : ''}</div>
-    //         </li>
-    //     </ul>
-    // </a>
-
-    // <div class="card-content">
-    //     <h3 class="h3">
-    //         <a href="" class="card-title">${product.ProductName}</a>
-    //     </h3>
-    //     <div class="card-price">
-    //         ${product.Discount ? `<del class="del">$${product.Price}</del>` : ''}
-    //         <data class="price" value="${product.Price}">$${product.Price}</data>
-    //     </div>
-    // </div>
-//   `;
-
-//   return card;
-// }
-
-// // Fetch products and render the product cards
-// fetchProducts().then(products => renderProductCards(products));
+    function createProductHTML(product) {
+        return `
+        <li class="decoration">
+            <div class="product-card">
+                <div class="card-banner img-holder has-before" style="--width:300; --height:200;">
+                    <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover">
+                    <ul class="card-action-list">
+                        <li>
+                            <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">
+                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="card-action-btn add-to-wish-list" aria-label="add to wishlist" title="add to wishlist">
+                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="details.html">
+                                <button class="card-action-btn show-more" aria-label="show more" title="show more">
+                                    <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
+                                </button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="details.html" style="--width:300; --height:200;">
+                    <span class="visually-hidden">${product.ProductName}</span>
+                </a>
+                <p class="card-description">${product.Description}</p>
+                <div class="card-price">
+                    <del class="del">$2.00</del>
+                    <data class="price" value="${product.Price}">$${product.Price}.00</data>
+                </div>
+                <div class="more-details" style="display: none;">
+                    <p>Additional details go here...</p>
+                </div>
+            </div>
+        </li>
+    `;
+    }
