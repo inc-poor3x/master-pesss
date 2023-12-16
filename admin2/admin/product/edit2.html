@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Candal|Lora"
+            rel="stylesheet">
+
+        <!-- Custom Styling -->
+        <link rel="stylesheet" href="../../css/style.css">
+
+        <!-- Admin Styling -->
+        <link rel="stylesheet" href="../../css/admin.css">
+
+        <title>Admin Section - Add User</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <h1 class="logo-text"><img src="../img/1-removebg-preview (1).png" alt="" width="130px" height="70px"></h1>
+            </div>
+            <i class="fa fa-bars menu-toggle"></i>
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        Awa Melvine
+                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+                    </a>
+                    <ul>
+                        <li><a href="#" class="logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+
+        <!-- Admin Page Wrapper -->
+        <div class="admin-wrapper">
+
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <ul>
+                    <li><a href="../product/index.html">Manage Product </a></li>
+                    <li><a href="../users/index.html">Manage Users</a></li>
+                    <li><a href="../categorey/index.html">Manage Category</a></li>
+                    <li><a href="../Salls/index.html">Manage Salls </a></li>
+                </ul>
+            </div>
+            <!-- // Left Sidebar -->
+
+
+            <!-- Admin Content -->
+            <div class="admin-content">
+                <div class="button-group">
+                    <a href="create.html" class="btn btn-big">Add Product</a>
+                    <a href="index.html" class="btn btn-big">Manage Product</a>
+                </div>
+
+
+                <div class="content">
+
+                    <h2 class="page-title">Add User</h2>
+
+                    <form action="create.html" 
+                    method="post" id="">
+                    <div>
+                        <label>StoreID</label>
+                        <input type="number" name="StoreID"
+                            class="text-input" id="Store_ID">
+                    </div>
+
+                        <div>
+                            <label>ProductName</label>
+                            <input type="text" name="username"
+                                class="text-input" id="Name_product">
+                        </div>
+                        <div>
+                            <label>Description</label>
+                            <input type="text" name="Description" 
+                            class="text-input" id="Dec_product">
+                        </div>
+                        <div>
+                            <label>Price</label>
+                            <input type="number" name="number"
+                                class="text-input" id="Price_num">
+                        </div>
+                        <div>
+                            <label>Quantity</label>
+                            <input type="number" name="Quantity" 
+                            class="text-input" id="Quantity_num">
+                        </div>
+                        
+                        <div>
+                            <label>categoryID</label>
+                            <input type="number" name="categoryID" 
+                            class="text-input" id="category_ID">
+                        </div>
+
+                        <div>
+                            <label>Image</label>
+                            <input type="url" name="Image" 
+                            class="text-input" id="Image_ID">
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-big" onclick="UpdateElement()"> Update </button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+            <!-- // Admin Content -->
+
+        </div>
+        <!-- // Page Wrapper -->
+   
+<!---------------------------read(show) the products--------------------------------------------------------------------------------------->
+            <script>
+                const productId = window.location.hash.substring(1);//تمشي بعد الهاش واحد 
+
+            //read for the form  (get function)
+            document.addEventListener("DOMContentLoaded",  () => {
+                // const eventContainer = document.getElementById('tablee');
+                
+            fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
+                .then(response => response.json())
+                .then(user => {
+                    document.getElementById('Store_ID').value = user.StoreID;
+                    document.getElementById('Name_product').value = user.ProductName;
+                    document.getElementById('Dec_product').value = user.Description;
+                    document.getElementById('Price_num').value = user.Price;
+                    document.getElementById('Quantity_num').value = user.Quantity;
+                    document.getElementById('category_ID').value = user.categoryID;
+                    document.getElementById('Image_ID').value = user.Image;
+
+            });
+            })
+            .catch(error => console.error('Error:', error));
+
+
+
+                    
+
+            function UpdateElement(){ 
+
+            const createdate={
+                        ProductID:productId,
+                        StoreID: document.getElementById('Store_ID').value,
+                        ProductName: document.getElementById('Name_product').value ,
+                        Description: document.getElementById('Dec_product').value,  
+                        Price: document.getElementById('Price_num').value,
+                        Quantity: document.getElementById('Quantity_num').value ,
+                        categoryID: document.getElementById('category_ID').value, 
+                        Image: document.getElementById('Image_ID').value,
+                        };
+
+
+            console.log(createdate);
+            fetch('http://localhost/Master-pes/master-pesss/API/proudcte/update.php', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(createdate),
+                        
+
+                    }) 
+
+
+            }
+            </script>
+
+
+        <!-- JQuery -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Ckeditor -->
+        <script
+            src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+   
+
+    </body>
+
+</html>
