@@ -131,3 +131,25 @@ function addToCart(productId) {
         })
         .catch(error => console.error('Error adding product to cart:', error));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

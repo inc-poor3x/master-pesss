@@ -15,6 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error fetching data:', error));
 });
 
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve user ID from session storage
     var userID = sessionStorage.getItem('UserID');
@@ -62,6 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('User ID not found in session storage.');
     }
 });
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch the API endpoint
@@ -148,73 +160,79 @@ window.addEventListener('load', function () {
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    fetchProducts();
-});
-
-
-function fetchProducts() {
-    // Replace 'your_api_endpoint' with the actual API endpoint
+document.addEventListener('DOMContentLoaded', function () {
+    // Fetch all products (without specifying a category)
     fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
         .then(response => response.json())
-        .then(products => displayProducts(products))
+        .then(data => {
+            // Shuffle the array to randomize product order
+            const shuffledProducts = shuffleArray(data);
+
+            // Take the first 6 products
+            const selectedProducts = shuffledProducts.slice(0, 8);
+
+            // Handle the response data and generate product cards
+            displayProducts(selectedProducts);
+        })
         .catch(error => console.error('Error fetching products:', error));
-}
+});
 
 function displayProducts(products) {
-    const productList = document.querySelector('.grid-list.product-list'); // Use the correct selector
+    const productList = document.querySelector('.product-list');
 
-    products.forEach(product => {
-        const productCard = document.createElement('li');
-        productCard.className = 'decoration'; // Assuming all products have this class, change as needed
+    // Generate HTML for each product
+    const productsHTML = products.map(product => createProductHTML(product)).join('');
 
-        const cardBanner = document.createElement('a');
-        cardBanner.href = '#';
-        cardBanner.className = 'card-banner img-holder has-before';
-        cardBanner.style.cssText = `--width:300; --height:300; background-image: url('${product.Image}')`;
-
-        const cardActionList = document.createElement('ul');
-        cardActionList.className = 'card-action-list';
-
-        // Add action buttons (similar to your original HTML)
-        ['add-outline', 'bag-handle-outline', 'heart-outline'].forEach(iconName => {
-            const actionButton = document.createElement('li');
-            actionButton.innerHTML = `<button class="card-action-btn" aria-label="add to card" title="add to card">
-                                      <ion-icon name="${iconName}" aria-hidden="true"></ion-icon>
-                                  </button>`;
-            cardActionList.appendChild(actionButton);
-        });
-
-        cardBanner.appendChild(cardActionList);
-
-        const cardContent = document.createElement('div');
-        cardContent.className = 'card-content';
-
-        const productTitle = document.createElement('h3');
-        productTitle.className = 'h3';
-        productTitle.innerHTML = `<a href="" class="card-title">${product.ProductName}</a>`;
-        cardContent.appendChild(productTitle);
-
-        const cardPrice = document.createElement('div');
-        cardPrice.className = 'card-price';
-        cardPrice.innerHTML = `<data class="price" value="${product.Price}">$${product.Price}</data>`;
-        cardContent.appendChild(cardPrice);
-
-        productCard.appendChild(cardBanner);
-        productCard.appendChild(cardContent);
-
-        productList.appendChild(productCard);
-    });
-    
+    // Add the generated HTML to the product list
+    productList.innerHTML = productsHTML;
 }
 
+function createProductHTML(product) {
+    return `
+    <li class="decoration">
+        <div class="product-card">
+            <div class="card-banner img-holder has-before" style="--width:300; --height:200;">
+                <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
+                <ul class="card-action-list">
+                    <li>
+                        <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">
+                            <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="card-action-btn add-to-wish-list"  aria-label="add to wishlist" title="add to wishlist">
+                            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="details.html?id=${product.ProductID}">
+                            <button class="card-action-btn show-more" aria-label="show more" title="show more">
+                                <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <a href="details.html?id=${product.ProductID}" style="--width:300; --height:200;">
+                <span class="visually-hidden">${product.ProductName}</span>
+            </a>
+            <p class="card-description">${product.Description}</p>
+            <div class="card-price">
+                <data class="price" value="${product.Price}">$${product.Price}.00</data>
+            </div>
+            <div class="more-details" style="display: none;">
+                <p>Additional details go here...</p>
+            </div>
+        </div>
+    </li>
+    `;
+}
 
-
-
-
-
-
-
-
-
-// Call fetchProducts when your page is ready
+// Function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
