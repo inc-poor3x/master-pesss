@@ -44,15 +44,16 @@ function createProductHTML(product) {
                     </button>
                 </li>
                 <li>
-                    <button class="card-action-btn add-to-wish-list" aria-label="add to wishlist" title="add to wishlist">
+                    <button class="card-action-btn add-to-wish-list"  aria-label="add to wishlist" title="add to wishlist">
                         <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
                     </button>
                 </li>
                 <li>
-                    <button class="card-action-btn show-more" aria-label="show more" title="show more">
+                <a href="details.html"     <button class="card-action-btn show-more" aria-label="show more" title="show more">
                         <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
-                    </button>
+                    </button> </a>
                 </li>
+               
             </ul>
             </div>
             <a href="details.html" style="--width:300; --height:200;">
@@ -75,6 +76,23 @@ function createProductHTML(product) {
 
 `;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener('click', function (event) {
     const addToCartButton = event.target.closest('.add-to-cart');
     if (addToCartButton) {
@@ -113,3 +131,25 @@ function addToCart(productId) {
         })
         .catch(error => console.error('Error adding product to cart:', error));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

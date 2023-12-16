@@ -6,6 +6,7 @@
  <!--
         favicon
     -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="shortcut icon" href="../Home/favicon.svg" type="">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
@@ -77,21 +78,20 @@
 
    <!--card and wishlist and person-->
         <!--WishList-->
-   <div class="header__user-actions">
-        <a href="wishlist.html" class="header__action-btn">
-             <img src="assets/images/img/icon-heart.svg" alt="">
-
-            <span class="count" >0</span>
-        </a>
-
-
-        <!--card -->
-        <a href="cart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
-            <img src="assets/images/img/icon-cart.svg" alt="">
-            <span class="count" id="cartCount">0</span>
-        </a>
-        <script src="./assets/js/home.js"></script>
-</div>
+        <div class="header__user-actions">
+            <a href="wishlist.html" class="header__action-btn">
+                 <img src="assets/images/img/icon-heart.svg" alt="">
+    
+                <span class="count" >0</span>
+            </a>
+    
+    
+            <!--card -->
+            <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+                <img src="assets/images/img/icon-cart.svg" alt="">
+                <span class="count" id="cartCount">0</span>
+            </a>
+    </div>
 </nav>
 </header>    
 
@@ -115,37 +115,24 @@
             <section class="section product--lg container" id="product" aria-label="product">
 
                 <div class="container">
-
-                    <div class="title-wrapper">
-                        <h2 class="h2 section-title">Popular Products</h2>
-
-                        <ul class="filter-btn-list">
-                            <li class="filter-btn-item">
-                                <button class="filter-btn active" data-filter-btn="all">All Products</button>
-                            </li>
-
-                            <li class="filter-btn-item">
-                                <button class="filter-btn " data-filter-btn="accessory">Accessory</button>
-                            </li>
-
-                            <li class="filter-btn-item">
-                                <button class="filter-btn " data-filter-btn="decoration">Decoration</button>
-                            </li>
-
-                            <li class="filter-btn-item">
-                                <button class="filter-btn " data-filter-btn="furniture">Furniture</button>
-                            </li>
-                        </ul>
-
-                        <div id="products">
-
-                        </div>
-                    </div>
-
-       
-
+                    <ul class="grid-list product-list" data-filter="all">
+                        <!-- Products will be dynamically added here using JavaScript -->
                     </ul>
                 </div>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <ul class="pagination">
+                <li><a href="" class="pagination__link ">01</a></li>
+                <li><a href="" class="pagination__link">02</a></li>
+                <li><a href="" class="pagination__link">03</a></li>
+                <li><a href="" class="pagination__link">...</a></li>
+                <li><a href="" class="pagination__link">16</a></li>
+                <li><a href="" class="pagination__link">
+                    <i class="fi-rs-angle-double-small-right"></i>
+                </a></li>
+
+            </ul>
             </section>
       <!--=============== NEWSLETTER ===============-->
       <section class="newsletter"></section>
@@ -276,9 +263,10 @@
     <!--=============== SWIPER JS ===============-->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+    <script src="./assets/js/home.js"></script>
 
     <!--=============== MAIN JS ===============-->
-    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/shop.js"></script>
     <script src="shop.js"></script>
   </body>
 </html>

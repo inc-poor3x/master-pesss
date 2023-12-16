@@ -231,18 +231,27 @@
             -->
             <section class="section about" id="about" aria-label="about">
                 <div class="container">
-                    <h2 class="section-title">peace for HandMade</h2>
+                    <h2 class="section-title">Peace for HandMade</h2>
                     <p class="section-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores quia laudantium iure porro voluptates corporis distinctio est omnis soluta dicta. Fuga, sunt? Impedit ipsum vitae voluptates neque harum hic similique?</p>
-                        <figure class="card-banner img-holder" style="--width:1170 ; --height:450 ;">
-                            <iframe autoplay width="1170" height="450" loading="lazy"  alt="handmade promo"  loop class="img-cover" src="https://www.youtube.com/embed/F48qVKo9f0E?si=WI5vhzk0-8nbw2Al" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                          <button class="play-btn" aria-label="play video">
+                    
+                    <figure class="card-banner img-holder" style="--width:1170; --height:450;">
+                        <iframe id="videoFrame" width="1170" height="450" alt="handmade promo" loop muted class="img-cover"
+    src="./assets/video/شلبي يونس وغزل غريّب - ميّل على بلدي _ Shalby Younis & Ghazal Ghrayeb - Mayel Ala Baladi.mp4"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+                    
+                        <button class="play-btn" aria-label="play video">
                             <ion-icon name="play-circle-outline" aria-hidden="true"></ion-icon>
                         </button>
+                    </figure>
+            
                     <div class="about-card">
-
+                        <!-- Your content for the about card goes here -->
                     </div>
                 </div>
             </section>
+            
 
 
             <!--
@@ -250,358 +259,19 @@
             -->
             <section class="section product" id="product" aria-label="product">
                 <div class="container">
-
+        
                     <div class="title-wrapper">
                         <h2 class="h2 section-title">Popular Products</h2>
-
+        
                         <ul class="filter-btn-list">
                             <li class="filter-btn-item">
                                 <button class="filter-btn active" data-filter-btn="all">Shop now </button>
                             </li>
-
+                        </ul>
                     </div>
-
+        
                     <ul class="grid-list product-list" data-filter="all">
-                         
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/stickers/1055820787_1024x1024@2x.webp" width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                    
-                                </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">jursalm sticker </a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                        <data class="price" value="1">$1.00
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-                         
-
-                      
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/stickers/934694403_1024x1024@2x.webp"  width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                     
-                                </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">color sticker</a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                         <data class="price" value="1.5">$1.50
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-                        
-
-                     
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/stickers/1131919956_1024x1024@2x.webp" width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                 </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">Thob sticker</a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                         <data class="price" value="1.5">$1.50
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-      
-
-                        
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/stickers/975870184_1024x1024@2x.webp" width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                 </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">Awda sticker</a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                         <data class="price" value="2">$2.00
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-         
-
-                         
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/olives/Capture.PNG"  width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                 </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">Nabulsi soap</a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                         <data class="price" value="7">$7.00
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-                   
-
-          
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/olives/Capture10.PNG"  width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                 </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">A bowl for olive oil</a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                         <data class="price" value="6">$6.00
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-                 
-
-                        
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/olives/Capture11.PNG"  width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                 </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">Dishes for oil and thyme</a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                         <data class="price" value="10">$10.00
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-                     
-
-                      
-                            <div class="product-card">
-                                <a href="#" class="card-banner img-holder has-before" style="--width:300 ; --height: 300;">
-                                    <img src="./assets/images/olives/Capture2.PNG"  width="300" height="300" loading="lazy" alt="any thing" class="img-cover">
-
-                                    <ul class="card-action-list">
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-cart" arial-label="add to card" title="add to card">
-                                                <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="card-action-btn add-to-wish-list" arial-label="add to wishlist" title="add to wishlist">
-                                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                                            </button>
-                                        </li>
-                                    </ul>
-
-                                 </a>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="" class="card-title">Nabulsi soap</a>
-                                    </h3>
-
-                                    <div class="card-price">
-                                         <data class="price" value="8">$8.00
-                                        </data>
-                                    </div>
-                                </div>
-
-                            </div>
-               
-
-                       
-
+                        <!-- Product cards will be dynamically added here by JavaScript -->
                     </ul>
                 </div>
             </section>
@@ -613,134 +283,14 @@
             <section class="section blog" id="blog" aria-label="blog">
                 <div class="container">
                     <div class="title-wrapper">
-                        <h2 class="h2 section-title">Success Stories </h2>
-
-                        <a href="blog.html" class="btn-link">
-                            <span class="span">View All</span>
-
-                            <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                        </a>
+                        <h2 class="h2 section-title">Success Stories</h2>
                     </div>
-
-                    <ul class="grid-list">
-                        <li>
-                            <div class="blog-card">
-                                <div class="card-banner img-holder" style="--width:374 ; --height:243 ;">
-                                    <img src="./assets/images/طلة3.PNG" width="374" height="243" loading="lazy" alt="Unique products that will impress your home in 2024" class="img-cover">
-
-                                    <a href="https://www.instagram.com/p/Cp5h6jDjEuz/" class="card-btn">
-                                        <span class="span">Show more</span>
-                                        <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                    </a>
-                                </div>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="https://www.instagram.com/p/Cp5h6jDjEuz/" class="card-title">A shop for making colorful traditional handmade utensils by Palestinian women </a>
-                                    </h3>
-
-                                    <ul class="card-meta-list">
-
-                                        <li class="card-meta-item">
-                                            <time class="card-meta-text" datetime="2023-11-27">November 27, 2023</time>
-
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                            <a href="#"   class="card-meta-text" >Tala</a>
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                           in <a href="#"   class="card-meta-text" >deco</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-
-                            </div>
-                        </li>
-
-
-                        <li>
-                            <div class="blog-card">
-                                <div class="card-banner img-holder" style="--width:374 ; --height:243 ;">
-                                    <img src="./assets/images/رنا صالح.PNG" width="374" height="243" loading="lazy" alt="Unique products that will impress your home in 2024" class="img-cover">
-
-                                    <a href="https://www.instagram.com/rs.threadiz/" class="card-btn">
-                                        <span class="span">Show more</span>
-                                        <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                    </a>
-                                </div>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="#" class="card-title">A Palestinian mother who excelled at embroidery</a>
-                                    </h3>
-
-                                    <ul class="card-meta-list">
-
-                                        <li class="card-meta-item">
-                                            <time class="card-meta-text" datetime="2023-11-27">November 27, 2023</time>
-
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                            <a href="#"   class="card-meta-text" >Rana Salah</a>
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                           in <a href="#"   class="card-meta-text" >deco</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="blog-card">
-                                <div class="card-banner img-holder" style="--width:374 ; --height:243 ;">
-                                    <img src="./assets/images/بيت الأرض.PNG" width="374" height="243" loading="lazy" alt="Unique products that will impress your home in 2024" class="img-cover">
-
-                                    <a href="https://www.instagram.com/beitalard/" class="card-btn">
-                                        <span class="span">Read more</span>
-                                        <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                                    </a>
-                                </div>
-
-                                <div class="card-content">
-                                    <h3 class="h3">
-                                        <a href="https://www.instagram.com/beitalard/" class="card-title">Colors painted on the glass, these Palestinian pieces were made with love</a>
-                                    </h3>
-
-                                    <ul class="card-meta-list">
-
-                                        <li class="card-meta-item">
-                                            <time class="card-meta-text" datetime="2023-11-27">November 27, 2023</time>
-
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                            <a href="#"   class="card-meta-text" >bet alard</a>
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                           in <a href="#"   class="card-meta-text" >deco</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-
-                            </div>
-                        </li>
-
+            
+                    <ul class="grid-list" id="storeList">
+                        <!-- Store items will be dynamically added here -->
                     </ul>
                 </div>
-    
-            </section>
-
-            <!--
+</section>  <!--
                 #Newslatter
             -->
             <section class="section newsletter" aria-label="newsletter">
