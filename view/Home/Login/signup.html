@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <!--
+        favicon
+    -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="shortcut icon" href="../Home/favicon.svg" type="">
+
+    <!--=============== FLATICON ===============-->
+   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
+ 
+    <!--=============== SWIPER CSS ===============-->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+
+    <link rel="stylesheet" href="login.css">
+    <title>Ecommerce Website</title>
+  </head>
+  <body>
+    <!--=============== HEADER ===============-->
+    <header class="header">
+        <!--nav par-->
+             <!--logo-->
+        <nav class="nav container1">
+          <a href="index.html" class="nav__logo">
+             <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
+          </a>
+  <!--list-->
+  <div class="nav__menu" id="nav-menu">
+    <ul class="nav__list">
+        <li class="nav__item">
+            <a href="../index.html" class="nav__link ">Home</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../ShopPages/shop.html" class="nav__link active-link">Shop</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../profilePage/profile.html" class="nav__link">My Account</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../blog.html" class="nav__link">Stories</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="login.html" class="nav__link">Login</a>
+        </li>
+
+        
+        <li class="nav__item">
+            <a href="bussiness.html" class="nav__link">Create Store</a>
+        </li>
+
+    </ul>
+
+    <!--search-->
+<div class="header__search">
+    <input 
+        type="text"
+        placeholder="search items"
+        class="form__input"
+    />
+
+    <button class="search__btn">
+        <ion-icon name="search-outline"></ion-icon>    </button>
+</div>
+
+
+ </div>
+
+   <!--card and wishlist and person-->
+        <!--WishList-->
+   <div class="header__user-actions">
+        <a href="wishlist.html" class="header__action-btn">
+            <ion-icon name="heart-outline" width="200px"></ion-icon>
+            <span class="count" >3</span>
+        </a>
+
+
+        <!--card -->
+        <a href="cart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+            <ion-icon name="bag-outline"></ion-icon>
+            <span class="count" id="cartCount">0</span>
+        </a>
+       
+</div>
+</nav>
+</header>
+
+<div class="container">
+
+    <section class="card-container">
+
+        <h1>SignUp </h1>
+        <!-- Email: -->
+        <form>
+            
+
+            <div autocomplete="off" >
+                <div class="form" id="email_field">
+                    <input type="text" placeholder="ُusername" id="username">
+                    <div class="Errors"><span id="email_error"></span></div>
+                </div>
+            </div>
+
+
+            <div autocomplete="off" >
+                <div class="form" id="email_field">
+                    <input type="email" placeholder="ُEmail Address" id="email">
+                    <div class="Errors"><span id="email_error"></span></div>
+                </div>
+            </div>
+
+            <!-- password: --> 
+            <!-- onkeyup="return validationPass()" -->
+            <div>
+                <div class="form">
+                    <div class="create_pass">
+                        <input type="password" placeholder="Password" class="create_password" id="password">
+                        <i class="fa-regular fa-eye-slash" class="show-password" id="show_password"></i>
+                        <div class="Errors"><small id="error_pass"></small></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+
+            <div class="bottom">
+                <button type="button"  onclick="registerUser()" id="Login"> sign Up </button>
+                <a href="signup.html">
+                   
+                </a>
+            </div>
+        </form>
+
+    </section>
+</div>
+<script src="login.js"></script>
+</body>
+</html>
+

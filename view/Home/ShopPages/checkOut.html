@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!--=============== SWIPER CSS ===============-->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="checkout.css">
+
+    <title>Ecommerce Website</title>
+  </head>
+  <script src="assets/js/addtocart.js"></script>
+  <body>
+    <!--=============== HEADER ===============-->
+    <header class="header">
+        <!--nav par-->
+             <!--logo-->
+        <nav class="nav container1">
+          <a href="index.html" class="nav__logo">
+             <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
+          </a>
+  <!--list-->
+  <div class="nav__menu" id="nav-menu">
+    <ul class="nav__list">
+        <li class="nav__item">
+            <a href="../index.html" class="nav__link ">Home</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../ShopPages/shop.html" class="nav__link active-link">Shop</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../profilePage/profile.html" class="nav__link">My Account</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../blog.html" class="nav__link">stories</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../Login/login.html" class="nav__link">Login</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../Login/bussiness.html" class="nav__link">Create Store</a>
+        </li>
+    </ul>
+
+    <!--search-->
+<div class="header__search">
+    <input 
+        type="text"
+        placeholder="search items"
+        class="form__input"
+    />
+
+    <button class="search__btn">
+        <ion-icon name="search-outline"></ion-icon>    </button>
+</div>
+
+
+ </div>
+
+   <!--card and wishlist and person-->
+        <!--WishList-->
+   <div class="header__user-actions">
+        <a href="wishlist.html" class="header__action-btn">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span class="count" >3</span>
+        </a>
+
+
+        <!--card -->
+             <a href="addToCart.html" class="header__action-btn">
+                <ion-icon name="bag-outline"></ion-icon>          
+                      
+                <span class="count">0</span>
+            </a>
+</div>
+</nav>
+</header> 
+<!--------------------------------------------------------------------------------------------------->
+<div class="all">
+<div class="container2">
+    <h1>Confirm Your Payment</h1>
+    <div class="first-row">
+        <div class="owner">
+            <h3>Owner</h3>
+            <div class="input-field">
+                <input type="text">
+            </div>
+        </div>
+        <div class="cvv">
+            <h3>CVV</h3>
+            <div class="input-field">
+                <input type="password">
+            </div>
+        </div>
+    </div>
+    <div class="second-row">
+        <div class="card-number">
+            <h3>Card Number</h3>
+            <div class="input-field">
+                <input type="text">
+            </div>
+        </div>
+    </div>
+    <div class="third-row">
+        <h3>Card Number</h3>
+        <div class="selection">
+            <div class="date">
+                <select name="months" id="months">
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+                  </select>
+                  <select name="years" id="years">
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                  </select>
+            </div>
+            <div class="cards">
+                <img src="../assets/images/mc.png" alt="">
+                <img src="../assets/images/vi.png" alt="">
+                <img src="../assets/images/pp.png" alt="">
+            </div>
+        </div>    
+    </div>
+    <a class="Confirm" href="">Confirm</a>
+</div>
+</div>

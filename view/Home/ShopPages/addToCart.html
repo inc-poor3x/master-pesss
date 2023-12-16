@@ -3,22 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <!--
-        favicon
-    -->
-    <link rel="stylesheet" href="https://ionic.io/ionicons">
-    <link rel="shortcut icon" href="../Home/favicon.svg" type="">
-
-    <!--=============== FLATICON ===============-->
-   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
- 
+  
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!--=============== SWIPER CSS ===============-->
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
     <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="addToCart.css">
 
     <title>Ecommerce Website</title>
   </head>
@@ -30,29 +25,33 @@
              <!--logo-->
         <nav class="nav container1">
           <a href="index.html" class="nav__logo">
-             <img src="assets/images/1.PNG" alt="" class="nav__logo-img">
+             <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
           </a>
   <!--list-->
   <div class="nav__menu" id="nav-menu">
     <ul class="nav__list">
         <li class="nav__item">
-            <a href="index.html" class="nav__link ">Home</a>
+            <a href="../index.html" class="nav__link ">Home</a>
         </li>
 
         <li class="nav__item">
-            <a href="shop.html" class="nav__link active-link">Shop</a>
+            <a href="../ShopPages/shop.html" class="nav__link ">Shop</a>
         </li>
 
         <li class="nav__item">
-            <a href="accounts.html" class="nav__link">My Account</a>
+            <a href="../profilePage/profile.html" class="nav__link">My Account</a>
         </li>
 
         <li class="nav__item">
-            <a href="compare.html" class="nav__link">compare</a>
+            <a href="../blog.html" class="nav__link">stories</a>
         </li>
 
         <li class="nav__item">
-            <a href="login-register.html" class="nav__link">Login</a>
+            <a href="../Login/login.html" class="nav__link">Login</a>
+        </li>
+
+        <li class="nav__item">
+            <a href="../Login/bussiness.html" class="nav__link">Create Store</a>
         </li>
     </ul>
 
@@ -65,8 +64,7 @@
     />
 
     <button class="search__btn">
-        <img src="assets/images/img/search.png" alt="" />
-    </button>
+        <ion-icon name="search-outline"></ion-icon>    </button>
 </div>
 
 
@@ -76,15 +74,15 @@
         <!--WishList-->
    <div class="header__user-actions">
         <a href="wishlist.html" class="header__action-btn">
-             <img src="assets/images/img/icon-heart.svg" alt="">
-
+            <ion-icon name="heart-outline"></ion-icon>
             <span class="count" >3</span>
         </a>
 
 
         <!--card -->
              <a href="addToCart.html" class="header__action-btn">
-               <img src="assets/images/img/icon-cart.svg" alt="">
+                <ion-icon name="bag-outline"></ion-icon>          
+                      
                 <span class="count">0</span>
             </a>
 </div>
@@ -94,31 +92,61 @@
 
     <!--=============== MAIN ===============-->
     <main class="main">
-      <!--=============== BREADCRUMB ===============-->
-      <section class="breadcrumb">
-        <ul class="breadcrumb__list flex container">
-            <li><a href="index.html">Home</a></li>
-            <li><span class="breadcrumb__link">></span></li>
-            <li><span class="breadcrumb__link">Shop</span></li>
+    
+<br>
+<br>
 
-        </ul>
-      </section>
+      <!--begining of the table -->
 
-
-      <!---->
-
-
-      <div class="product-container-card">
-        <div class="product-header-card">
-            <h5 class="product-title-card">PRODUCT</h5>
-            <h5 class="price-card">PRICE</h5>
-            <h5 class="quantity-card">QUANTITY</h5>
-            <h5 class="total-card">TOTAL</h5>
+      <section class="container">
+        <div id="products">
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <td> Image </td>
+                        <td> Product </td>
+                        <td> Product_id </td>
+                        <td> Price </td>
+                        <td> discount </td>
+                        <td> Quantity </td>
+                        <td> Remove </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <img src="flat-lay-healthy-vegetables-frame.jpg" alt=""> </td>
+                        <td> Product Name </td>
+                        <td> </td>
+                        <td> JD</td>
+                        <td>JD </td>
+                        <td> </td>
+                        <td> <button id="removebottun"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-            <div class="products-card"></div>
-      </div>
 
 
+        <div id="subtotal">
+            <h3> Cart Total </h3>
+            <table>
+                <tr>
+                    <td> <strong> Total Price </strong></td>
+                    <td id="totalPrice"> <strong> 300JD </strong></td>
+                </tr>
+            </table>
+            <div class="bottom"><button id="check"><a href="checkOut.html">Checkout </a> </button> </div>
+        </div>
+    </section>
+      
+
+
+
+
+
+ 
+
+      <!--ending  of the table -->
 
 
 

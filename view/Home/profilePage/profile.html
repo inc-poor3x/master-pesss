@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="profile.css">
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+    <style>
+    
+        
+    </style>
+</head>
+<body>
+<!---------------------------------------------------------------------->
+<header class="header">
+    <!--nav par-->
+         <!--logo-->
+    <nav class="nav container1">
+      <a href="index.html" class="nav__logo">
+         <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
+      </a>
+<!--list-->
+<div class="nav__menu" id="nav-menu">
+<ul class="nav__list">
+    <li class="nav__item">
+        <a href="../index.html" class="nav__link ">Home</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../ShopPages/shop.html" class="nav__link active-link">Shop</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="profile.html" class="nav__link">My Account</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../blog.html" class="nav__link">Stories</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../Login/login.html" class="nav__link">Login</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../Login/bussiness.html" class="nav__link">Create store</a>
+    </li>
+</ul>
+
+<!--search-->
+<div class="header__search">
+<input 
+    type="text"
+    placeholder="search items"
+    class="form__input"
+/>
+
+<button class="search__btn">
+    <ion-icon name="search-outline"></ion-icon>    </button>
+</div>
+
+
+</div>
+
+<!--card and wishlist and person-->
+    <!--WishList-->
+<div class="header__user-actions">
+    <a href="wishlist.html" class="header__action-btn">
+        <ion-icon name="heart-outline" width="200px"></ion-icon>
+        <span class="count" >3</span>
+    </a>
+
+
+    <!--card -->
+    <a href="../ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+        <ion-icon name="bag-outline"></ion-icon>
+        <span class="count" id="cartCount">0</span>
+    </a>
+    <script src="./assets/js/home.js"></script>
+</div>
+</nav>
+</header>
+
+
+<!---------------------------------------------------------------------->
+  
+
+    <div class="container4" id="profile-container">
+        <img id="profile-image" src="../assets/images/vector-flat-illustration-grayscale-avatar-600nw-2264922221.webp" alt="Profile Image">
+        <h2 id="profile-username">Your Username</h2>
+        <p id="profile-email">your.email@example.com</p>
+        <button class="bttn" onclick="toggleEditMode()">Edit Profile</button>
+    </div>
+
+    <form id="edit-form" class="container4 edit-mode">
+        <label for="newUsername">Username:</label>
+        <input type="text" id="newUsername" placeholder="Enter your new username" required>
+
+        <label for="newEmail">Email:</label>
+        <input type="email" id="newEmail" placeholder="Enter your new email" required>
+
+        <label for="newPassword">Password:</label>
+        <input type="password" id="newPassword" placeholder="Enter your new password" required>
+
+        <button class="bttn" type="button" onclick="updateProfile()">Update Profile</button>
+        <button class="bttn" type="button" onclick="toggleEditMode()">Cancel</button>
+    </form>
+
+    <script>
+        function toggleEditMode() {
+            var container = document.getElementById("profile-container");
+            var form = document.getElementById("edit-form");
+            
+            container.classList.toggle("edit-mode");
+            form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
+        }
+
+        function updateProfile() {
+            var newUsername = document.getElementById("newUsername").value;
+            var newEmail = document.getElementById("newEmail").value;
+
+            document.getElementById("profile-username").innerText = newUsername;
+            document.getElementById("profile-email").innerText = newEmail;
+
+            toggleEditMode(); // Hide the form after updating
+        }
+    </script>
+
+</body>
+</html>

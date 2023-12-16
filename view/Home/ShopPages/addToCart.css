@@ -1,0 +1,228 @@
+
+:root {
+    --orange:hsl(27, 46%, 58%);
+    --black: #130f40;
+    --light-color: #666;
+    --box-shadow: 0.5rem 1.5rem rgb(0, 0, 0, .1);
+    --border: 2rem solid rgb(0, 0, 0, .1);
+    --outline: .1rem solid rgb(0, 0, 0, .1);
+    --outline-hover: .2rem solid var(--black);
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+ 
+section {
+    padding: 5rem 8rem;
+}
+ 
+
+/* home */
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(/home/image/flat-lay-healthy-vegetables-frame.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 17rem;
+    padding-bottom: 10rem;
+}
+
+.home .content {
+    text-align: center;
+    width: 60rem;
+}
+
+.home .content h3 {
+    color: var(--black);
+    font-size: 3rem;
+}
+
+.home .content h3 span {
+    color: var(--orange);
+
+}
+
+.home .content p {
+    color: var(--light-color);
+    font-size: 1.7rem;
+    padding: 1rem 0;
+    line-height: 1.8;
+
+}
+
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#subtotal {
+    width: 50%;
+    margin-bottom: 30px;
+    border: 1px solid #e2e9e1;
+    padding: 30px;
+    background-color: #fff;
+    padding: 3rem 3rem;
+    outline: var(--outline);
+    outline-offset: -1rem;
+    text-align: left;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+#subtotal:hover {
+    outline: var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+#subtotal table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+
+#subtotal table td {
+    width: 50%;
+    border: 1px solid #e2e9e1;
+    padding: 10px;
+    padding: 10px;
+    font-size: 13px;
+
+}
+
+#subtotal h3 {
+    padding-bottom: 15px;
+    font-size: 20px;
+    color: var(--orange);
+    display: flex;
+    align-self: center;
+
+}
+
+#check {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border: .2rem solid var(--black);
+    display: flex;
+    border-radius: .5rem;
+    color: var(--black);
+    cursor: pointer;
+}
+
+#check:hover {
+    background: var(--orange);
+    color: #fff;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#products {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    margin-bottom: 30px;
+    border: 1px solid #e2e9e1;
+    padding: 30px;
+    background-color: #fff;
+    padding: 3rem 3rem;
+    outline: var(--outline);
+    outline-offset: -1rem;
+    box-shadow: var(--box-shadow);
+
+}
+
+#products table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+    margin-bottom: 20px;
+
+}
+
+#products:hover {
+    outline: var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+#products table img {
+    width: 70px;
+
+}
+
+#products table td:nth-child(1),
+#products table td:nth-child(2),
+#products table td:nth-child(3),
+#products table td:nth-child(4),
+#products table td:nth-child(5) {
+    width: 100px;
+    text-align: center;
+}
+
+#products table td:nth-child(4) input {
+    width: 50px;
+    padding: 10px 5px;
+    border: 1px solid #e2e9e1;
+
+}
+
+#products table thead {
+    border: 1px solid #e2e9e1;
+
+}
+
+#products table thead td {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 18px 0;
+    color: var(--orange);
+
+}
+
+#products table tbody tr td {
+    padding-top: 15px;
+
+}
+
+#products table tbody td {
+    font-size: 15px;
+}
+
+.fa-solid {
+    color: var(--orange);
+    font-size: 2rem;
+    margin-right: .3rem;
+    cursor: pointer;
+
+}
+
+.fa-solid:hover {
+    color: #090909;
+} 
