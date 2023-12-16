@@ -163,6 +163,36 @@ class Cart
         $query = "DELETE FROM cart WHERE UserID = ? AND ProductID = ?";
         $this->prepareAndExecuteQuery($query, 'ii', $userID, $productID);
     }
+
+    public function getTotalCartPrice($userID)
+    {
+        try {
+            $query = "SELECT SUM(p.Price * c.Quantity) AS TotalPrice
+                      FROM cart c
+                      JOIN product p ON c.ProductID = p.ProductID
+                      WHERE c.UserID = ?";
+            $statement = $this->conn->prepare($query);
+
+            if (!$statement) {
+                throw new Exception("Database error.");
+            }
+
+            $statement->bind_param('i', $userID);
+            $statement->execute();
+            $result = $statement->get_result();
+
+            if ($result) {
+                $totalPrice = $result->fetch_assoc()['TotalPrice'];
+                return ["success" => true, "message" => "Total cart price retrieved successfully.", "data" => $totalPrice];
+            } else {
+                return ["success" => false, "message" => "Error retrieving total cart price."];
+            }
+        } catch (Exception $e) {
+            return ["success" => false, "message" => "Error: " . $e->getMessage()];
+        }
+    }
+
+
 }
 
 ?>

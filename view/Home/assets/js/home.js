@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch the data from the API
     fetch('http://localhost/Master-pes/master-pesss/API/admin/category/show.php')
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+var userID = sessionStorage.getItem('UserID');
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -235,4 +234,113 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if the user is logged in
+        if (sessionStorage.getItem('UserID')) {
+            // If logged in, update the login link to logout
+            document.querySelector('.nav__link[href="../Home/Login/login.html"]').textContent = 'Logout';
+        }
+
+        // Add click event listener to the login/logout link
+        document.querySelector('.nav__link[href="../Home/Login/login.html"]').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Check if the user is logged in
+            if (sessionStorage.getItem('UserID')) {
+                // If logged in, destroy the session and update the link back to login
+                sessionStorage.removeItem('UserID');
+                alert('You have been logged out.'); // You can replace this with your logout logic
+                this.textContent = 'Login'; // Update the link text
+            } else {
+                // If not logged in, redirect to the login page
+                window.location.href = '../Home/Login/login.html';
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+document.addEventListener('click', function (event) {
+    const addToCartButton = event.target.closest('.add-to-cart');
+    if (addToCartButton) {
+        const productId = addToCartButton.dataset.productId;
+        addToCart(productId);
+    }
+});
+
+function addToCart(productId) {
+    var userId = sessionStorage.getItem('UserID');
+ console.log(userId);
+    // Check if the user is logged in
+    if (!userId) {
+        console.error('User not logged in');
+        return;
+    }
+
+    // Fetch API to add the product to the cart
+    fetch(`http://localhost/Master-pes/master-pesss/API/user_access/cart/cart.php?UserID=${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+         
+            ProductID: productId,
+            SubOrSum: 1,
+            Quantity: 1,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data if needed
+            console.log('Product added to cart:',data.message);
+            console.log('Product added to cart:', data);
+        })
+        .catch(error => console.error('Error adding product to cart:', error));
 }

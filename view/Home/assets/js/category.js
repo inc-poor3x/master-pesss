@@ -72,8 +72,6 @@ function createProductHTML(product) {
     </div>
 </li>
 
-
-
 `;
 }
 
@@ -93,52 +91,59 @@ function createProductHTML(product) {
 
 
 
-document.addEventListener('click', function (event) {
-    const addToCartButton = event.target.closest('.add-to-cart');
-    if (addToCartButton) {
-        const productId = addToCartButton.dataset.productId;
-        addToCart(productId);
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Retrieve user ID from session storage
+    var userID = sessionStorage.getItem('UserID');
+
+    // Check if the user ID is available
+    if (userID) {
+        // Construct the API request payload
+        var apiPayload = {
+            "Action": "getTotalInCart",
+            "UserID": userID
+        };
+
+        // Log the payload for debugging
+        console.log('API Payload:', apiPayload);
+
+        // Make the API request when the page loads
+        fetch('http://localhost/Master-pes/master-pesss/API/user_access/cart/total.php', {
+            method: 'POST', // Use POST method since you are sending data
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(apiPayload)
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Log the API response for debugging
+                console.log('API Response:', data);
+
+                // Check if the API request was successful
+                if (data.success) {
+                    // Update the cart count on the button
+                    var cartCountElement = document.getElementById('cartCount');
+                    cartCountElement.textContent = data.data.Total;
+                } else {
+                    // Handle the case when the API request is not successful
+                    console.error('Error retrieving total from the cart:', data.message);
+                }
+            })
+            .catch(error => {
+                // Handle network errors or other exceptions
+                console.error('Error making API request:', error);
+            });
+    } else {
+        // Handle the case when the user ID is not available in session storage
+        console.error('User ID not found in session storage.');
     }
 });
-
-function addToCart(productId) {
-    const userId = sessionStorage.getItem('UserID');
-
-    // Check if the user is logged in
-    if (!userId) {
-        console.error('User not logged in');
-        return;
-    }
-
-    // Fetch API to add the product to the cart
-    fetch('http://localhost/Master-pes/master-pesss/API/user_access/cart/cart.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            UserID: userId,
-            ProductID: productId,
-            SubOrSum: 1,
-            Quantity: 1,
-        }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response data if needed
-            console.log('Product added to cart:',data.message);
-            console.log('Product added to cart:', data);
-        })
-        .catch(error => console.error('Error adding product to cart:', error));
-}
-
-
-
-
-
-
-
-
 
 
 
