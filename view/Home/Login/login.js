@@ -23,16 +23,21 @@ function registerUser() {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        sessionStorage.setItem('UserID', data.UserID);
         // Handle success, e.g., show a success message or redirect to login page
     })
     .catch((error) => {
         console.error('Error:', error);
         // Handle error, e.g., show an error message to the user
-    });
-}
+ 
+   });
 
+   window.location.href = 'login.html' ;
+}
+ 
 
 //----------------------------------------login fetch----------------------------------------------------------------//
+
 function loginUser() {
     const usernameOrEmail = document.getElementById('email_log').value;
     const password = document.getElementById('password_log').value;
@@ -56,6 +61,12 @@ function loginUser() {
 
             // Save user ID in session (you may want to use a more secure method)
             sessionStorage.setItem('UserID', data.UserID);
+            if(data.RoleID==2){
+                window.location.href="../index.html";
+            }
+            else{
+                window.location.href="../../../admin2/admin/users/index.html"
+            }
 
             // Redirect or perform other actions on successful login
         } else {
@@ -67,6 +78,8 @@ function loginUser() {
         console.error('Error:', error);
         // Handle other errors, e.g., network issues
     });
+
+
 }
 
 

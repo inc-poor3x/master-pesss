@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Candal|Lora"
+            rel="stylesheet">
+
+        <!-- Custom Styling -->
+        <link rel="stylesheet" href="../../css/style.css">
+
+        <!-- Admin Styling -->
+        <link rel="stylesheet" href="../../css/admin.css">
+
+        <title>Admin Section - Manage Posts</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <h1 class="logo-text"><img src="../img/1-removebg-preview (1).png" alt="" width="130px" height="70px"></h1>
+            </div>
+            <i class="fa fa-bars menu-toggle"></i>
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        Awa Melvine
+                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+                    </a>
+                    <ul>
+                        <li><a href="#" class="logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+
+        <!-- Admin Page Wrapper -->
+        <div class="admin-wrapper">
+
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <ul>
+                    <li><a href="../product/index.html">Manage Product </a></li>
+                    <li><a href="../users/index.html">Manage Users</a></li>
+                    <li><a href="../categorey/index.html">Manage Category</a></li>
+
+
+                </ul>
+            </div>
+            <!-- // Left Sidebar -->
+
+
+            <!-- Admin Content -->
+            <div class="admin-content">
+                <div class="button-group">
+                    <a href="create.html" class="btn btn-big">Add Product</a>
+                    <a href="index.html" class="btn btn-big">Manage Product</a>
+                </div>
+
+
+                <div class="content">
+
+                    <h2 class="page-title">Manage Product</h2>
+
+                    <table>
+                        <thead>
+                             <th>StoreID</th>
+                            <th>Product name</th>
+                            <th>Description</th>
+                            <th>price</th>
+                            <th>Quantity</th>
+                            <th>category ID</th>
+                            <th>Image</th>
+                            <th colspan="3">Action</th>
+                        </thead>
+                        <tbody id="tablee">
+                            <tr >
+                                 <td>4</td>
+                                <td>Huda</td>
+                                <td>beauitful product</td>
+                                <td>$15</td>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>Image</td>
+
+                                <td class="edit"><a href="edit2.html"><i class="fa-solid fa-pen"></a></td>
+                                <td class="delete"><i class="fa-solid fa-trash"></i></i></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+            <!-- // Admin Content -->
+
+        </div>
+        <!-- // Page Wrapper -->
+
+
+
+
+        <!-- JQuery -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Custom Script -->
+
+
+
+<!----------------------------to show the products in the table------------------------------------------------------------------------------------->
+        <script>
+            document.addEventListener("DOMContentLoaded",  () => {
+                const eventContainer = document.getElementById('tablee');
+                
+            fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
+                .then(response => response.json())
+                .then(data => {
+                data.forEach(user => {
+                const productRow = document.createElement('tr');
+                productRow.className = 'products-row';
+
+                productRow.innerHTML = `
+
+               
+                                 <td>${user.StoreID }</td>
+                                <td>${user.ProductName }</td>
+                                <td>${user.Description }</td>
+                                <td>${user.Price }</td>
+                                <td>${user.Quantity }</td>
+                                <td>${user.categoryID }</td>
+                                <td>${user.Image }</td>
+
+ 
+                               
+                                <td class="edit"><a href="edit2.html#${user.ProductID } "> <i class="fa-solid fa-pen"></i></a></td>
+                                <td class="delete"  onclick="DeleteUser(${user.ProductID })"> <i class="fa-solid fa-trash"></i></td>
+                           
+
+                `
+        ;
+
+        eventContainer.appendChild(productRow);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+  });
+
+
+
+
+            
+
+
+
+                function DeleteUser(productId){
+                  
+                    fetch("http://localhost/Master-pes/master-pesss/API/proudcte/delet.php", {
+                        method: 'DELETE',
+                        body: JSON.stringify({ProductID:productId}),
+                    })
+                     .then(response => {
+                     if (response.ok) {
+                        console.log(`
+                        User with ID ${productId} deleted successfully`);
+
+                        location.reload();
+                // Fetch and populate the table again after deletion
+                     }
+                      else {
+                console.error(`
+                Error deleting user with ID ${productId}:`, response.statusText);
+            }
+                })
+        .catch(error => console.error(`Error deleting user with ID ${productId}:`, error));
+
+                }
+            </script>
+
+    </body>
+
+</html>
