@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
 $inputData = json_decode(file_get_contents("php://input"), true);
 
 // Assuming you have the following data from the API request
-$userID = $inputData['UserID'] ?? null;
+$userID = $_GET['UserID'] ?? null;
 $productID = $inputData['ProductID'] ?? null;
 
 // Create an instance of the Wishlist class

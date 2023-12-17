@@ -44,10 +44,10 @@ function createProductHTML(product) {
                     </button>
                 </li>
                 <li>
-                    <button class="card-action-btn add-to-wish-list"  aria-label="add to wishlist" title="add to wishlist">
-                        <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                </li>
+                        <button class="card-action-btn add-to-wish-list"  aria-label="add to wishlist" title="add to wishlist" data-product-id="${product.ProductID}">
+                            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                        </button>
+                    </li>
                 <li>
                 <a href="details.html"     <button class="card-action-btn show-more" aria-label="show more" title="show more">
                         <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
@@ -202,9 +202,90 @@ function addToCart(productId) {
 
 
 
+document.addEventListener('click', function (event) {
+    const addToWishlistButton = event.target.closest('.add-to-wish-list');
+    if (addToWishlistButton) {
+        const productId = addToWishlistButton.dataset.productId;
+        addToWishlist(productId);  // Corrected function name
+    }
+});
+
+
+function addToWishlist(productId) {
+    var userId = sessionStorage.getItem('UserID');
+
+    // Check if the user is logged in
+    if (!userId) {
+        console.error('User not logged in');
+        return;
+    }
+
+    // Fetch API to add the product to the wishlist
+    fetch(`http://localhost/Master-pes/master-pesss/API/wishlist/wishlist-add.php?UserID=${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            ProductID: productId,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data
+            console.log('Response:', data);
+
+            if (data.success) {
+                // Product added to wishlist successfully
+                console.log('Product added to wishlist:', data.message);
+            } else {
+                // Product is already in the wishlist
+                console.log('Product already in wishlist:', data.message);
+
+                // Find the button with the matching data-product-id attribute
+                const wishlistButton = document.querySelector(`.add-to-wish-list[data-product-id="${productId}"]`);
+
+              // ...
+
+            if (wishlistButton) {
+    // Change the style of the heart button to indicate it's already in the wishlist
+    wishlistButton.innerHTML = '<ion-icon name="heart"></ion-icon>';
+           wishlistButton.classList.add('already-in-wishlist');
+            }
+            }
+        })
+        .catch(error => console.error('Error adding product to wishlist:', error));
+}
 
 
 
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Get user ID from session storage
+    const userID = sessionStorage.getItem('UserID');
+
+    // Check if user ID exists
+    if (userID) {
+        // Construct the API endpoint URL
+        const apiUrl = `http://localhost/Master-pes/master-pesss/API/wishlist/total.php?UserID=${userID}`;
+
+        // Make a fetch request to the API endpoint
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Check if the API request was successful
+                if (data.success) {
+                    // Update the wishlist count in the HTML
+                    const wishlistCountElement = document.querySelector('.header__user-actions .count');
+                    wishlistCountElement.textContent = data.totalItems;
+                } else {
+                    console.error('Error fetching wishlist count:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching wishlist count:', error);
+            });
+    }
+});
 

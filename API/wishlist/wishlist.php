@@ -58,16 +58,20 @@ public function addToWishlist($db, $userId, $productId)
     public function getWishlist($db, $userId)
     {
         try {
-            // Perform the database query to retrieve the user's wishlist
-            $query = "SELECT * FROM wishlist WHERE UserID = ?";
+            // Perform the database query to retrieve the user's wishlist with product info
+            $query = "
+            SELECT w.WishlistID, w.UserID, w.ProductID, p.ProductName, p.Image,Price
+            FROM wishlist w
+            JOIN product p ON w.ProductID = p.ProductID
+            WHERE w.UserID =?";
             $stmt = $db->prepare($query);
             $stmt->bind_param("i", $userId);
             $stmt->execute();
             $result = $stmt->get_result();
-
+    
             // Check if the query was successful
             if ($result) {
-                // Fetch the wishlist data
+                // Fetch the wishlist data with product info
                 $wishlistData = $result->fetch_all(MYSQLI_ASSOC);
                 return ["success" => true, "wishlist" => $wishlistData];
             } else {
@@ -77,6 +81,7 @@ public function addToWishlist($db, $userId, $productId)
             return ["success" => false, "message" => "Error: " . $e->getMessage()];
         }
     }
+    
 
 /**
  * Remove product from the wishlist

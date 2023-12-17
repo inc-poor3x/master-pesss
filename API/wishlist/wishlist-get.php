@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 // Get the JSON data from the request body
 $inputData = json_decode(file_get_contents("php://input"), true);
-$userID = $inputData['UserID'] ?? null;
+$userID = $_GET['UserID'] ?? null;
 
 // Create an instance of the Wishlist class
 $wishlist = new Wishlist();
