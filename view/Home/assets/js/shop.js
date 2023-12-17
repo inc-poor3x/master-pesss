@@ -1,3 +1,6 @@
+ 
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch all products (without specifying a category)
     fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
@@ -18,8 +21,13 @@ function displayProducts(products) {
     // Add the generated HTML to the product list
     productList.innerHTML = productsHTML;
 }
-
+let Dec ;
 function createProductHTML(product) {
+    // if(product.Description==NUll){
+    //     Dec = " ";
+    // } else{
+    //     Dec=product.Description;
+    // }
     return `
     <li class="decoration">
         <div class="product-card">

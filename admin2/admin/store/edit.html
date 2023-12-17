@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Candal|Lora"
+            rel="stylesheet">
+
+        <!-- Custom Styling -->
+        <link rel="stylesheet" href="../../css/style.css">
+
+        <!-- Admin Styling -->
+        <link rel="stylesheet" href="../../css/admin.css">
+
+        <title>Admin Section - Add User</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <h1 class="logo-text"><img src="../img/1-removebg-preview (1).png" alt="" width="130px" height="70px"></h1>
+            </div>
+            <i class="fa fa-bars menu-toggle"></i>
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        Awa Melvine
+                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+                    </a>
+                    <ul>
+                        <li><a href="#" class="logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+
+        <!-- Admin Page Wrapper -->
+        <div class="admin-wrapper">
+
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <ul>
+                    <li><a href="../product/index.html">Manage Product </a></li>
+                    <li><a href="../users/index.html">Manage Users</a></li>
+                    <li><a href="../categorey/index.html">Manage Category</a></li>
+                    <li><a href="../store/index.html"> Manege Stores  </a></li>
+                </ul>
+            </div>
+            <!-- // Left Sidebar -->
+
+
+            <!-- Admin Content -->
+            <div class="admin-content">
+                <div class="button-group">
+                    <a href="create.html" class="btn btn-big">Add User</a>
+                    <a href="index.html" class="btn btn-big">Manage Users</a>
+                </div>
+
+
+                <div class="content">
+
+                    <h2 class="page-title">Add User</h2>
+
+                    <form action="create.html" method="post" id="">
+                        <div>
+                            <label>Username</label>
+                            <input type="text" name="username"
+                                class="text-input" id="UserName">
+                        </div>
+
+                        <div>
+                            <label>Email</label>
+                            <input type="email" name="email"
+                             class="text-input" id="Email">
+                        </div>
+
+                        <div>
+                            <label>Password</label>
+                            <input type="password" name="password"
+                                class="text-input" id="pass">
+                        </div>
+                       
+                        <div>
+                            <button type="button" class="btn btn-big" onclick="UpdateElement()"> Update </button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+            <!-- // Admin Content -->
+
+        </div>
+        <!-- // Page Wrapper -->
+
+
+        
+        <script>
+             const UserId = window.location.hash.substring(1);//تمشي بعد الهاش واحد 
+
+            //read for the form  (get function)
+           document.addEventListener("DOMContentLoaded",  () => {
+                // const eventContainer = document.getElementById('tablee');
+
+            fetch('http://localhost/master-pesss-main/API/admin/user_crud/show.php')
+                .then(response => response.json())
+                .then(user => {
+                    document.getElementById('UserName').value = user.UserName;
+                    document.getElementById('Email').value = user.Email;
+                    document.getElementById('pass').value = user.Password;
+
+         });
+      })
+      .catch(error => console.error('Error:', error));
+
+
+      
+                    
+ 
+      function UpdateElement(){ 
+        
+        const createdate={
+                        userID:UserId,
+                        UserName: document.getElementById('UserName').value,
+                        Password: document.getElementById('Email').value ,
+                        Email: document.getElementById('pass').value,  
+                     };
+
+
+        console.log(createdate);
+         fetch('http://localhost/Master-pes/master-pesss/API/admin/user_crud/update.php', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(createdate),
+                       
+  
+                    }) 
+         
+
+      }
+  </script>
+
+        <!-- JQuery -->
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Ckeditor -->
+        <script
+            src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+        <!-- Custom Script -->
+        <script src="../../js/scripts.js"></script>
+
+    </body>
+
+</html>

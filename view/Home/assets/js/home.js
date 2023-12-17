@@ -236,3 +236,7 @@ function shuffleArray(array) {
     }
     return array;
 }
+
+
+
+//function logout

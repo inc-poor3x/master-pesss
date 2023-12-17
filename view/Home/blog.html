@@ -27,6 +27,7 @@
 
 a{
     text-decoration: none;
+    
 }
 
 li{
@@ -35,6 +36,8 @@ li{
 
 img{
     width: 100%;
+    height: 45%;
+    object-fit: cover;
 }
 
 section{
@@ -201,7 +204,7 @@ header.shadow .logo{
 }
 
 .post-title{
-    font-size: 1.3rem;
+    font-size: 2rem;
     font-weight: 600;
     color: var(--text-color);
     display: -webkit-box;
@@ -219,13 +222,12 @@ header.shadow .logo{
 }
 
 .post-description{
-    font-size:1.2rem;
-    line-height: 1.5rem;
+    font-size:1.5rem;
+    line-height: 1.8rem;
     margin: 5px 0 10px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
 .profile{
@@ -735,6 +737,8 @@ header.shadow .logo{
             $(".filter-item").click(function () {
                 $(this).addClass("active-filter").siblings().removeClass("active-filter")
             });
-        });</script>
+        });
+        
+        </script>
 </body>
 </html>
