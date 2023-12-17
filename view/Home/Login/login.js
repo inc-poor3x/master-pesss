@@ -25,6 +25,7 @@ function registerUser() {
         console.log('Success:', data);
         sessionStorage.setItem('UserID', data.UserID);
         // Handle success, e.g., show a success message or redirect to login page
+        window.location.href = 'login.html';
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -58,7 +59,7 @@ function loginUser() {
     .then(data => {
         if (data.success) {
             console.log('Login successful:', data);
-
+            window.location.href = '../index.html';
             // Save user ID in session (you may want to use a more secure method)
             sessionStorage.setItem('UserID', data.UserID);
             if(data.RoleID==2){
@@ -81,6 +82,7 @@ function loginUser() {
 
 
 }
+
 
 
 //----------------BussinessAccountForm-----------------------------------------------------------------//
@@ -112,10 +114,11 @@ function registerBusinessAccount() {
     .then(data => {
         console.log('Business Registration Success:', data);
         // Handle success, e.g., show a success message or redirect to login page
+        window.location.href = 'login.html';
     })
     .catch((error) => {
         console.error('Error:', error);
         // Handle error, e.g., show an error message to the user
     });
-    
+
 }

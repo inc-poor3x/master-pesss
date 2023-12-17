@@ -98,48 +98,43 @@
 
       <!--begining of the table -->
 
-      <section class="container">
-        <div id="products">
-            <table id="cartTable">
-                <thead>
+        <section class="container">
+            <div id="products">
+                <table id="cartTable">
+                    <thead>
+                        <tr>
+                            <td> Image </td>
+                            <td> Product </td>
+        
+                            <td> Price </td>
+                          
+                            <td> Quantity </td>
+                            <td> Remove </td>
+                        </tr>
+                    </thead>
+                    <tbody id="products-cards">
+                        <tr>
+                            
+                            <td> <button id="removebottun"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    
+    
+            <div id="subtotal">
+                <h3> Cart Total </h3>
+                <table>
                     <tr>
-                        <td> Image </td>
-                        <td> Product </td>
-                        <td> Product_id </td>
-                        <td> Price </td>
-                        <td> discount </td>
-                        <td> Quantity </td>
-                        <td> Remove </td>
+                        <td> <strong> Total Price </strong></td>
+                        <td id="totalPrice"> <strong> 300JD </strong></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> <img src="flat-lay-healthy-vegetables-frame.jpg" alt=""> </td>
-                        <td> Product Name </td>
-                        <td> </td>
-                        <td> JD</td>
-                        <td>JD </td>
-                        <td> </td>
-                        <td> <button id="removebottun"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-        <div id="subtotal">
-            <h3> Cart Total </h3>
-            <table>
-                <tr>
-                    <td> <strong> Total Price </strong></td>
-                    <td id="totalPrice"> <strong> 300JD </strong></td>
-                </tr>
-            </table>
-            <div class="bottom"><button id="check"><a href="checkOut.html">Checkout </a> </button> </div>
-        </div>
-    </section>
-      
-
+                </table>
+                <div class="bottom"><button id="check"><a href="checkOut.html">Checkout </a> </button> </div>
+            </div>
+        </section>
+        
+    
 
 
 
@@ -284,5 +279,6 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/script.js"></script>
+    <script src="../assets/js/cart.js"></script>
   </body>
 </html>

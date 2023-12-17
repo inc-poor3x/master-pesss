@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const postsContainer = document.getElementById('posts-container');
     console.log("hiiiiiiiiiiiiii");
 
-    fetch('http://localhost/Master-pes/master-pesss/API/store/show.php') // Replace with your actual API endpoint
+    fetch('https://localhost/Master-pes/master-pesss/API/store/show.php') // Replace with your actual API endpoint
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

@@ -12,7 +12,7 @@ header("Content-Type: application/json");
 $inputData = json_decode(file_get_contents("php://input"), true);
 
 // Assuming you have the following data from the API request
-$userID = $inputData['UserID'] ?? null;
+$userID = $_GET['UserID'] ?? null;
 
 // Check for missing or invalid data
 if ($userID === null) {
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Handle GET requests to retrieve products in the cart
 elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $action = $inputData['Action'] ?? null;
+        $action = $_GET['Action'] ?? null;
 
         if ($action === 'getProductsInCart') {
             // Retrieve products in the cart

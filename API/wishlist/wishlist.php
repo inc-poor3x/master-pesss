@@ -123,6 +123,37 @@ public function removeFromWishlist($db, $userId, $productId)
     }
 }
 
+    /**
+     * Get the total number of items in the wishlist for a user
+     *
+     * @param conn $db Database connection
+     * @param int $userId User ID
+     * @return array Result of the operation (success, totalItems)
+     */
+    public function getTotalItemsInWishlist($db, $userId)
+    {
+       try {
+           // Perform the database query to retrieve the total number of items in the wishlist
+           $query = "SELECT COUNT(*) AS totalItems FROM wishlist WHERE UserID = ?";
+           $stmt = $db->prepare($query);
+           $stmt->bind_param("i", $userId);
+           $stmt->execute();
+           $result = $stmt->get_result();
+    
+           // Check the number of rows returned by the query
+           if ($result->num_rows > 0) {
+               // Fetch the total number of items
+               $totalItems = $result->fetch_assoc()['totalItems'];
+               return ["success" => true, "totalItems" => $totalItems];
+           } else {
+               return ["success" => false, "message" => "No items found in the wishlist for the given user ID"];
+           }
+       } catch (Exception $e) {
+           return ["success" => false, "message" => "Error: " . $e->getMessage()];
+       }
+    }
+    
+
 }
 
 ?>
