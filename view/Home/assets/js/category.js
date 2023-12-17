@@ -158,3 +158,53 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+document.addEventListener('click', function (event) {
+    const addToCartButton = event.target.closest('.add-to-cart');
+    if (addToCartButton) {
+        const productId = addToCartButton.dataset.productId;
+        addToCart(productId);
+    }
+});
+
+function addToCart(productId) {
+    var userId = sessionStorage.getItem('UserID');
+ console.log(userId);
+    // Check if the user is logged in
+    if (!userId) {
+        console.error('User not logged in');
+        return;
+    }
+
+    // Fetch API to add the product to the cart
+    fetch(`http://localhost/Master-pes/master-pesss/API/user_access/cart/cart.php?UserID=${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+         
+            ProductID: productId,
+            SubOrSum: 1,
+            Quantity: 1,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data if needed
+            console.log('Product added to cart:',data.message);
+            console.log('Product added to cart:', data);
+        })
+        .catch(error => console.error('Error adding product to cart:', error));
+}
+
+
+
+
+
+
+
+
+
+
+
+
