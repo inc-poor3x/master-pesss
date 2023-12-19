@@ -5,16 +5,213 @@
     <title>Ecommerce Product Website - Easy Tutorials</title>
     <link href="style.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Home/assets/css/style.css">
 
+    <!-- for ion icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!--------------------------------------------------------------------------------------------------------->
     <style>
-      * {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+ 
+ :root {
+    --primary-color: #90e0ef;
+    --secondary-color: #00b4d5;
+    --tertiary-color: #0077b6;
+    --yellow-color: #ffb900;
+    --gray-color: #808080;
 }
-.hero{
-    width: 100%;
+
+
+.containerx {
+    
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.box {
+     
+    padding: 45px;
+     width: 950px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+    "images info"
+    "images description";
+    grid-gap: 100px;
+}
+ 
+
+.box .images .img-holder img {
+     height:450px;
+    display: block;
+   
+}
+
+ 
+ 
+
+.box .basic-info {
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.box .basic-info .rate {
+    color: var(--yellow-color);
+}
+
+.box .basic-info span {
+    font-weight: 800;
+    font-size: 25px;
+}
+
+/*For a button */
+
+/* Bottom */
+.options {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+ 
+#Login{
+    font-size:13px;
+    letter-spacing: 2px;
+
+    height: 40px;
+    width:200px;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.8em 1.5em;
+    border: 2px solid hsl(27, 46%, 58%);
+    border-radius: 2px;
+    position: relative;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1); */
+    color:#000;
+    text-decoration: none;
+    transition: 0.3s ease all;
+    z-index: 1;
+  }
+  
+  #Login:before {
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: hsl(27, 46%, 58%);;
+    z-index: -1;
+  }
+  
+  #Login:hover, a:focus {
+    color: #000;
+  }
+  
+  #Login:hover:before, a:focus:before {
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+  }
+  
+  #Login:active {
+    transform: scale(0.9);
+  }
+
+/*The end of the buttom*/
+
+
+
+/*end of the button*/
+.box .description {
+    grid-area: description;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.box .description p {
+    color: var(--gray-color);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.box .description .features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--gray-color);
+}
+
+ 
+ 
+
+@media (max-width: 991px) {
+    .box {
+        width: 750px;
+        grid-template-areas: 
+        "info info"
+        "images description";
+    }
+    .box .basic-info .options a {
+        padding: 8.5px 12px;
+    }
+}
+
+@media screen and (max-width: 991px) and (min-width: 769px) {
+    .box .basic-info span {
+        position: absolute;
+        align-self: flex-end;
+    }
+    .box .basic-info .options {
+        position: absolute;
+        align-self: flex-end;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .box {
+        width: 600px;
+        grid-template-areas: 
+        "images info"
+        "description description";
+    }
+    .box .images {
+        gap: 3px;
+    }
+    .box .images .img-holder img {
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 640px) {
+    .box {
+        width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 35px;
+        margin: 0;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas: 
+        "images"
+        "info"
+        "description";
+    }
+}
+
+/************************for related products *******************/
+    
 .row{
     width: 90%;
     height: 100vh;
@@ -23,76 +220,10 @@
     align-items: center;
     justify-content: space-between;
 }
-.col{
-    flex-basis: 45%;
-}
-.slider{
-    height: 80vh;
-    display: flex;
-}
-.product img{
-    height: 19vh;
-    margin-bottom: 9px;
-    cursor: pointer;
-    opacity: 0.6;
-}
-
-.product img:hover{
-    opacity: 1;
-}
-
-
-.preview img{
-    height: 100%;
-}
-p{
-    margin-bottom: 20px;
-}
-.brand{
-    background: #008000;
-    width: fit-content;
-    color: #fff;
-    font-size: 12px;
-    padding: 2px 5px;
-}
-h2{
-    font-size: 45px;
-    color: #555;
-    margin-bottom: 20px;
-}
-.rating{
-    display: flex;
-    height: 15px;
-}
-.rating .fa{
-    color: #008000;
-}
-.price{
-    color: #fe980f;
-    font-size: 26px;
-    font-weight: bold;
-    padding-top: 10px;
-}
-input{
-    width: 30px;
-    border: 1px solid #ccc;
-    font-weight: bold;
-    text-align: center;
-}
-button{
-    color: #fff;
-    font-size: 15px;
-    outline: none;
-    border: 0;
-    border-radius: 5px;
-    background: #fe980f;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-button .fa{
-    margin-right: 10px;
-}
+ 
+ 
+ 
+  
 .related{
     width: 90%;
     margin: 0 auto 40px;
@@ -115,161 +246,191 @@ button .fa{
     font-size: 14px;
     margin-bottom: 10px;
 }
-.details .rating{
-    margin: 10px 0;
-}
-
-
-
-
-
-
-
-
-
-
-
 
     </style>
 </head>
 
 <body>
 
-    <div class="hero">
-        <div class="row">
-            <div class="col">
+    <!--Nav bar section -->
+ <!--=============== HEADER ===============-->
+ <header class="header">
+    <!--nav par-->
+         <!--logo-->
+    <nav class="nav container1">
+      <a href="index.html" class="nav__logo">
+         <img src="../Home/assets/images/1.PNG" alt="" class="nav__logo-img">
+      </a>
+  <!--list-->
+  <div class="nav__menu" id="nav-menu">
+  <ul class="nav__list">
+    <li class="nav__item">
+        <a href="../Home/index.html" class="nav__link ">Home</a>
+    </li>
+  
+    <li class="nav__item">
+        <a href="../ShopPages/shop.html" class="nav__link active-link">Shop</a>
+    </li>
+  
+    
+    <li class="nav__item">
+      <a href="../ShopPages/shop.html" class="nav__link ">Contact Us</a>
+  </li>
+  
+    <li class="nav__item">
+        <a href="../profilePage/profile.html" class="nav__link">My Account</a>
+    </li>
+  
+    <li class="nav__item">
+        <a href="../blog.html" class="nav__link">Stories</a>
+    </li>
+  
+    <li class="nav__item">
+        <a href="login.html" class="nav__link">Login</a>
+    </li>
+  
+    
+    <li class="nav__item">
+        <a href="bussiness.html" class="nav__link">Create Store</a>
+    </li>
+  
+  </ul>
+  
+  <!--search-->
+  <div class="header__search">
+  <input 
+    type="text"
+    placeholder="search items"
+    class="form__input"
+  />
+  
+  <button class="search__btn">
+    <ion-icon name="search-outline"></ion-icon>    </button>
+  </div>
+  
+  
+  </div>
+  
+  <!--card and wishlist and person-->
+    <!--WishList-->
+  <div class="header__user-actions">
+    <a href="wishlist.html" class="header__action-btn">
+        <ion-icon name="heart-outline" width="200px"></ion-icon>
+        <span class="count" >3</span>
+    </a>
+  
+  
+    <!--card -->
+    <a href="cart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+        <ion-icon name="bag-outline"></ion-icon>
+        <span class="count" id="cartCount">0</span>
+    </a>
+   
+  </div>
+  </nav>
+  </header>
+  
 
-                <div class="slider">
-                    <div class="product">
-
-                        <img src="assets/images/10.jpg" alt="" onclick="clickme(this)">
-                        <img src="assets/images/11.jpg" alt="" onclick="clickme(this)">
-                        <img src="assets/images/22.jpg" alt="" onclick="clickme(this)">
-                        <img src="assets/images/33.jpg" alt="" onclick="clickme(this)">
-
-                    </div>
-                    <div class="preview">
-                        <img src="assets/img/product4.png" id="imagebox" alt="">
-                    </div>
-                </div>
-
+  <div class="containerx">
+    <div class="box">
+        <div class="images">
+            <div class="img-holder active">
+                <img src="assets/images/olives/Capture4.PNG">
             </div>
-            <div class="col">
+            
+        </div>
+        <div class="basic-info">
+            <h1>Headphone</h1>
+            <span>$250</span>
 
-                <div class="content">
-                    <p class="brand">Brand: Varanga</p>
-                    <h2>Woman Black Quirky Print Empire Dress</h2>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                    </div>
-                    <p class="price">Brand: Varanga</p>
+            <div class="description">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus temporibus corporis repudiandae, consectetur nostrum nisi commodi placeat rerum molestias numquam nihil accusantium deleniti! Enim, nesciunt a quis amet hic officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nemo accusantium tempora facere doloremque cum iusto, ut neque, fuga omnis libero laborum ullam. At dolorum qui atque labore illo dignissimos.</p>
+                
+            </div>
+            
+
+
+            <!-- <div class="bottom">
+                <button  type="button" id="Login">Send messege</button>
                
-                    <p>Quantity: <input type="text" value="1"></p>
-                    <button type="button">
-                        <i class="fa fa-shopping-cart"></i>
-                        Add to cart</button>
-                </div>
-
+           </div>    
+            -->
+            <div class="options">
+          
+                <a href="#" id="Login">Add to Cart</a>
+                <a href="#" id="Login"> Add to wishlist </a>
             </div>
         </div>
-
-
-        <div class="related">
-            <h2>related items</h2>
-            <div class="row">
-                <div class="columns">
-                    <div class="items">
-                        <img src="assets/img/product4.png" alt="">
-                        <div class="details">
-                            <p>Woman Brown Solid Biker Jacket</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </div>
-
-                            <p>USD $120.00</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="items">
-                        <img src="assets/img/product4.png" alt="">
-                        <div class="details">
-                            <p>Navy Blue Flared Palazzos</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-
-                            <p>USD $80.00</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="items">
-                        <img src="assets/img/product4.png" alt="">
-                        <div class="details">
-                            <p>Jacquard Banarasi Dupatta</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-
-                            <p>USD $110.00</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="items">
-                        <img src="assets/img/product4.png" alt="">
-                        <div class="details">
-                            <p>Printed Straight Kurta</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-
-                            <p>USD $100.00</p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
+        
     </div>
+</div>
+
+
+<!--------------------------------------Related Div---------------------------------------------------------------->
+
+    
+<div class="related">
+    <h2>related items</h2>
+    <div class="row">
+        <div class="columns">
+            <div class="items">
+                <img src="assets/images/olives/Capture2.PNG" alt="">
+                <div class="details">
+                    <p>Woman Brown Solid Biker Jacket</p>
+                     
+
+                    <p>USD $120.00</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="items">
+                <img src="assets/images/olives/Capture10.PNG" alt="">
+                <div class="details">
+                    <p>Navy Blue Flared Palazzos</p>
+                     
+
+                    <p>USD $80.00</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="items">
+                <img src="assets/images/olives/Capture9.PNG" alt="">
+                <div class="details">
+                    <p>Jacquard Banarasi Dupatta</p>
+                    
+
+                    <p>USD $110.00</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="items">
+                <img src="assets/images/olives/Capture6.PNG" alt="">
+                <div class="details">
+                    <p>Printed Straight Kurta</p>
+                   
+                    <p>USD $100.00</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-    <script>
-        function clickme(smallImg) {
+</div>
 
-            var fullImg = document.getElementById("imagebox");
-            fullImg.src = smallImg.src;
 
-        }
 
+
+
+ <!-----------------ending related div ---------------------------------------------------------------------------->
     </script>
       <script src="assets/js/category.js"></script>
 
@@ -279,4 +440,3 @@ button .fa{
 </body>
 
 </html>
-

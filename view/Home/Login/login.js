@@ -65,8 +65,10 @@ function loginUser() {
             if(data.RoleID==2){
                 window.location.href="../index.html";
             }
-            else{
-                window.location.href="../../../admin2/admin/users/index.html"
+            else if(data.RoleID==1){
+                window.location.href="../../admin2/admin/product/index.html"
+            } else{
+                window.location.href="../../admin2/admin/product/index.html"
             }
 
             // Redirect or perform other actions on successful login

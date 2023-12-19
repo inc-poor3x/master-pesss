@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <!-- Fontawesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  
+    <!-------------------------------------ion icons link ------------------------------>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+    <link rel="stylesheet" href="../assets/css/style.css" />
+
+    <title>Ecommerce Website</title>
+  </head>
+ 
+  <body>
+<!--Nav bar section -->
+ <!--=============== HEADER ===============-->
+ <header class="header">
+  <!--nav par-->
+       <!--logo-->
+  <nav class="nav container1">
+    <a href="index.html" class="nav__logo">
+       <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
+    </a>
+<!--list-->
+<div class="nav__menu" id="nav-menu">
+<ul class="nav__list">
+  <li class="nav__item">
+      <a href="../index.html" class="nav__link ">Home</a>
+  </li>
+
+  <li class="nav__item">
+      <a href="../ShopPages/shop.html" class="nav__link">Shop</a>
+  </li>
+
+  
+  <li class="nav__item">
+    <a href="../ShopPages/shop.html" class="nav__link active-link">Contact Us</a>
+</li>
+
+  <li class="nav__item">
+      <a href="../profilePage/profile.html" class="nav__link">My Account</a>
+  </li>
+
+  <li class="nav__item">
+      <a href="../blog.html" class="nav__link">Stories</a>
+  </li>
+
+  <li class="nav__item">
+      <a href="login.html" class="nav__link">Login</a>
+  </li>
+
+  
+  <li class="nav__item">
+      <a href="bussiness.html" class="nav__link">Create Store</a>
+  </li>
+
+</ul>
+
+<!--search-->
+<div class="header__search">
+<input 
+  type="text"
+  placeholder="search items"
+  class="form__input"
+/>
+
+<button class="search__btn">
+  <ion-icon name="search-outline"></ion-icon>    </button>
+</div>
+
+
+</div>
+
+<!--card and wishlist and person-->
+  <!--WishList-->
+<div class="header__user-actions">
+  <a href="wishlist.html" class="header__action-btn">
+      <ion-icon name="heart-outline" width="200px"></ion-icon>
+      <span class="count" >3</span>
+  </a>
+
+
+  <!--card -->
+  <a href="cart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+      <ion-icon name="bag-outline"></ion-icon>
+      <span class="count" id="cartCount">0</span>
+  </a>
+ 
+</div>
+</nav>
+</header>
+
+
+    
+    <section class = "contact-section">
+      <div class = "contact-bg">
+         <div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class = "text"> </p>
+      </div>
+
+
+      <div class = "contact-body">
+        <div class = "contact-info">
+          <div>
+            <span><i class = "fas fa-mobile-alt"></i></span>
+            <span>Phone No.</span>
+            <span class = "text">1-2392-23928-2</span>
+          </div>
+          <div>
+            <span><i class = "fas fa-envelope-open"></i></span>
+            <span>E-mail</span>
+            <span class = "text">peaseHandmade@gmail.com</span>
+          </div>
+          <div>
+            <span><i class = "fas fa-map-marker-alt"></i></span>
+            <span>Address</span>
+            <span class = "text">Amman-Jordan-jursalm-palestine</span>
+          </div>
+          <div>
+            <span><i class = "fas fa-clock"></i></span>
+            <span>Opening Hours</span>
+            <span class = "text">all days in the week</span>
+          </div>
+        </div>
+
+        <div class = "contact-form">
+          <form>
+            <textarea rows = "10" placeholder="Left a message for our group "  class = "form-control"></textarea>
+            <div class="bottom">
+              <button  type="button" id="Login">Send messege</button>
+             
+         </div>        
+          </form>
+
+          
+        </div>
+      </div>
+
+      <div class = "map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108513.71160447817!2d35.257588340502345!3d31.796292175206148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502d7d634c1fc4b%3A0xd96f623e456ee1cb!2z2KfZhNmC2K_Ys9iMINil2LPYsdin2KbZitmE!5e0!3m2!1sar!2sjo!4v1702930378309!5m2!1sar!2sjo"  width="100%" height="500px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      </div>
+
+    
+    </section>
+
+
+    <!--The footer section -->
+    
+     <!--
+        #Footer
+    -->
+    <footer class="footer" style="color: #000;">
+      <div class="container">
+          <div class="footer-top section">
+
+              <div class="footer-brand">
+                  <a href="" class="logo">HandMade</a>
+
+                  <ul>
+                      <li class="footer-list-item">
+                          <ion-icon name="location-sharp" aria-hidden="true"></ion-icon>
+
+                          <address class="address">
+                              HandMade,Amman ,Jordan 2023
+                          </address>
+                      </li>
+
+                      <li class="footer-list-item">
+                          <ion-icon name="call-sharp" aria-hidden="true"></ion-icon>
+
+                          <a href="tel:+1234567890" class="footer-link">tel:+1234567890</a>
+                      </li>
+
+                      <li>
+                         <ul class="social-list">
+
+                              <li>
+                                 <a href="#" class="social-link">
+                                  <ion-icon name="logo-facebook" ></ion-icon>
+                                 </a> 
+                              </li>
+
+                              <li>
+                                  <a href="#" class="social-link">
+                                   <ion-icon name="logo-linkedin" ></ion-icon>
+                                  </a> 
+                               </li>
+
+                               <li>
+                                  <a href="#" class="social-link">
+                                   <ion-icon name="logo-instagram" ></ion-icon>
+                                  </a> 
+                               </li>
+                         </ul> 
+                      </li>
+                  </ul>
+              </div>
+
+              <ul class="footer-list">
+                  <li>
+                  <p class="footer-list-title">Help and Information</p>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link">Help and Contact Us</a>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link"> Returns and Refunds</a>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link"> Online store</a>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link">Terms and Conditions</a>
+                  </li>
+              </ul>
+
+
+
+              <ul class="footer-list">
+                  <li>
+                  <p class="footer-list-title">About Us</p>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link">About Us</a>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link">What We Do </a>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link"> FAQ Pages</a>
+                  </li>
+
+                  <li>
+                      <a href="#" class="footer-link">Contact Us</a>
+                  </li>
+              </ul>
+
+              <div class="footer-list">
+                  <p class="footer-list-title">Newsletter</p>
+                  
+                  <form action="" class="footer-form">
+                      <input type="email" name="email_address" placeholder="Your email address" required class="email-field">
+
+                      <button type="submit" class="footer-form-btn">
+                          <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                      </button>
+                  </form>
+
+                  <div class="wrapper">
+
+                      <a href="#" class="footer-link">Term and Condition</a>
+                      <a href="#" class="footer-link">Policy</a>
+                      <a href="#" class="footer-link">Map</a>
+                  </div>
+                   
+              </div>
+
+              
+          </div>
+      </div>
+   </footer>
+    
+
+  </body>
+</html>
