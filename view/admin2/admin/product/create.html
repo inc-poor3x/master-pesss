@@ -65,7 +65,7 @@
             <div class="admin-content">
                 <div class="button-group">
                     <a href="create.html" class="btn btn-big">Add Product</a>
-                    <a href="index.html" class="btn btn-big">Manage Product</a>
+             
                 </div>
 
                 <div class="content">
@@ -74,12 +74,7 @@
 
                     <form action="create.html" 
                     method="post" id="create">
-                    <div>
-                        <label>StoreID</label>
-                        <input type="number" name="StoreID"
-                            class="text-input" id="Store_ID">
-                    </div>
-
+                  
                         <div>
                             <label>ProductName</label>
                             <input type="text" name="username"
@@ -102,11 +97,18 @@
                         </div>
                         
                         <div>
-                            <label>categoryID</label>
-                            <input type="number" name="categoryID" 
-                            class="text-input" id="category_ID">
+                            <label>Category</label>
+                            <select name="categoryID" class="text-input" id="category_ID">
+                                <!-- Add options dynamically using JavaScript or manually -->
+                                <!-- For demonstration, I'm manually adding options -->
+                                <option value="2">Embroideries</option>
+                                <option value="3">Arts</option>
+                                <option value="4">Accessories</option>
+                                <option value="6">Plates</option>
+                                <option value="8">Warmth</option>
+                                <!-- You can add more options based on your database values -->
+                            </select>
                         </div>
-
                         <div>
                             <label>Image</label>
                             <input type="url" name="Image" 
@@ -127,63 +129,50 @@
 
         
         <script>
-            const createduser=document.getElementById('create').
-            addEventListener('submit', function (event) {
-                    event.preventDefault();
-                    let Store_ID=document.getElementById('Store_ID').value;
-                    let Name_product = document.getElementById('Name_product').value;
-                    let Dec_product = document.getElementById('Dec_product').value;
-                    let Price_num = document.getElementById('Price_num').value;
-                    let Quantity_num = document.getElementById('Quantity_num').value;
-                    let category_ID = document.getElementById('category_ID').value;
-                    let Image_ID = document.getElementById('Image_ID').value;
- 
+              document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('create').addEventListener('submit', function (event) {
+                event.preventDefault();
 
-                    const createdate={
-                           
-                        StoreID: Store_ID,
-                        ProductName: Name_product,
-                        Description: Dec_product,  
-                        Price:Price_num,
-                        Quantity:Quantity_num,
-                        categoryID:category_ID,
-                        Image:Image_ID,
-                    };
+                let Name_product = document.getElementById('Name_product').value;
+                let Dec_product = document.getElementById('Dec_product').value;
+                let Price_num = document.getElementById('Price_num').value;
+                let Quantity_num = document.getElementById('Quantity_num').value;
+                let category_ID = document.getElementById('category_ID').value;
+                let Image_ID = document.getElementById('Image_ID').value;
 
-                    
-                    fetch('http://localhost/master-pesss-main/API/proudcte/create.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(createdate),
-                       
-  
-                    }) 
-                    console.log(createdate);
-                     // .then(response => response.json())
-                    // .then(createduser => {
-                    //     console.log("1");
-                    //     setTimeout(() => {
-                    //         window.location.href = 'index.html?message=Success';
-                    //     }, 500);
-                    //     console.log(createduser);
-                    // })
-                
-                    window.location.href="index.html";
-                });
-            
+                const createdate = {
+                    ProductName: Name_product,
+                    Description: Dec_product,  
+                    Price: Price_num,
+                    Quantity: Quantity_num,
+                    categoryID: category_ID,
+                    Image: Image_ID,
+                };
 
+                fetch('http://localhost/Master-pes/master-pesss/API/proudcte/admin_create.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(createdate)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    console.log(data);
+                    window.location.href = 'index.html?message=Success';
+                })
+                .catch(error => console.error('Fetch error:', error));
+            });
+        });
             </script>
 
         <!-- JQuery -->
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Ckeditor -->
-        <script
-            src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
-        <!-- Custom Script -->
-        <script src="../../js/scripts.js"></script>
+       
 
     </body>
 

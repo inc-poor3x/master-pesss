@@ -56,7 +56,8 @@
                     <li><a href="../product/index.html">Manage Product </a></li>
                     <li><a href="../users/index.html">Manage Users</a></li>
                     <li><a href="../categorey/index.html">Manage Category</a></li>
-                    <li><a href="../store/index.html">Manage Category</a></li>
+                    <li><a href="../store/index.html">Manage Stores</a></li>
+
  
                 </ul>
             </div>
@@ -67,7 +68,7 @@
             <div class="admin-content">
                 <div class="button-group">
                     <a href="create.html" class="btn btn-big">Add User</a>
-                    <a href="index.html" class="btn btn-big">Manage Users</a>
+        
                 </div>
 
 
@@ -90,7 +91,7 @@
                                 <td>Awa</td>
  
                                
-                                <td class="edit"><a href="edit4.html"><i class="fa-solid fa-pen"></a></td>
+                             
                                 <td class="delete"><i class="fa-solid fa-trash"></i></i></td>
                             </tr>
                            
@@ -107,70 +108,7 @@
 
 
 
-        <script>
-            let x=0;
-
-
-           document.addEventListener("DOMContentLoaded",  () => {
-                const eventContainer = document.getElementById('tablee');
-
-            fetch('http://localhost/master-pesss-main/API/admin/user_crud/show.php')
-                .then(response => response.json())
-                .then(data => {
-                data.forEach(user => {
-                const productRow = document.createElement('tr');
-                productRow.className = 'products-row';
-
-                productRow.innerHTML = `
-
-               
-                                <td>${++x}</td>
-                                <td>${user.UserName }</td>
-                                <td>${user.Email }</td>
- 
-                               
-                                <td class="edit"><a href="edit4.html#${user.UserID } "> <i class="fa-solid fa-pen"></i></a></td>
-                                <td class="delete"  onclick="DeleteUser(${user.UserID })"> <i class="fa-solid fa-trash"></i></td>
-                           
-
-                `
-        ;
-
-        eventContainer.appendChild(productRow);
-        });
-      })
-      .catch(error => console.error('Error:', error));
-  });
-
-
-
-
-            
-
-
-
-                function DeleteUser(userId){
-                    
-                    fetch("http://localhost/master-pesss-main/API/admin/user_crud/delet.php", {
-                        method: 'DELETE',
-                        body: JSON.stringify({UserID:userId}),
-                    })
-                     .then(response => {
-                     if (response.ok) {
-                        console.log(`
-                        User with ID ${userId} deleted successfully`);
-
-                        location.reload();
-                // Fetch and populate the table again after deletion
-                     }
-                      else {
-                console.error(`
-                Error deleting user with ID ${userId}:`, response.statusText);
-            }
-                })
-        .catch(error => console.error(`Error deleting user with ID ${userId}:`, error));
-
-                }
+        <script src="../../../Home/assets/js/admin.js">
             </script>
 
 
