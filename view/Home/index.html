@@ -15,9 +15,10 @@
     <script src="assets/js/addtocart.js" async></script>
     <script src="assets/js/addtowishlist.js" async></script>
     <!--
-        favicon
+        ion icons link 
     -->
-    <link rel="shortcut icon" href="" type="">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!--
         custom css Link
@@ -51,6 +52,10 @@
     #My_Account{
         display: none;
     }
+
+
+
+    
 </style>
 
 
@@ -58,27 +63,84 @@
 
     <header class="header">
         <!--header top-->
-        <div class="header__top">
-            <div class="header__container container1">
-                <span> </span>
-
-                <span>Amman-Jordan</span>
-                <p class="header__alert-news">
-                     support palestinian Woman
+        <div class="header__top" >
+            <div class="header__container container1 " > 
+                <p class="header__alert-news" style="margin: auto;  display: flex;"   >
+                    <b>support palestinian Woman</b>  
                 </p>
 
-                <a href="../login - sign up/login.html" class="header__top-action">Login / signUp</a>
             </div>
         </div>
         <!--nav par-->
              <!--logo-->
-        <nav class="nav container1">
+        <nav class="nav container1 ">
           <a href="index.html" class="nav__logo">
-             <img src="assets/images/1.PNG" alt="" class="nav__logo-img">
-          </a>
+             <img src="assets/images/1.PNG" alt="" class="nav__logo-img"> 
+            </a>
+<!-----------------------menu main --------------------------------------->
+ <!--list-->
+ 
+ <div class="nav__menu " id="nav-menu" >
+    <ul class="nav__list ">
+        <li class="nav__item hideOnMobile">
+            <a href="index.html" class="nav__link active-link">Home</a>
+        </li>
+
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/ShopPages/shop.html" class="nav__link">Shop</a>
+        </li>
+
+        
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/contact-us-page/index.html" class="nav__link">Contact.Us</a>
+        </li>
+
+        <li class="nav__item hideOnMobile">
+            <a href="profilePage/profile.html" class="nav__link">My.Account</a>
+        </li>
+
+        <li class="nav__item hideOnMobile">
+            <a href="blog.html" class="nav__link">Stories</a>
+        </li>
+
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/Login/login.html" class="nav__link">Login</a>
+        </li>
+
+        <li class="nav__item  menu-Button" onclick="showSideBar()">
+            <a href="#"><ion-icon name="menu-outline" style="font-size: 50px;"></ion-icon></a>
+       </li>
+       </ul>
+
+       
+
+   <!--card and wishlist and person-->
+        <!--WishList-->
+        <div class="header__user-actions">
+            <a href="wishlist.html" class="header__action-btn">
+                 <img src="assets/images/img/icon-heart.svg" alt="">
+    
+                <span class="count" >0</span>
+            </a>
+    
+    
+            <!--card -->
+            <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+                <img src="assets/images/img/icon-cart.svg" alt="">
+                <span class="count" id="cartCount">0</span>
+            </a>
+    </div>
+
+
+</div>
+</header>
+<!---------------------------------------------- parmenant menu------------------------------------------------------------------>
+  <header>
+
   <!--list-->
-  <div class="nav__menu" id="nav-menu">
-    <ul class="nav__list">
+  <div class="nav__menu " id="nav-menu" >
+    <ul class="nav__list sidebar">
+        <li onclick="hideSidebar()"><a href="#"><ion-icon name="close-circle-outline"></ion-icon></a></li>
         <li class="nav__item">
             <a href="index.html" class="nav__link active-link">Home</a>
         </li>
@@ -104,46 +166,30 @@
             <a href="../Home/Login/login.html" class="nav__link">Login</a>
         </li>
 
-        <li class="nav__item">
-            <a href="../Home/Login/bussiness.html" class="nav__link">Create store</a>
-        </li>
+      
+
 
 
     </ul>
 
 
-    <!--search-->
-<div class="header__search">
-    <input 
-        type="text"
-        placeholder="search items"
-        class="form__input"
-    />
-
-    <button class="search__btn">
-        <img src="assets/images/img/search.png" alt="" />
-    </button>
-</div>
-
-
- </div>
 
    <!--card and wishlist and person-->
         <!--WishList-->
-        <div class="header__user-actions">
+        <!-- <div class="header__user-actions">
             <a href="wishlist.html" class="header__action-btn">
                  <img src="assets/images/img/icon-heart.svg" alt="">
     
                 <span class="count" >0</span>
             </a>
     
-    
+     -->
             <!--card -->
-            <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+            <!-- <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
                 <img src="assets/images/img/icon-cart.svg" alt="">
                 <span class="count" id="cartCount">0</span>
             </a>
-    </div>
+    </div> -->
 </nav>
 </header>    
 
@@ -247,16 +293,18 @@
 
 
             <!--
-                #About  //
+                #what happend in gaza at these days section  //
             -->
             <section class="section about" id="about" aria-label="about">
                 <div class="container">
-                    <h2 class="section-title">Peace for HandMade</h2>
-                    <p class="section-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores quia laudantium iure porro voluptates corporis distinctio est omnis soluta dicta. Fuga, sunt? Impedit ipsum vitae voluptates neque harum hic similique?</p>
+                    <h2 class="section-title">What happend in Gaza at These Days ?!!</h2>
+                    <p class="section-text">Gaza is exposed to daily genocide, with no regard for humanity. Hundreds of people are killed daily, tortured, bombed, their homes and tents are demolished, and even their food is mixed with blood.
+                        Gaza under bombardment
+                       We wish you eternal peace..</p>
                     
                     <figure class="card-banner img-holder" style="--width:1170; --height:450;">
                         <iframe id="videoFrame" width="1170" height="450" alt="handmade promo" loop muted class="img-cover"
-    src="./assets/video/شلبي يونس وغزل غريّب - ميّل على بلدي _ Shalby Younis & Ghazal Ghrayeb - Mayel Ala Baladi.mp4"
+    src="./assets/video/وينك يا إنسانية - صالح الجعفراوي _ Video Official Music - Saleh Aljafarawi.mp4"
     title="YouTube video player" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen></iframe>
@@ -272,7 +320,44 @@
                 </div>
             </section>
             
+<!-----------------About Us ------------------------------------>
+           <!-- <section class="sec_about">
+              
+                 <div class="title-wrapper">
+                <h2 class="h2 section-title " style="margin-left: 180px;">About Us</h2>
+                </div>  -->
 
+
+                <!--   <div class="sec_main">
+                    <img src="assets/images/img/Capture.PNG" alt="">
+                    <div class="sec_text">
+                        <h1 style="font-family: var(--ff-mr_de_haviland);">
+                            Who We Are?
+                        </h1>
+                        <h5>
+                            Supporting women in Palestine!
+                        </h5>
+
+                        <p>
+                            We are a team that supports Palestinian women who work in handicrafts and crafts by displaying their products and store
+                            Which preserves the culture of Palestine, and here we believe that anyone is able to support the cause from his place and ability
+                            Palestine is our flower among the thorns and there is no force on earth that will change that. Palestine is our map and our country and it will remain free and our first and last destination. All roads, issues and matters lead to Palestine, my brother. No matter how much you try to deceive, it will not work. The road to Palestine is approaching and it will be free and in our hands.
+                            The people of Gaza can give you hope in a strange way through their faith and resilience.
+                            Palestine will remain free and the suffering of the people of Gaza will tremble, otherwise you will not find it a subscription, not a mad subscription.
+                            All people have a homeland, and we have Palestine and will remain its people.
+                            
+</p>
+                     </div>
+
+                </div>
+
+            </section>
+  -->
+
+
+
+
+<!----------------------end of what happend in gaza section -------------------------------------->
 
             <!--
                 #Products
@@ -283,11 +368,7 @@
                     <div class="title-wrapper">
                         <h2 class="h2 section-title">Popular Products</h2>
         
-                        <ul class="filter-btn-list">
-                            <li class="filter-btn-item">
-                                <button class="filter-btn active" data-filter-btn="all">Shop now </button>
-                            </li>
-                        </ul>
+                         
                     </div>
         
                     <ul class="grid-list product-list" data-filter="all">

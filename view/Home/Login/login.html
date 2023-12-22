@@ -10,128 +10,131 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="shortcut icon" href="../Home/favicon.svg" type="">
 
-    <!--=============== FLATICON ===============-->
-   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
- 
-    <!--=============== SWIPER CSS ===============-->
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-    <!--=============== CSS ===============-->
+    
+<!--======================================== CSS =====================================================-->
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <link rel="stylesheet" href="login.css">
     <title>Ecommerce Website</title>
   </head>
   <body>
-    <!--=============== HEADER ===============-->
+<!--======================================== HEADER ==================================================-->
     <header class="header">
         <!--nav par-->
              <!--logo-->
-        <nav class="nav container1">
-          <a href="index.html" class="nav__logo">
-             <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
+        <nav class="nav container1" style="color: black;">
+          <a href="../index.html" class="nav__logo">
+             <img src="../assets/images/1-removebg-preview (1).png" alt="" class="nav__logo-img">
           </a>
   <!--list-->
   <div class="nav__menu" id="nav-menu">
     <ul class="nav__list">
-        <li class="nav__item">
+        <li class="nav__item hideOnMobile"  >
             <a href="../index.html" class="nav__link ">Home</a>
         </li>
 
-        <li class="nav__item">
-            <a href="../ShopPages/shop.html" class="nav__link active-link">Shop</a>
+        <li class="nav__item hideOnMobile"  >
+            <a href="../ShopPages/shop.html" class="nav__link  ">Shop</a>
         </li>
 
-        <li class="nav__item">
-            <a href="../profilePage/profile.html" class="nav__link">My Account</a>
+        <li class="nav__item hideOnMobile"  >
+            <a href="../contact-us-page/index.html" class="nav__link">contact Us</a>
         </li>
 
-        <li class="nav__item">
+        <li class="nav__item hideOnMobile"  >
             <a href="../blog.html" class="nav__link">stories</a>
         </li>
 
-        <li class="nav__item">
-            <a href="login.html" class="nav__link">Login</a>
+        <li class="nav__item hideOnMobile"  >
+            <a href="login.html" class="nav__link active-link">Login</a>
         </li>
 
-        <li class="nav__item">
-            <a href="bussiness.html" class="nav__link">Create Store</a>
-        </li>
+        <li class="nav__item  menu-Button" onclick="showSideBar()">
+            <a href="#"><ion-icon name="menu-outline" style="font-size: 50px;"></ion-icon></a>
+       </li>
+      
     </ul>
-
-    <!--search-->
-<div class="header__search">
-    <input 
-        type="text"
-        placeholder="search items"
-        class="form__input"
-    />
-
-    <button class="search__btn">
-        <ion-icon name="search-outline"></ion-icon>    </button>
-</div>
-
-
- </div>
-
-   <!--card and wishlist and person-->
-        <!--WishList-->
-   <div class="header__user-actions">
-        <a href="wishlist.html" class="header__action-btn">
-            <ion-icon name="heart-outline" width="200px"></ion-icon>
-            <span class="count" >3</span>
-        </a>
-
-
-        <!--card -->
-        <a href="cart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
-            <ion-icon name="bag-outline"></ion-icon>
-            <span class="count" id="cartCount">0</span>
-        </a>
-        <script src="./assets/js/home.js"></script>
-</div>
 </nav>
 </header>
 
+<!--------------------------------burger menu side bar----------------------------------------------->
+<header>
+
+    <!--list-->
+    <div class="nav__menu " id="nav-menu" >
+      <ul class="nav__list sidebar">
+          <li onclick="hideSidebar()"><a href="#"><ion-icon name="close-circle-outline"></ion-icon></a></li>
+          <li class="nav__item">
+              <a href="index.html" class="nav__link active-link">Home</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="../Home/ShopPages/shop.html" class="nav__link">Shop</a>
+          </li>
+  
+          
+          <li class="nav__item">
+              <a href="../Home/contact-us-page/index.html" class="nav__link">Contact Us</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="profilePage/profile.html" class="nav__link">My Account</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="blog.html" class="nav__link">Stories</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="../Home/Login/login.html" class="nav__link">Login</a>
+          </li>
+      </ul>
+  </nav>
+  </header>   
+
+
+
+<!--=========================The Login Form =========================================================-->
 <div class="container">
 
     <section class="card-container">
 
         <h1>Login</h1>
-        <!-- Email: -->
-        <form action="post">
-            <div autocomplete="off" onkeyup="return ">
+
+        <form id="myForm" >
+            <!-- Email: -->
+            <div autocomplete="off" >
                 <div class="form" id="email_field">
-                    <input type="text " placeholder="ُEmail Address" id="email_log">
+                    <input type="text" placeholder="Email Address" id="email_log" style="background-color: rgba(255, 255, 255, 0.7);">
                     <div class="Errors"><span id="email_error"></span></div>
                 </div>
             </div>
-
-            <!-- password: -->
-            <div onkeyup="">
+    
+            <!-- Password: -->
+            <div >
                 <div class="form">
                     <div class="create_pass">
-                        <input type="password" placeholder="Password" class="create_password" id="password_log">
-                        <i class="fa-regular fa-eye-slash" class="show-password" id="show_password"></i>
+                        <input type="password" placeholder="Password" class="create_password" id="password_log"  style="background-color: rgba(255, 255, 255, 0.7);">
                         <div class="Errors"><small id="error_pass"></small></div>
                     </div>
                 </div>
             </div>
-
+    
+         </form>
+    
             <!-- Submit Button -->
 
             <div class="bottom">
                  <button  type="button" onclick= "loginUser()" id="Login"> Login </button>
                 <a href="signup.html">
-                    <span> create an account </span>
+                    <span > create an account </span>
                 </a>
             </div>
         </form>
 
     </section>
 </div>
+<script src="../assets/js/script.js"></script>
 <script src="login.js"></script>
   </body>
   </html>

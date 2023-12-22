@@ -1,5 +1,12 @@
 //----------------------------------------signup fetch----------------------------------------------------//
 function registerUser() {
+    if (validateForm()) {
+        // If form is valid, proceed with registration
+      
+        // Add further registration logic here
+    
+
+
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -32,14 +39,20 @@ function registerUser() {
         // Handle error, e.g., show an error message to the user
  
    });
-
-   window.location.href = 'login.html' ;
+      
+   alert('Registration successful!');
+    window.location.href = 'login.html' ;
+}
 }
  
 
 //----------------------------------------login fetch----------------------------------------------------------------//
 
 function loginUser() {
+
+
+
+
     const usernameOrEmail = document.getElementById('email_log').value;
     const password = document.getElementById('password_log').value;
 
@@ -84,6 +97,88 @@ function loginUser() {
 
 
 }
+
+
+
+/*********************************Sign Up validation *******************************/
+
+function validateForm() {
+    var username = document.getElementById('username').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    // let confirmpass = document.getElementById('confirm').value;
+
+
+    // Validate username
+    if (username.trim() === '') {
+        document.getElementById('User_error').innerText = 'Username is required';
+        return false;
+    } else {
+        document.getElementById('User_error').innerText = '';
+    }
+
+    // Validate email
+    if (email.trim() === '') {
+        document.getElementById('email_error').innerText = 'Email is required';
+        return false;
+    } else {
+        document.getElementById('email_error').innerText = '';
+    }
+
+    // Validate password
+    if (password.length < 5) {
+        document.getElementById('error_pass').innerText = 'Password should be at least 5 characters';
+        return false;
+    } else if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) {
+        document.getElementById('error_pass').innerText = 'Password should have both letters and numbers';
+        return false;
+    } else {
+        document.getElementById('error_pass').innerText = '';
+    }
+
+    // If all validations pass, you can submit the form
+    return true;
+}
+
+/* if(password !== confirmpass){
+    document.getElementById('error_pass').innerText = 'password is not match'
+    return false;
+    else {
+        documet.getElementById('error_pass').innerText = '' 
+
+    }
+    return true 
+} */
+
+function registerUser1() {
+    // Add any specific registration logic here
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

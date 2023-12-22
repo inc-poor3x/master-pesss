@@ -8,16 +8,6 @@ for(let i=0;i<wish.length;i++){
 
 
 
-
-
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const productListContainer = document.querySelector('.product-list');
 

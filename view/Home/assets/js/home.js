@@ -1,3 +1,6 @@
+/* ******************* for The Logout function ****************************/
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // Check if the user is logged in
     if (sessionStorage.getItem('UserID')) {
@@ -24,24 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+/************************************************************************************************** */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/***********************************fetching for categories ***************************************** */
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch the data from the API
     fetch('http://localhost/Master-pes/master-pesss/API/admin/category/show.php')
@@ -58,12 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error fetching data:', error));
 });
 
-
-
-
-
-
-
+/******************************for cart and heart in the nav bar************************************************************************* */
 
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve user ID from session storage
@@ -271,7 +254,7 @@ function createProductHTML(product) {
     `;
 }
 
-// Function to shuffle an array
+// Function to shuffle an array ////////////////Randomly product using array ///////////////////
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -281,7 +264,7 @@ function shuffleArray(array) {
 }
 
 
-    
+/*********************Add to cart function *********************/    
 document.addEventListener('click', function (event) {
     const addToCartButton = event.target.closest('.add-to-cart');
     if (addToCartButton) {
@@ -289,6 +272,8 @@ document.addEventListener('click', function (event) {
         addToCart(productId);
     }
 });
+
+
 
 function addToCart(productId) {
     var userId = sessionStorage.getItem('UserID');

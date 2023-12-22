@@ -261,21 +261,37 @@ h3{
   padding-block:0.87rem   
 }
 /*=============== HEADER & NAV ===============*/
+
+
+.nav__menu{
+ display: flex;
+ justify-content: space-between;
+}
+.container1{
+  display: flex;
+  justify-content: space-between;
+}
 .nav,
 .nav__menu,
-.nav__list,
-.header__user-actions{
+.nav__list{
  display: flex;
  align-items: center;
+ }
+
+ .header__user-actions{
+  display: flex;
+justify-content: flex-end;
+  
 }
+
 .nav__logo-img{
  width:200px;
 }
 
 .nav{
+ justify-content: space-between;
+height: calc(var(--header-height) + 2.5rem);
 
- height: calc(var(--header-height) + 2.5rem);
-justify-content: space-between;
 column-gap: 1rem;
 }
 
@@ -295,26 +311,11 @@ column-gap: 1rem;
  transition: all 0.2s var(--transition);
 }
 
-.header__search{
- width:340px;
- position:relative;
-}
-
-.header__search .form__input{
-  width:100%;
-}
-
 .active-link,
 .nav__link:hover{
  color:  hsl(27, 46%, 58%);
 }
-.search__btn{
- position:absolute;
- top: 24%;
- right: 1.25rem;
- cursor: pointer;
-}
- 
+
 .header__user-actions{
  column-gap: 1.25rem;
 }
@@ -1074,3 +1075,90 @@ details**********************/
 .details__small-img{
   cursor: pointer;
 }
+
+/*About Us Section*/
+
+.sec_about{
+min-height: 100vh;
+width: 100%;
+padding: 78px 0px;
+}
+
+.sec_about img{
+  height: 600px;
+  width: 500px;
+}
+
+.sec_text{
+  width: 550px;
+}
+
+.sec_main{
+  width: 1130px;
+  max-width: 95% ;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap:20px;
+}
+
+.sec_text h1{
+  font-size: 60px;
+  
+}
+
+.sec_text h5{
+
+  font-size: 20px;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+.sec_text p{
+  letter-spacing: 1px;
+  line-height: 28px;
+  font-size: 18px;
+  margin-bottom: 45px;
+}
+
+.btn_section{
+  background: #000;
+}
+
+
+
+/**************Responsive nav bar ************************/
+
+.sidebar{
+  position: fixed;
+  top:0;
+  right: 0;
+  height: 100vh;
+  width:250px;
+  z-index: 999;
+  background: hsl(27, 46%, 58%);
+  display: none;
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+.menu-Button{
+  display: none;
+}
+
+@media(max-width: 800px){
+  .hideOnMobile{
+    display: none;
+  }
+  .menu-Button{
+    display: block;
+  }
+
+}
+@media(max-width: 400px ){
+  .sidebar{
+    width: 100%;
+  }
+} 

@@ -1,7 +1,4 @@
- 
-
-
-document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
     // Fetch all products (without specifying a category)
     fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
         .then(response => response.json())
@@ -56,8 +53,7 @@ function createProductHTML(product) {
             <a href="details.html" style="--width:300; --height:200;">
                 <span class="visually-hidden">${product.ProductName}</span>
             </a>
-            <p class="card-description">${product.Description}</p>
-            <div class="card-price">
+             <div class="card-price">
                 <data class="price" value="${product.Price}">$${product.Price}.00</data>
             </div>
             <div class="more-details" style="display: none;">
