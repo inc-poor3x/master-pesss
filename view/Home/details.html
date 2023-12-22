@@ -247,6 +247,92 @@
     margin-bottom: 10px;
 }
 
+.mainMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* margin-top: 150px; */
+}
+
+.full-boxer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.box-topTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.comment-box:hover{
+    margin-top: 12px;
+}
+
+.comment-box{
+    width: 350px;
+    background: #eee;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 3px 3px 25px rgba(0,0,0,0.3);
+}
+
+.ProfileProfile{
+    display: flex;
+    align-items: center;
+}
+
+.profile-image-img{
+    width: 70px;
+    height: 70px;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-image-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.NameName{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.NameName strong{
+    color: black;
+    font-size: 18px;
+}
+
+.NameName span{
+    color: gray;
+    margin-top: 2px;
+}
+
+.commentComm p{
+    color: black;
+}
+
+
+
+
+
+
+
+
     </style>
 </head>
 
@@ -337,8 +423,21 @@
         
     </div>
 
-    
+    <section class="mainMain">
+        <div class="full-boxer" id="commentContainer">
+            <!-- Comment boxes will be added here dynamically -->
+        </div>
+        <form id="ratingForm">
+            <textarea rows="10" cols="45" placeholder="Leave a message for our group" class="form-control"></textarea>
+            <div class="bottom" style="margin-top: 10px;">
+                <button id="Login" type="button" id="submitRating">Send message</button>
+            </div>
+          </form>
+          
+
+    </section>
 </div>
+
  
 
 
@@ -409,7 +508,6 @@
  <!-----------------ending related div ---------------------------------------------------------------------------->
  
   
- <script src="path/to/your/builded/tailwind.js"></script>
 
 <script src="../Home/assets/js/ProductDetails.js">
 </script>
