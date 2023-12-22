@@ -6,6 +6,89 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
+
+
+if (isset($_GET['UserID'])) {
+    $userID = $_GET['UserID'];
+
+    $conn = new mysqli("localhost", "root", "", "master-pe");
+
+    if ($conn->connect_error) {
+        dieWithError("Connection failed: " . $conn->connect_error);
+    }
+
+    if (isUserIDExists($userID, $conn)) {
+        $totalOrderAmount = calculateTotalOrderAmount($userID, $conn);
+    
+        if ($totalOrderAmount > 0) {
+            $orderID = createOrder($userID, $totalOrderAmount, $conn);
+    
+            $cartQuery = "SELECT ProductID, Quantity FROM cart WHERE UserID = ?";
+            $cartStatement = $conn->prepare($cartQuery);
+    
+            if (!$cartStatement) {
+                dieWithError("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+            }
+    
+            $cartStatement->bind_param('i', $userID);
+            $cartStatement->execute();
+            $cartResult = $cartStatement->get_result();
+    
+            while ($cartRow = $cartResult->fetch_assoc()) {
+                if (isset($cartRow['ProductID']) && isset($cartRow['Quantity'])) {
+                    addOrderItem($orderID, $cartRow['ProductID'], $cartRow['Quantity'], $conn);
+                } else {
+                    dieWithError('Error retrieving cart items');
+                }
+            }
+    
+            $clearCartQuery = "DELETE FROM cart WHERE UserID = ?";
+            $clearCartStatement = $conn->prepare($clearCartQuery);
+    
+            if (!$clearCartStatement) {
+                dieWithError("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+            }
+    
+            $clearCartStatement->bind_param('i', $userID);
+            $clearCartStatement->execute();
+    
+            $clearCartStatement->close();
+    
+            echo json_encode(array("OrderID" => $orderID, "TotalAmount" => $totalOrderAmount,"message" => "Order created successfully.", "orderID" => $orderID));
+     
+        } else {
+            dieWithError("Your cart is empty");
+        }
+    } else {
+        dieWithError("User not found");
+    }
+    
+    $conn->close();
+} else {
+    dieWithError("UserID not provided");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function calculateTotalOrderAmount($userID, $conn)
 {
     $query = "SELECT SUM(p.Price * c.Quantity) AS TotalAmount
@@ -139,66 +222,5 @@ function addOrderItem($orderID, $productID, $quantity, $conn)
 function dieWithError($message)
 {
     die(json_encode(array("error" => $message)));
-}
-
-$inputData = json_decode(file_get_contents("php://input"), true);
-
-if (isset($inputData['UserID'])) {
-    $userID = $inputData['UserID'];
-
-    $conn = new mysqli("localhost", "root", "", "master-pe");
-
-    if ($conn->connect_error) {
-        dieWithError("Connection failed: " . $conn->connect_error);
-    }
-
-    if (isUserIDExists($userID, $conn)) {
-        $totalOrderAmount = calculateTotalOrderAmount($userID, $conn);
-    
-        if ($totalOrderAmount > 0) {
-            $orderID = createOrder($userID, $totalOrderAmount, $conn);
-    
-            $cartQuery = "SELECT ProductID, Quantity FROM cart WHERE UserID = ?";
-            $cartStatement = $conn->prepare($cartQuery);
-    
-            if (!$cartStatement) {
-                dieWithError("Prepare failed: (" . $conn->errno . ") " . $conn->error);
-            }
-    
-            $cartStatement->bind_param('i', $userID);
-            $cartStatement->execute();
-            $cartResult = $cartStatement->get_result();
-    
-            while ($cartRow = $cartResult->fetch_assoc()) {
-                if (isset($cartRow['ProductID']) && isset($cartRow['Quantity'])) {
-                    addOrderItem($orderID, $cartRow['ProductID'], $cartRow['Quantity'], $conn);
-                } else {
-                    dieWithError('Error retrieving cart items');
-                }
-            }
-    
-            $clearCartQuery = "DELETE FROM cart WHERE UserID = ?";
-            $clearCartStatement = $conn->prepare($clearCartQuery);
-    
-            if (!$clearCartStatement) {
-                dieWithError("Prepare failed: (" . $conn->errno . ") " . $conn->error);
-            }
-    
-            $clearCartStatement->bind_param('i', $userID);
-            $clearCartStatement->execute();
-    
-            $clearCartStatement->close();
-    
-            echo json_encode(array("OrderID" => $orderID, "TotalAmount" => $totalOrderAmount));
-        } else {
-            dieWithError("Your cart is empty");
-        }
-    } else {
-        dieWithError("User not found");
-    }
-    
-    $conn->close();
-} else {
-    dieWithError("UserID not provided");
 }
 ?>
