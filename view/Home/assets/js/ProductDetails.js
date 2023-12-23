@@ -380,3 +380,67 @@ document.getElementById('submitRating').addEventListener('click', function() {
         alert('An error occurred while submitting the review');
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Fetch all products (without specifying a category)
+    fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
+        .then(response => response.json())
+        .then(data => {
+            // Shuffle the array to randomize product order
+            const shuffledProducts = shuffleArray(data);
+
+            // Take the first 4 products (assuming your original HTML had 4 product slots)
+            const selectedProducts = shuffledProducts.slice(0, 4);
+
+            // Handle the response data and generate product cards
+            displayProducts(selectedProducts);
+        })
+        .catch(error => console.error('Error fetching products:', error));
+});
+
+function displayProducts(products) {
+    const rowElement = document.querySelector('.row');
+
+    // Generate HTML for each product
+    const productsHTML = products.map(product => createProductHTML(product)).join('');
+
+    // Add the generated HTML to the row element
+    rowElement.innerHTML = productsHTML;
+}
+
+function createProductHTML(product) {
+    return `
+    <div class="columns">
+    <a href="details.html?id=${product.ProductID}">
+        <div class="items">
+            <img src="${product.Image}" alt="">
+            <div class="details">
+                <p>${product.ProductName}</p>
+                <p>USD $${product.Price}.00</p>
+            </div>
+            </a>
+        </div>
+    </div>
+    `;
+}
+
+// Function to shuffle an array ////////////////Randomly product using array ///////////////////
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
