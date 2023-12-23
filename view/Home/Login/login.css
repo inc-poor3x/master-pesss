@@ -14,7 +14,12 @@
 }
 
 body {
-    width: 100vw;
+    background-image:  linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(../assets/images/Darzahroundtwo6_60969895-2135-4cbf-a829-dc29c0e26aab_1597x1065.webp);           
+    background-size: cover;
+    background-position: center;
+    /* background-repeat: no-repeat; */
+
+    
 }
  
 
@@ -73,10 +78,15 @@ form {
 }
 
 #error_pass,
-#email_error {
+#email_error,
+#User_error {
+    width: 300px;
     font-size: 14px;
     color: #ee3301;
+    background: rgba(255, 255, 255, 0.6);
 }
+
+
 
 /* show and hide: */
 #show_password {
@@ -148,12 +158,12 @@ form {
   #Login:active {
     transform: scale(0.9);
   }
+  .bottom>a span{
+    color: #000;
+    font-weight: bold;
+  }
 
   .bottom>a span:hover{
     color:hsl(27, 46%, 58%)
   }
-
-
-  #registerButton{
-     
-  }
+ 
