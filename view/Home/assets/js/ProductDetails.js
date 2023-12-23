@@ -273,9 +273,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Make a request to the API
     fetch(`http://localhost/Master-pes/master-pesss/API/user_access/rating/show.php?ProductID=${productId}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
         .then(data => {
-            // Handle the response data
+            // Directly use the data without parsing
             console.log(data);
             const commentContainer = document.getElementById('commentContainer');
             commentContainer.innerHTML = generateCommentHTML(data);
@@ -284,71 +289,94 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Error fetching data:', error);
         });
 
-    // Function to generate HTML for a comment with star rating
-    function generateCommentHTML(comment) {
-        const starRating = generateStarRating(comment.RatingValue);
-        return `
-            <div class="comment-box">
-                <div class="box-topTop">
-                    <div class="ProfileProfile">
-                        <div class="NameName">
-                            <strong>${comment.UserName}</strong>
-                            <span>${starRating}</span>
+    // Function to generate HTML for comments with star rating
+    function generateCommentHTML(data) {
+        const comments = data.trim().split('\n').map(jsonString => JSON.parse(jsonString));
+        
+        // Shuffle the array of comments
+        shuffleArray(comments);
+
+        // Select the first three comments
+        const selectedComments = comments.slice(0, 3);
+
+        return selectedComments.map(comment => {
+            const starRating = generateStarRating(comment.RatingValue);
+            return `
+                <div class="comment-box">
+                    <div class="box-topTop">
+                        <div class="ProfileProfile">
+                            <div class="NameName">
+                                <strong>${comment.UserName}</strong>
+                                <span>${starRating}</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="commentComm">
+                        <p>${comment.Comment}</p>
+                    </div>
                 </div>
-                <div class="commentComm">
-                    <p>${comment.Comment}</p>
-                </div>
-            </div>
-        `;
+            `;
+        }).join('');
     }
 
     // Function to generate star icons based on rating value
     function generateStarRating(ratingValue) {
-        const roundedRating = Math.round(ratingValue); // Round to the nearest whole number
-        const stars = '★'.repeat(roundedRating); // Use Unicode star character
+        const roundedRating = Math.round(ratingValue);
+        const stars = '★'.repeat(roundedRating);
         return stars;
     }
+
+    // Function to shuffle an array in place (Fisher-Yates algorithm)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 });
- 
 
 
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Add an event listener to the button
-    document.getElementById('submitRating').addEventListener('click', function () {
-      // Get the values from the textarea and other relevant data
-      const message = document.querySelector('.form-control').value;
-      const userID = sessionStorage.getItem('UserID');
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get('id');  
-      // Create the data object to be sent in the request
-      const data = {
-        UserID: userID,
-        ProductID: productId,
-        Message: message
+document.getElementById('submitRating').addEventListener('click', function() {
+    // Get form data
+    var comment = document.getElementById('comment').value;
+    var rating = document.getElementById('rating').value;
+    
+    // Get user ID from session (replace 'yourUserIdKey' with your actual session key)
+    var userId = sessionStorage.getItem('UserID');
+    
+    // Get product ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    // Prepare data for the fetch request
+    var formData = {
+        RatingValue: rating,
+        Comment: comment
     };
-  
-      // Use the Fetch API to make the POST request
-      fetch('http://localhost/Master-pes/master-pesss/API/user_access/rating/creat.php', {
+    
+    // Make the fetch request
+    fetch(`http://localhost/Master-pes/master-pesss/API/user_access/rating/creat.php?UserID=${userId}&ProductID=${productId}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
-      })
-      .then(response => response.json())
-      .then(result => {
-        // Handle the response from the server, you can update the UI accordingly
-        console.log(result);
-        alert('Rating submitted successfully!');
-      })
-      .catch(error => {
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the API response
+        console.log(data);
+        if (data.status === 'success') {
+            alert('Review successfully inserted');
+            // Optionally, redirect or perform other actions after successful submission
+        } else {
+            alert('Failed to insert review');
+        }
+    })
+    .catch(error => {
         console.error('Error:', error);
-        alert('An error occurred while submitting the rating.');
-      });
+        alert('An error occurred while submitting the review');
     });
 });
