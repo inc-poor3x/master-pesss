@@ -36,7 +36,7 @@ function createProductHTML(product) {
     <li class="decoration">
     <div class="product-card">
         <div class="card-banner img-holder has-before" style="--width:300; --height:200;">
-            <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
+            <img src="../../assets/images/${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
             <ul class="card-action-list">
                 <li>
                     <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">

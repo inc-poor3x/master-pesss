@@ -24,7 +24,7 @@
         <!-- Admin Styling -->
         <link rel="stylesheet" href="../../css/admin.css">
 
-        <title>Admin Section - Manage Users</title>
+        <title>Admin Section - Manage Store</title>
     </head>
 
     <body>
@@ -57,6 +57,8 @@
                     <li><a href="../users/index.html">Manage Users</a></li>
                     <li><a href="../categorey/index.html">Manage Category</a></li>
                     <li><a href="../store/index.html">Manage Stores</a></li>
+                    <li><a href="../order/index.html">Manage order</a></li>
+                    <li><a href="../rating/index.html">Manage Rating</a></li>
 
                 </ul>
             </div>
@@ -66,21 +68,20 @@
             <!-- Admin Content -->
             <div class="admin-content">
                 <div class="button-group">
-                    <a href="create.html" class="btn btn-big">Add User</a>
+                    <a href="create.html" class="btn btn-big">Add Store</a>
                
                 </div>
 
 
                 <div class="content">
 
-                    <h2 class="page-title">Manage Users</h2>
+                    <h2 class="page-title">Manage Store</h2>
 
                     <table >
                         <thead>
                             <th>UserID</th>
                             <th>storeName</th>
                             <th>category</th>
-                            <th>store image</th>
                             <th>Is Active</th>
                             <th colspan="2">Action</th>
                         </thead>
@@ -119,10 +120,9 @@
                                 <td>${user.UserID}</td>
                                 <td>${user.StoreName }</td>
                                 <td>${user.Category }</td>
-                                <td><img src="${user.StoreImage}" width="50px"></td>
                                 <td>${user.IsActive }</td>
                              
-                                <td class="edit"><a href="edit4.html#${user.UserID } "> <i class="fa-solid fa-pen"></i></a></td>
+                                <td class="edit"><a href="edit.html?id=${user.UserID } "> <i class="fa-solid fa-pen"></i></a></td>
                                 <td class="delete"  onclick="DeleteUser(${user.StoreID })"> <i class="fa-solid fa-trash"></i></td>
                            
 

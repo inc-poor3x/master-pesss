@@ -8,7 +8,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Get JSON data from the request body
     $data = json_decode(file_get_contents('php://input'), true);
 
@@ -26,24 +25,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($result && $result->num_rows > 0) {
                 $responseData = $result->fetch_all(MYSQLI_ASSOC);
-                echo json_encode($responseData);
+                echo json_encode(['success' => true, 'data' => $responseData]);
             } else {
-                echo "No products available for the specified storeID";
+                http_response_code(404); // Not Found
+                echo json_encode(['success' => false, 'message' => "No products available for the specified storeID"]);
             }
         } else {
-            echo "Error executing query: " . $stmt->error;
+            http_response_code(500); // Internal Server Error
+            echo json_encode(['success' => false, 'message' => "Error executing query: " . $stmt->error]);
         }
 
         // Close the statement
         $stmt->close();
     } else {
-        echo "storeID parameter is required in the JSON data";
+        http_response_code(400); // Bad Request
+        echo json_encode(['success' => false, 'message' => "storeID parameter is required in the JSON data"]);
     }
-
 } else {
-    echo "The request method is wrong";
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(['success' => false, 'message' => "The request method is wrong"]);
 }
-// <!-- {
-//     "storeID": 6
-//   } -->
 ?>
+

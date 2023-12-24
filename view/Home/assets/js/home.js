@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 li.innerHTML = `
                     <div class="blog-card">
                         <div class="card-banner img-holder" style="--width:374; --height:243;">
-                            <img src="${store.StoreImage}" width="374" height="243" loading="lazy" alt="${store.StoreName}" class="img-cover">
+                            <img src="../../assets/images/${store.StoreImage}" width="374" height="243" loading="lazy" alt="${store.StoreName}" class="img-cover">
                             <a href="blog.html" class="card-btn">
                                 <span class="span">Show more</span>
                                 <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
@@ -218,7 +218,7 @@ function createProductHTML(product) {
     <li class="decoration">
         <div class="product-card">
             <div class="card-banner img-holder has-before" style="--width:300; --height:200;">
-                <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
+                <img src="../../assets/images/${product.Image} width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
                 <ul class="card-action-list">
                     <li>
                         <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">

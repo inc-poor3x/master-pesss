@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Candal|Lora"
+            rel="stylesheet">
+
+        <!-- Custom Styling -->
+        <link rel="stylesheet" href="../../css/style.css">
+
+        <!-- Admin Styling -->
+        <link rel="stylesheet" href="../../css/admin.css">
+
+        <title>Admin Section - Manage Posts</title>
+        <style>
+            
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <h1 class="logo-text"><img src="../img/1-removebg-preview (1).png" alt="" width="130px" height="70px"></h1>
+            </div>
+            <i class="fa fa-bars menu-toggle"></i>
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        Awa Melvine
+                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+                    </a>
+                    <ul>
+                        <li><a href="#" class="logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+
+        <!-- Admin Page Wrapper -->
+        <div class="admin-wrapper">
+
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <ul>
+                    <li><a href="../product/index.html">Manage Product </a></li>
+                    <li><a href="../users/index.html">Manage Users</a></li>
+                    <li><a href="../categorey/index.html">Manage Category</a></li>
+                    <li><a href="../store/index.html">Manage Stores</a></li>
+                    <li><a href="../order/index.html">Manage order</a></li>
+                    <li><a href="../rating/index.html">Manage Rating</a></li>
+
+                </ul>
+            </div>
+            <!-- // Left Sidebar -->
+
+            <div class="admin-content">
+
+            <!-- Admin Content -->
+            <div class="content">
+                <h2 class="page-title">Manage Ratings</h2>
+                <table>
+                    <thead>
+                     
+                     
+                      
+                        <th>Rating Value</th>
+                        <th>Comment</th>
+                        <th>Date Rated</th>
+                        <th>User Name</th>
+                        <th>Product Name</th>
+                        <th>Action </th>
+
+                    </thead>
+                    <tbody id="ratingsTable">
+                        <!-- Ratings will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- // Admin Content -->
+
+        </div>
+        <!-- // Page Wrapper -->
+ 
+
+        <!-- JQuery -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Custom Script -->
+
+
+
+<!----------------------------to show the products in the table------------------------------------------------------------------------------------->
+        <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const ratingsContainer = document.getElementById('ratingsTable');
+
+    fetch('http://localhost/Master-pes/master-pesss/API/admin/rating/showall.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(rating => {
+                const ratingRow = document.createElement('tr');
+                
+                ratingRow.innerHTML = `
+                    
+                   
+                   
+                    <td>${rating.RatingValue}</td>
+                    <td>${rating.Comment}</td>
+                    <td>${rating.DateRated}</td>
+                    <td>${rating.UserName}</td>
+                    <td>${rating.ProductName}</td>
+                    <td class="delete" onclick="DeleteRating(${rating.RatingID})"> <i class="fa-solid fa-trash"></i></td>
+
+                `;
+
+                ratingsContainer.appendChild(ratingRow);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+});
+function DeleteRating(ratingID) {
+    fetch(`http://localhost/Master-pes/master-pesss/API/admin/rating/delet.php`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ RatingID: ratingID })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Remove the rating row from the table or refresh the table
+        location.reload(); // This will reload the page to refresh the data
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+
+            </script>
+
+    </body>
+
+</html>

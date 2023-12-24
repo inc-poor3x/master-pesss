@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded",  () => {
 
                 <div class="images">
                 <div class="img-holder active">
-                    <img src="${data.Image}">
+                    <img src="../../assets/images${data.Image}">
                 </div>
             </div>
             
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded",  () => {
                 <div class="store-info">
         <a href="store.html?storeID=${data.StoreID}" class="store-link">
             <div class="profile-image-img">
-                <img src="${data.StoreImage}">
+                <img src="../../assets/images/${data.StoreImage}">
             </div>
             <div class="description">
                 <p>${data.StoreName}</p>
@@ -425,7 +425,7 @@ function createProductHTML(product) {
     <div class="columns">
     <a href="details.html?id=${product.ProductID}">
         <div class="items">
-            <img src="${product.Image}" alt="">
+            <img src="../../assets/images/${product.Image}" alt="">
             <div class="details">
                 <p>${product.ProductName}</p>
                 <p>USD $${product.Price}.00</p>

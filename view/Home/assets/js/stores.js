@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 postBox.className = 'post-box';
 
                 const img = document.createElement('img');
-                img.src = postData.StoreImage;
+                img.src =`../../assets/images/${postData.StoreImage}`;
                 img.alt = '';
 
                 const title = document.createElement('a');

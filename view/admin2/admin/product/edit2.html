@@ -54,8 +54,9 @@
                     <li><a href="../product/index.html">Manage Product </a></li>
                     <li><a href="../users/index.html">Manage Users</a></li>
                     <li><a href="../categorey/index.html">Manage Category</a></li>
-                    <li><a href="../store/index.html"> Manege Stores  </a></li>
-
+                    <li><a href="../store/index.html">Manage Stores</a></li>
+                    <li><a href="../order/index.html">Manage order</a></li>
+                    <li><a href="../rating/index.html">Manage Rating</a></li>
                 </ul>
             </div>
             <!-- // Left Sidebar -->
@@ -64,26 +65,21 @@
             <!-- Admin Content -->
             <div class="admin-content">
                 <div class="button-group">
-                    <a href="create.html" class="btn btn-big">Add Product</a>
+                    <!-- <a href="create.html" class="btn btn-big">Add Product</a> -->
                   
                 </div>
 
 
-                <div class="content">
+                <div class="admin-content">
 
-                    <h2 class="page-title">Add User</h2>
+                    <h2 class="page-title">Add Product</h2>
 
-                    <form action="create.html" 
-                    method="post" id="">
-                    <div>
-                        <label>StoreID</label>
-                        <input type="number" name="StoreID"
-                            class="text-input" id="Store_ID">
-                    </div>
+                    <form id="updateProductForm" >
+
 
                         <div>
                             <label>ProductName</label>
-                            <input type="text" name="username"
+                            <input type="text" name="ProductName"
                                 class="text-input" id="Name_product">
                         </div>
                         <div>
@@ -93,7 +89,7 @@
                         </div>
                         <div>
                             <label>Price</label>
-                            <input type="number" name="number"
+                            <input type="number" name="Price"
                                 class="text-input" id="Price_num">
                         </div>
                         <div>
@@ -103,19 +99,26 @@
                         </div>
                         
                         <div>
-                            <label>categoryID</label>
-                            <input type="number" name="categoryID" 
-                            class="text-input" id="category_ID">
+                            <label>Category</label>
+                            <select name="categoryID" class="text-input" id="category_ID">
+                                <!-- Add options dynamically using JavaScript or manually -->
+                                <!-- For demonstration, I'm manually adding options -->
+                                <option value="2">Embroideries</option>
+                                <option value="3">Arts</option>
+                                <option value="4">Accessories</option>
+                                <option value="6">Plates</option>
+                                <option value="8">Warmth</option>
+                                <!-- You can add more options based on your database values -->
+                            </select>
                         </div>
 
                         <div>
                             <label>Image</label>
-                            <input type="url" name="Image" 
-                            class="text-input" id="Image_ID">
+                            <input type="file" name="Image" class="text-input" id="Image_ID">
                         </div>
-
+            
                         <div>
-                            <button type="button" class="btn btn-big" onclick="UpdateElement()"> Update </button>
+                            <button type="button" class="btn btn-big" onclick="UpdateElement()">Update</button>
                         </div>
                     </form>
 
@@ -129,58 +132,52 @@
    
 <!---------------------------read(show) the products--------------------------------------------------------------------------------------->
             <script>
-                const productId = window.location.hash.substring(1);//تمشي بعد الهاش واحد 
-
-            //read for the form  (get function)
-            document.addEventListener("DOMContentLoaded",  () => {
-                // const eventContainer = document.getElementById('tablee');
-                
-            fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
-                .then(response => response.json())
-                .then(user => {
-                    document.getElementById('Store_ID').value = user.StoreID;
-                    document.getElementById('Name_product').value = user.ProductName;
-                    document.getElementById('Dec_product').value = user.Description;
-                    document.getElementById('Price_num').value = user.Price;
-                    document.getElementById('Quantity_num').value = user.Quantity;
-                    document.getElementById('category_ID').value = user.categoryID;
-                    document.getElementById('Image_ID').value = user.Image;
-
-            });
+  document.addEventListener("DOMContentLoaded", () => {
+    const id = new URLSearchParams(window.location.search).get('id');
+    console.log(id);
+    if (id) {
+        fetch(`http://localhost/Master-pes/master-pesss/API/proudcte/show_id.php?id=${id}`)
+            .then(response => response.json())
+            .then(responseData => {
+                const product = responseData.data; // Accessing the 'data' key
+                document.getElementById('Name_product').value = product.ProductName;
+                document.getElementById('Dec_product').value = product.Description;
+                document.getElementById('Price_num').value = product.Price;
+                document.getElementById('Quantity_num').value = product.Quantity;
+                document.getElementById('category_ID').value = product.categoryID;
+                // Populate other fields as needed
+                console.log(product.ProductName); // Corrected console log statement
             })
             .catch(error => console.error('Error:', error));
+    }
+});
+
+
+function UpdateElement() {
+    const productId = new URLSearchParams(window.location.search).get('id');
+    const formData = new FormData(document.getElementById('updateProductForm'));
+    formData.append('productID', productId);
+
+    fetch('http://localhost/Master-pes/master-pesss/API/proudcte/update.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        window.alert('Produit modifié avec succès!');
+        window.location.href = "index.html";
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 
 
-                    
-
-            function UpdateElement(){ 
-
-            const createdate={
-                        productID:productId,
-                        StoreID: document.getElementById('Store_ID').value,
-                        ProductName: document.getElementById('Name_product').value ,
-                        Description: document.getElementById('Dec_product').value,  
-                        Price: document.getElementById('Price_num').value,
-                        Quantity: document.getElementById('Quantity_num').value ,
-                        categoryID: document.getElementById('category_ID').value, 
-                        Image: document.getElementById('Image_ID').value,
-                        };
-
-
-            console.log(createdate);
-            fetch('http://localhost/Master-pes/master-pesss/API/proudcte/update.php', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(createdate),
-                        
-
-                    }) 
-            window.location.href="index.html"
-
-            }
             </script>
 
 

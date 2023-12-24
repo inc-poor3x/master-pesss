@@ -52,9 +52,11 @@
             <div class="left-sidebar">
                 <ul>
                     <li><a href="../product/index.html">Manage Product </a></li>
-                    <li><a href="../users/index.html">Manage Users </a></li>
-                    <li><a href="../categorey/index.html">Manage Category </a></li>
-                    <li><a href="../store/index.html"> Manege Stores</a></li>
+                    <li><a href="../users/index.html">Manage Users</a></li>
+                    <li><a href="../categorey/index.html">Manage Category</a></li>
+                    <li><a href="../store/index.html">Manage Stores</a></li>
+                    <li><a href="../order/index.html">Manage order</a></li>
+                    <li><a href="../rating/index.html">Manage Rating</a></li>
                 </ul>
             </div>
             <!-- // Left Sidebar -->
@@ -63,7 +65,7 @@
             <!-- Admin Content -->
             <div class="admin-content">
                 <div class="button-group">
-                    <a href="create.html" class="btn btn-big">Add Stores</a>
+                    <!-- <a href="create.html" class="btn btn-big">Add Stores</a> -->
                     
                 </div>
 
@@ -71,48 +73,34 @@
                 <div class="content">
 
                     <h2 class="page-title">Add Stores</h2>
-
-                    <form enctype='multipart/form-data'
-                    method="post" id="create">
-                    <div>
-                        <label>User ID</label>
-                        <select id="UseriD">
-                            <option value="0">All</option>
-                        </select>
-
-
+                    <form enctype='multipart/form-data' method="post" id="createStoreForm">
+                        <div>
+                            <label>User ID</label>
+                            <select name="UserID" id="UseriD">
+                                <option value="0">All</option>
+                            </select>
+                        </div>
                         <div>
                             <label>StoreName</label>
-                            <input type="text" name="storeName"
-                                class="text-input" id="store_name">
+                            <input type="text" name="StoreName" class="text-input" id="store_name">
                         </div>
-                        
                         <div>
                             <label>Category</label>
-                            <input type="text" name="category"
-                                class="text-input" id="category">
+                            <input type="text" name="Category" class="text-input" id="category">
                         </div>
-
                         <div>
-                            <label>Store image </label>
-                            <input type="url" name="image" 
-                            id="StoreImg" class="text-input">
+                            <label>Store image</label>
+                            <input type="file" name="StoreImage" id="StoreImg">
                         </div>
-
-                        
                         <div>
-                            <label>Is Active </label>
-                            <input type="number" name="IsActive" 
-                            id="IsActive" class="text-input">
+                            <label>Is Active</label>
+                            <input type="number" name="IsActive" id="IsActive" class="text-input">
                         </div>
-
-                         <!-- onclick="createUser()" -->
-
                         <div>
-                            <button type="submit" class="btn btn-big" >Create Store</button>
+                            <button type="submit" class="btn btn-big">Create Store</button>
                         </div>
                     </form>
-
+                    
                 </div>
 
             </div>
@@ -134,50 +122,41 @@
 
             <script>
 
-            const createduser = document.getElementById('create').
-            addEventListener('submit', function (event) {
-                    event.preventDefault();
-            
-                    let Userid = document.getElementById('UseriD').value;
-                    let store_name = document.getElementById('store_name').value;
-                    let category = document.getElementById('category').value;
-                    let storeImage = document.getElementById('StoreImg').value;
-                    let isactive = document.getElementById('IsActive').value;
+document.getElementById('createStoreForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-                    const createdate={
-                        UserID:Userid,
-                        StoreName: store_name,
-                        Category: category,
-                        StoreImage: storeImage,  
-                        IsActive:isactive,
-                    };
+    let formData = new FormData();
+    formData.append('UserID', document.getElementById('UseriD').value);
+    formData.append('StoreName', document.getElementById('store_name').value);
+    formData.append('Category', document.getElementById('category').value);
+    formData.append('StoreImage', document.getElementById('StoreImg').files[0]);
+    formData.append('IsActive', document.getElementById('IsActive').value);
 
-                    console.log(Userid);
-                 
+    // Log the FormData to the console
+    for (const pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
 
-                    fetch('http://localhost/Master-pes/master-pesss/API/store/create.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(createdate),
-                       
-  
-                    }) 
-                     // .then(response => response.json())
-                    // .then(createduser => {
-                    //     console.log("1");
-                    //     setTimeout(() => {
-                    //         window.location.href = 'index.html?message=Success';
-                    //     }, 500);
-                    //     console.log(createduser);
-                    // })
-                
-                    window.location.href="index.html";
-                });
-            
-               
+    fetch('http://localhost/Master-pes/master-pesss/API/store/create.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        // Redirect or display a message as needed
+        if (data.message == 'Store created successfully'){
+        alert("Store Created Successfully");
+        window.location.href = 'index.html?message=Success';
 
+        }else{
+            alert("Error Creating Store, Please try again later."+data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
 
 
                     document.addEventListener("DOMContentLoaded", function () {

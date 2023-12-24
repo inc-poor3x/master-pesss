@@ -1,65 +1,52 @@
 <?php
-
 include '../conction.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: Content-Type, Content-Disposition");
 header("Content-Type: application/json");
 
-// Check if the request method is PUT
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    // Assuming you pass the StoreID and new data in the request body
-    $requestData = json_decode(file_get_contents('php://input'), true);
-    
-    $storeIdToUpdate = isset($requestData['store_id']) ? $requestData['store_id'] : null;
-    $newStoreName = isset($requestData['new_store_name']) ? $requestData['new_store_name'] : null;
-    $newCategory = isset($requestData['new_category']) ? $requestData['new_category'] : null;
-    $newIsActive = isset($requestData['new_is_active']) ? $requestData['new_is_active'] : null;
-    $newStoreImage = isset($requestData['new_store_image']) ? $requestData['new_store_image'] : null;
+    parse_str(file_get_contents("php://input"), $data);
 
-    if ($storeIdToUpdate && ($newStoreName || $newCategory || $newIsActive || $newStoreImage)) {
-        $updateClause = "";
+    $userIdToUpdate = isset($data['user_id']) ? $data['user_id'] : null;
+    $storeIdToUpdate = isset($data['store_id']) ? $data['store_id'] : null;
+    $updateClause = [];
 
-        if ($newStoreName) {
-            $updateClause .= "StoreName = '$newStoreName', ";
-        }
+    if ($newStoreName = isset($data['new_store_name']) ? $data['new_store_name'] : null) {
+        $updateClause[] = "StoreName = '" . $conn->real_escape_string($newStoreName) . "'";
+    }
+    if ($newCategory = isset($data['new_category']) ? $data['new_category'] : null) {
+        $updateClause[] = "Category = '" . $conn->real_escape_string($newCategory) . "'";
+    }
+    if (isset($data['new_is_active'])) {
+        $updateClause[] = "IsActive = '" . $conn->real_escape_string($data['new_is_active']) . "'";
+    }
+    if (isset($_FILES['new_store_image']) && $_FILES['new_store_image']['error'] == 0) {
+        $target_dir = "../../view/Home/assets/images/";
+        $target_file = $target_dir . basename($_FILES["new_store_image"]["name"]);
 
-        if ($newCategory) {
-            $updateClause .= "Category = '$newCategory', ";
-        }
-
-        if ($newIsActive) {
-            $updateClause .= "IsActive = $newIsActive, ";
-        }
-
-        if ($newStoreImage) {
-            $updateClause .= "StoreImage = '$newStoreImage', ";
-        }
-
-        // Remove trailing comma and space
-        $updateClause = rtrim($updateClause, ", ");
-
-        $sql = "UPDATE store SET $updateClause WHERE StoreID = $storeIdToUpdate";
-        $result = $conn->query($sql);
-
-        if ($result !== false) {
-            // Check the number of affected rows
-            $affectedRows = $conn->affected_rows;
-        
-            if ($affectedRows > 0) {
-                echo json_encode(array('message' => 'Store updated successfully'));
-            } else {
-                echo json_encode(array('error' => 'Store with specified ID not found'));
-            }
+        if (move_uploaded_file($_FILES["new_store_image"]["tmp_name"], $target_file)) {
+            $updateClause[] = "StoreImage = '" . $conn->real_escape_string($target_file) . "'";
         } else {
-            echo json_encode(array('error' => 'Failed to update store. MySQL Error: ' . $conn->error));
+            echo json_encode(["error" => "Sorry, there was an error uploading your file."]);
+            exit;
+        }
+    }
+
+    if ($userIdToUpdate && $storeIdToUpdate && !empty($updateClause)) {
+        $updateSQL = implode(", ", $updateClause);
+        $sql = "UPDATE store SET $updateSQL WHERE UserID = '" . $conn->real_escape_string($userIdToUpdate) . "' AND StoreID = '" . $conn->real_escape_string($storeIdToUpdate) . "'";
+
+        if ($conn->query($sql) === TRUE) {
+            echo json_encode(["message" => "Store updated successfully"]);
+        } else {
+            echo json_encode(["error" => "Error updating store: " . $conn->error]);
         }
     } else {
-        echo json_encode(array('error' => 'Invalid or missing parameters for store update'));
+        echo json_encode(["error" => "Invalid or missing parameters for store update"]);
     }
 } else {
-    echo json_encode(array('error' => 'Invalid request method'));
+    echo json_encode(["error" => "Invalid request method"]);
 }
-
 ?>

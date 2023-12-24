@@ -54,7 +54,9 @@
                     <li><a href="../product/index.html">Manage Product </a></li>
                     <li><a href="../users/index.html">Manage Users</a></li>
                     <li><a href="../categorey/index.html">Manage Category</a></li>
-                    <li><a href="../store/index.html">Manege stores </a></li>
+                    <li><a href="../store/index.html">Manage Stores</a></li>
+                    <li><a href="../order/index.html">Manage order</a></li>
+                    <li><a href="../rating/index.html">Manage Rating</a></li>
 
                 </ul>
             </div>
@@ -64,7 +66,7 @@
             <!-- Admin Content -->
             <div class="admin-content">
                 <div class="button-group">
-                    <a href="create.html" class="btn btn-big">Add Product</a>
+                    <!-- <a href="create.html" class="btn btn-big">Add Product</a> -->
              
                 </div>
 
@@ -72,30 +74,29 @@
 
                     <h2 class="page-title">Add product</h2>
 
-                    <form action="create.html" 
-                    method="post" id="create">
-                  
+                    <form id="create-product-form" enctype="multipart/form-data">
                         <div>
-                            <label>ProductName</label>
-                            <input type="text" name="username"
-                                class="text-input" id="Name_product">
+                            <label>Product Name</label>
+                            <input type="text" name="ProductName" class="text-input" id="Name_product">
                         </div>
                         <div>
+                            <label>Store Name</label>
+                            <select  class="text-input" name="StoreID" id="StoreID_input">
+                                <!-- Store options will be added here -->
+                            </select>                
+                                </div>
+                        <div>
                             <label>Description</label>
-                            <input type="text" name="Description" 
-                            class="text-input" id="Dec_product">
+                            <textarea name="Description" class="text-input" id="Dec_product"></textarea>
                         </div>
                         <div>
                             <label>Price</label>
-                            <input type="number" name="number"
-                                class="text-input" id="Price_num">
+                            <input type="number" name="Price" class="text-input" id="Price_num">
                         </div>
                         <div>
                             <label>Quantity</label>
-                            <input type="number" name="Quantity" 
-                            class="text-input" id="Quantity_num">
+                            <input type="number" name="Quantity" class="text-input" id="Quantity_num">
                         </div>
-                        
                         <div>
                             <label>Category</label>
                             <select name="categoryID" class="text-input" id="category_ID">
@@ -111,12 +112,11 @@
                         </div>
                         <div>
                             <label>Image</label>
-                            <input type="url" name="Image" 
-                            class="text-input" id="Image_ID">
+                            <input type="file" name="Image" class="text-input" id="Image_ID">
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-big"> Update </button>
+                            <button type="submit" class="btn btn-big">Add Product</button>
                         </div>
                     </form>
 
@@ -129,48 +129,57 @@
 
         
         <script>
-              document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('create').addEventListener('submit', function (event) {
+            document.getElementById('create-product-form').addEventListener('submit', function(event) {
                 event.preventDefault();
-
-                let Name_product = document.getElementById('Name_product').value;
-                let Dec_product = document.getElementById('Dec_product').value;
-                let Price_num = document.getElementById('Price_num').value;
-                let Quantity_num = document.getElementById('Quantity_num').value;
-                let category_ID = document.getElementById('category_ID').value;
-                let Image_ID = document.getElementById('Image_ID').value;
-
-                const createdate = {
-                    ProductName: Name_product,
-                    Description: Dec_product,  
-                    Price: Price_num,
-                    Quantity: Quantity_num,
-                    categoryID: category_ID,
-                    Image: Image_ID,
-                };
-
+        
+                let formData = new FormData(this);
+        
                 fetch('http://localhost/Master-pes/master-pesss/API/proudcte/admin_create.php', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(createdate)
+                    body: formData // Send as FormData
                 })
                 .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
+                    if (response.ok) return response.json();
                     throw new Error('Network response was not ok.');
                 })
                 .then(data => {
                     console.log(data);
-                    window.location.href = 'index.html?message=Success';
+                    alert('Product added successfully');
+                    // Redirect or update the UI as needed
                 })
-                .catch(error => console.error('Fetch error:', error));
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert('Error adding product: ' + error.message);
+                });
             });
-        });
-            </script>
 
+
+
+            function loadStoreNames() {
+        fetch('http://localhost/Master-pes/master-pesss/API/store/show_all.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const storeSelect = document.getElementById('StoreID_input');
+                data.forEach(store => {
+                    let option = document.createElement('option');
+                    option.value = store.StoreID;
+                    option.textContent = store.StoreName;
+                    storeSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Fetch error:', error));
+    }
+
+    // Call the function when the document loads
+    document.addEventListener('DOMContentLoaded', loadStoreNames);
+            
+        </script>
+        
         <!-- JQuery -->
        
 

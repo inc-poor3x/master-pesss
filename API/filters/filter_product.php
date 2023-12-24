@@ -44,8 +44,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "The request method is wrong";
 }
+
 ?>
-<!-- {
-  "StoreID": 6,
-  "categoryID": 2
-} -->

@@ -28,7 +28,7 @@ function fetchCartData(userID) {
             const row = document.createElement('tr');
             row.innerHTML = `
         
-        <td> <img src="${item.Image}" alt="${item.ProductName}"> </td>
+        <td> <img src="../../assets/images/${item.Image}" alt="${item.ProductName}"> </td>
         <td> ${item.ProductName} </td>
         <td> ${item.Price} JD </td>
         <td>
