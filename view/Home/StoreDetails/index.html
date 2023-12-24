@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!----------------------------------------ion icons Link --------------------------------------------->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+ <!--
+        favicon
+    -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="shortcut icon" href="../Home/favicon.svg" type="">
+
+    
+<!--======================================== CSS =====================================================-->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+
+    <link rel="stylesheet" href="login.css">
+    <title>Ecommerce Website</title>
+  </head>
+  <body>
+<!--======================================== HEADER ==================================================-->
+    <header class="header">
+        <!--nav par-->
+             <!--logo-->
+        <nav class="nav container1" style="color: black;">
+          <a href="../index.html" class="nav__logo">
+             <img src="../assets/images/1-removebg-preview (1).png" alt="" class="nav__logo-img">
+          </a>
+  <!--list-->
+  <div class="nav__menu" id="nav-menu">
+    <ul class="nav__list">
+        <li class="nav__item hideOnMobile"  >
+            <a href="../index.html" class="nav__link ">Home</a>
+        </li>
+
+        <li class="nav__item hideOnMobile"  >
+            <a href="../ShopPages/shop.html" class="nav__link  ">Shop</a>
+        </li>
+
+        <li class="nav__item hideOnMobile"  >
+            <a href="../contact-us-page/index.html" class="nav__link">contact Us</a>
+        </li>
+
+        <li class="nav__item hideOnMobile"  >
+            <a href="../blog.html" class="nav__link active-link">stories</a>
+        </li>
+
+        <li class="nav__item hideOnMobile"  >
+            <a href="../Login/login.html" class="nav__link ">Login</a>
+        </li>
+
+        <li class="nav__item  menu-Button" onclick="showSideBar()">
+            <a href="#"><ion-icon name="menu-outline" style="font-size: 50px;"></ion-icon></a>
+       </li>
+      
+    </ul>
+</nav>
+</header>
+
+<!--------------------------------burger menu side bar----------------------------------------------->
+<header>
+
+    <!--list-->
+    <div class="nav__menu " id="nav-menu" >
+      <ul class="nav__list sidebar">
+          <li onclick="hideSidebar()"><a href="#"><ion-icon name="close-circle-outline"></ion-icon></a></li>
+          <li class="nav__item">
+              <a href="index.html" class="nav__link active-link">Home</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="../Home/ShopPages/shop.html" class="nav__link">Shop</a>
+          </li>
+  
+          
+          <li class="nav__item">
+              <a href="../Home/contact-us-page/index.html" class="nav__link">Contact Us</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="profilePage/profile.html" class="nav__link">My Account</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="blog.html" class="nav__link">Stories</a>
+          </li>
+  
+          <li class="nav__item">
+              <a href="../Home/Login/login.html" class="nav__link">Login</a>
+          </li>
+      </ul>
+  </nav>
+  </header>   
+
+<!--==================================main code======================================================-->
+<div class="section10">
+    <div class="container10">
+        <div class="content-section10">
+            <div class="title10">
+                <h1>Success Stories</h1>
+              
+            </div>
+            <div class="content10">
+                <h3>
+                    Store Name
+                </h3>
+                <p>
+                    (THe content of Success Story )
+                    Lorem ipsum dolor sit amet consectetur
+                     adipisicing elit. Natus quod cum nostrum 
+                     porro quis ullam quas modi voluptatum 
+                     quae laborum dolorum molestias numquam
+                      quia, ex nemo quidem veniam iusto vero?
+                </p>
+                 <div class="socail10">
+                    <a><ion-icon name="logo-instagram"></ion-icon></a>
+                    <a><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a><ion-icon name="logo-twitter"></ion-icon></a>
+                 </div>
+            </div>
+
+            <div class="social">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
