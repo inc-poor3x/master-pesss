@@ -10,26 +10,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Use prepared statement to prevent SQL injection
     $data = json_decode(file_get_contents('php://input'), true);
 
-   $ProductID=$data['ProductID'];
+    $ProductID = $_GET['ProductID'];
     $stmt = $conn->prepare("
-        SELECT r.*, u.UserName as UserName, p.ProductName as ProductName
-        FROM rating r
-        INNER JOIN user u ON r.UserID = u.UserID
-        INNER JOIN product p ON r.ProductID = p.ProductID
-        WHERE r.ProductID =$ProductID ;
+    SELECT r.*, u.UserName as UserName, p.ProductName as ProductName
+    FROM rating r
+    INNER JOIN user u ON r.UserID = u.UserID
+    INNER JOIN product p ON r.ProductID = p.ProductID
+    WHERE r.ProductID = $ProductID;
     ");
     
     if ($stmt->execute()) {
         // Get result set
         $result = $stmt->get_result();
         
-        // Fetch data and encode as JSON
-        $ratings = [];
+        // Fetch and echo each row individually
         while ($row = $result->fetch_assoc()) {
-            $ratings[] = $row;
+            echo json_encode($row) . "\n";
         }
-        
-        echo json_encode($ratings);
     } else {
         echo "Error retrieving ratings: " . $stmt->error;
     }

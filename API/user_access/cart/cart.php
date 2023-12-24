@@ -25,27 +25,37 @@ $cart = new Cart($conn);
 
 // Check the request method and perform the corresponding action
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle POST requests for adding/subtracting products from the cart
-    try {
-        $productID = $inputData['ProductID'] ?? null;
-        $quantity = $inputData['Quantity'] ?? null;
-        $subOrSum = $inputData['SubOrSum'] ?? null;
+    $action = $inputData['action'] ?? null;
 
-        // Add or subtract based on the SubOrSum value
-        if ($subOrSum == 1) {
-            $result = $cart->addToCart($userID, $productID, $quantity);
-        } elseif ($subOrSum == 0) {
-            $result = $cart->subtractFromCart($userID, $productID);
-        } else {
-            throw new Exception("Invalid SubOrSum value.");
+    if ($action === 'delete') {
+        try {
+            $productID = $inputData['ProductID'] ?? null;
+            $cart->deleteCartItem($userID, $productID);
+
+            echo json_encode(["success" => true, "message" => "Item deleted successfully."]);
+        } catch (Exception $e) {
+            echo json_encode(["success" => false, "message" => "Error: " . $e->getMessage()]);
         }
+    } else {
+        try {
+            $productID = $inputData['ProductID'] ?? null;
+            $quantity = $inputData['Quantity'] ?? null;
+            $subOrSum = $inputData['SubOrSum'] ?? 1;
 
-        // Echo the result in JSON format
-        echo json_encode($result);
-    } catch (Exception $e) {
-        echo json_encode(["success" => false, "message" => "Error: " . $e->getMessage()]);
+            if ($subOrSum == 1) {
+                $result = $cart->addToCart($userID, $productID, $quantity);
+            } elseif ($subOrSum == 0) {
+                $result = $cart->subtractFromCart($userID, $productID);
+            } else {
+                throw new Exception("Invalid SubOrSum value.");
+            }
+
+            echo json_encode($result);
+        } catch (Exception $e) {
+            echo json_encode(["success" => false, "message" => "Error: " . $e->getMessage()]);
+        }
     }
-} 
+}
 // Handle GET requests to retrieve products in the cart
 elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {

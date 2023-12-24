@@ -8,13 +8,17 @@ header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $productId = $_GET['id'];
-    $query = "SELECT * FROM product WHERE ProductID =  $productId";
+    $query = "SELECT product.*, store.StoreName, store.StoreImage,store.StoreID 
+    FROM product
+    JOIN store ON product.StoreID = store.StoreID
+    WHERE product.ProductID = $productId;
+    ";
 
 
     $result = $conn->query( $query);
 
     if ($result && $result->num_rows > 0) {
-        $data = $result->fetch_all(MYSQLI_ASSOC);
+        $data = $result->fetch_assoc(); 
         echo json_encode($data);
     } else {
         echo "no data available";

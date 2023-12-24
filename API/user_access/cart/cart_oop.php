@@ -158,7 +158,7 @@ class Cart
         $this->prepareAndExecuteQuery($query, 'iii', $quantity, $userID, $productID);
     }
 
-    private function deleteCartItem($userID, $productID)
+    public function deleteCartItem($userID, $productID)
     {
         $query = "DELETE FROM cart WHERE UserID = ? AND ProductID = ?";
         $this->prepareAndExecuteQuery($query, 'ii', $userID, $productID);

@@ -11,27 +11,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if required fields are set
     if (
-        isset($data['UserID']) &&
-        isset($data['ProductID']) &&
+        isset($_GET['UserID']) &&
+        isset($_GET['ProductID']) &&
         isset($data['RatingValue']) &&
         isset($data['Comment'])
     ) {
         // Use prepared statement to prevent SQL injection
         $stmt = $conn->prepare("INSERT INTO rating (UserID, ProductID, RatingValue, Comment) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiis", $data['UserID'], $data['ProductID'], $data['RatingValue'], $data['Comment']);
+        $stmt->bind_param("iiis", $_GET['UserID'], $_GET['ProductID'], $data['RatingValue'], $data['Comment']);
 
         if ($stmt->execute()) {
-            echo "Review inserted successfully";
-            echo json_encode($data);
+            echo json_encode(array("status" => "success", "message" => "Review successfully inserted", "data" => $data));
         } else {
-            echo "Review not inserted: " . $stmt->error;
+            echo json_encode(array("status" => "error", "message" => "Review not inserted: " . $stmt->error));
         }
 
         // Close the statement
         $stmt->close();
     } else {
-        echo "Required fields not set";
+        echo json_encode(array("status" => "error", "message" => "Required fields not set"));
     }
 } else {
-    echo "Request method false";
+    echo json_encode(array("status" => "error", "message" => "Invalid request method"));
 }
+?>

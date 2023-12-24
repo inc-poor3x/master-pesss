@@ -247,6 +247,92 @@
     margin-bottom: 10px;
 }
 
+.mainMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* margin-top: 150px; */
+}
+
+.full-boxer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.box-topTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.comment-box:hover{
+    margin-top: 12px;
+}
+
+.comment-box{
+    width: 350px;
+    background: #eee;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 3px 3px 25px rgba(0,0,0,0.3);
+}
+
+.ProfileProfile{
+    display: flex;
+    align-items: center;
+}
+
+.profile-image-img{
+    width: 70px;
+    height: 70px;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-image-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.NameName{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.NameName strong{
+    color: black;
+    font-size: 18px;
+}
+
+.NameName span{
+    color: gray;
+    margin-top: 2px;
+}
+
+.commentComm p{
+    color: black;
+}
+
+
+
+
+
+
+
+
     </style>
 </head>
 
@@ -336,64 +422,36 @@
     <div class="box" id="box"> 
         
     </div>
+
+ 
 </div>
+<section class="mainMain">
+    <div class="full-boxer" id="commentContainer">
+        <!-- Comment boxes will be added here dynamically -->
+    </div>
+    <form id="ratingForm">
+        <textarea rows="10" cols="45" placeholder="Leave a message for our group" class="form-control" id="comment"></textarea>
+        
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" step="1" value="4">
+        
+        <div class="bottom" style="margin-top: 10px;">
+            <button type="button" id="submitRating">Send message</button>
+        </div>
+    </form>
+    
+      
+
+</section>
+ 
 
 
 <!--------------------------------------Related Div---------------------------------------------------------------->
-
-    
-<div class="related">
+<div class="related product-list">
     <h2>related items</h2>
-    <div class="row">
-        <div class="columns">
-            <div class="items">
-                <img src="assets/images/olives/Capture2.PNG" alt="">
-                <div class="details">
-                    <p>Woman Brown Solid Biker Jacket</p>
-                     
-
-                    <p>USD $120.00</p>
-
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="items">
-                <img src="assets/images/olives/Capture10.PNG" alt="">
-                <div class="details">
-                    <p>Navy Blue Flared Palazzos</p>
-                     
-
-                    <p>USD $80.00</p>
-
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="items">
-                <img src="assets/images/olives/Capture9.PNG" alt="">
-                <div class="details">
-                    <p>Jacquard Banarasi Dupatta</p>
-                    
-
-                    <p>USD $110.00</p>
-
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="items">
-                <img src="assets/images/olives/Capture6.PNG" alt="">
-                <div class="details">
-                    <p>Printed Straight Kurta</p>
-                   
-                    <p>USD $100.00</p>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="row"></div>
 </div>
+
 
 
 
