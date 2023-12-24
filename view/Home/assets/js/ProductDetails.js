@@ -18,36 +18,36 @@ document.addEventListener("DOMContentLoaded",  () => {
 
                 <div class="images">
                 <div class="img-holder active">
-                    <img src="../../assets/images${data.Image}">
+                    <img src="../../assets/images${data.data.Image}">
                 </div>
             </div>
             
             <div class="product-details">
                 <div class="basic-info">
-                    <h1>${data.ProductName}</h1>
-                    <span>$250</span>
+                    <h1>${data.data.ProductName}</h1>
+                    <span>$${data.data.Price}</span>
             
                     <div class="description">
-                        <p>${data.Description}</p>
+                        <p>${data.data.Description}</p>
                     </div>
                 </div>
             
                 <div class="store-info">
-        <a href="store.html?storeID=${data.StoreID}" class="store-link">
+        <a href="store.html?storeID=${data.data.StoreID}" class="store-link">
             <div class="profile-image-img">
-                <img src="../../assets/images/${data.StoreImage}">
+                <img src="../../assets/images/${data.data.StoreImage}">
             </div>
             <div class="description">
-                <p>${data.StoreName}</p>
+                <p>${data.data.StoreName}</p>
             </div>
         </a>
     </div>
             
                 <div class="options">
-                    <button class="card-action-btn add-to-wish-list" aria-label="add to wishlist" title="add to wishlist" id="Login" data-product-id="${data.ProductID}">
+                    <button class="card-action-btn add-to-wish-list" aria-label="add to wishlist" title="add to wishlist" id="Login" data-product-id="${data.data.ProductID}">
                         Add to Wishlist
                     </button>
-                    <button class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" id="Login" data-product-id="${data.ProductID}">
+                    <button class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" id="Login" data-product-id="${data.data.ProductID}">
                         Add to Cart
                     </button>
                 </div>

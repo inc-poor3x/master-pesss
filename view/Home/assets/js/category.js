@@ -49,7 +49,7 @@ function createProductHTML(product) {
                         </button>
                     </li>
                 <li>
-                <a href="details.html"     <button class="card-action-btn show-more" aria-label="show more" title="show more">
+                <a href="details.html?id=${product.ProductID}"     <button class="card-action-btn show-more" aria-label="show more" title="show more">
                         <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
                     </button> </a>
                 </li>
@@ -73,14 +73,27 @@ function createProductHTML(product) {
 </li>
 
 `;
+
 }
 
+function searchProduct() {
+    const input = document.getElementById('nameInput');
+    const name = input.value.trim().toLowerCase();
 
-
-
-
-
-
+    fetch(`http://localhost/Master-pes/master-pesss/API/filters/serach.php?name=${name}`)
+        .then(response => response.json())
+        .then(data => {
+            // Assuming data is an array of products
+            const productList = document.querySelector('.product-list');
+            productList.innerHTML = ''; // Clear current products
+            data.forEach(product => {
+                productList.innerHTML += createProductHTML(product);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
 
 
 

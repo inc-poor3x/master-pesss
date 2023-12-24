@@ -840,7 +840,14 @@ a.card-meta-text:is(:hover, :focus){ color:var(--tan-crayola); }
   /**
   * Newsletter
   */
-
+  .header__search i {
+    position: absolute;
+    right: 12%;
+    top: 5%;
+  }
+ .header__search input{
+  border: .1px solid #000;
+ }
   .newsletter{ background: none;}
 
   .newsletter-card{
