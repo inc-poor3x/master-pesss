@@ -18,12 +18,18 @@ document.addEventListener("DOMContentLoaded",  () => {
 
                 <div class="images">
                 <div class="img-holder active">
-                    <img src="../../assets/images${data.data.Image}">
+                    <img src="./assets/images/${data.data.Image}">
                 </div>
             </div>
             
             <div class="product-details">
                 <div class="basic-info">
+                <div class="profile-image-img">
+                <img src="../../assets/images/${data.data.StoreImage}">
+            </div>
+            <div class="description">
+                <h1>${data.data.StoreName}</h1>
+            </div>
                     <h1>${data.data.ProductName}</h1>
                     <span>$${data.data.Price}</span>
             
@@ -34,12 +40,7 @@ document.addEventListener("DOMContentLoaded",  () => {
             
                 <div class="store-info">
         <a href="store.html?storeID=${data.data.StoreID}" class="store-link">
-            <div class="profile-image-img">
-                <img src="../../assets/images/${data.data.StoreImage}">
-            </div>
-            <div class="description">
-                <p>${data.data.StoreName}</p>
-            </div>
+            
         </a>
     </div>
             
@@ -425,7 +426,7 @@ function createProductHTML(product) {
     <div class="columns">
     <a href="details.html?id=${product.ProductID}">
         <div class="items">
-            <img src="../../assets/images/${product.Image}" alt="">
+            <img src="./assets/images/${product.Image}"class="ahmadimag"   alt="${product.ProductName}">
             <div class="details">
                 <p>${product.ProductName}</p>
                 <p>USD $${product.Price}.00</p>

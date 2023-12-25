@@ -23,12 +23,15 @@
 
 
 .containerx {
-    
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* gap: 175px; */
+    width: 90%;
 }
+
+
 
 .box {
      
@@ -49,7 +52,9 @@
     display: block;
    
 }
-
+.description{
+margin-bottom: 20px;
+}
  
  
 
@@ -127,7 +132,67 @@
   }
 
 /*The end of the buttom*/
+.rating{
+    font-size:13px;
+    letter-spacing: 2px;
 
+    height: 40px;
+    width:200px;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.8em 1.5em;
+    border: 2px solid hsl(27, 46%, 58%);
+    border-radius: 2px;
+    position: relative;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1); */
+    color:#000;
+    text-decoration: none;
+    transition: 0.3s ease all;
+    z-index: 1;
+
+  }
+  #ratingform{
+    
+
+  
+    text-align: center;
+
+  }
+  #ratingform.button{
+    
+
+  
+   
+
+  }
+  .rating:before {
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: hsl(27, 46%, 58%);;
+    z-index: -1;
+  }
+  
+  .rating:hover, a:focus {
+    color: #000;
+  }
+  
+  .rating:hover:before, a:focus:before {
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+  }
+  
+  .rating:active {
+    transform: scale(0.9);
+  }
 
 
 /*end of the button*/
@@ -325,6 +390,14 @@
 .commentComm p{
     color: black;
 }
+
+
+.ahmadimag{
+    width:100px;
+    height:300px ;
+    
+
+}
     </style>
 </head>
 
@@ -479,24 +552,25 @@
 
  
 </div>
-<section class="mainMain">
-    <div class="full-boxer" id="commentContainer">
-        <!-- Comment boxes will be added here dynamically -->
-    </div>
+<div class="full-boxer" id="commentContainer">
+    <!-- Comment boxes will be added here dynamically -->
+</div>
+
     <form id="ratingForm">
-        <textarea rows="10" cols="45" placeholder="Leave a message for our group" class="form-control" id="comment"></textarea>
-        
+      <div style="display: flex; flex-direction: column;  align-items: center;">
+        <textarea rows="10" cols="45" style="width: 500px;;" placeholder="Leave a message for our group" class="form-control" id="comment"></textarea>
+   
         <label for="rating">Rating:</label>
-        <input type="number" id="rating" name="rating" min="1" max="5" step="1" value="4">
-        
+        <input type="number" class="rating" name="rating" min="1" max="5" step="1" value="4" >
+
+    </div>
         <div class="bottom" style="margin-top: 10px;">
-            <button type="button" id="submitRating">Send message</button>
+            <button type="button" class="rating"  id="submitRating">Send message</button>
         </div>
     </form>
-    
+
       
 
-</section>
  
 
 
@@ -560,7 +634,126 @@
 
 </div>
 
+  <!--
+        #Footer
+    -->
+    <footer class="footer" style="color: #000;">
+        <div class="container">
+            <div class="footer-top section">
 
+                <div class="footer-brand">
+                    <a href="" class="logo">HandMade</a>
+
+                    <ul>
+                        <li class="footer-list-item">
+                            <ion-icon name="location-sharp" aria-hidden="true"></ion-icon>
+
+                            <address class="address">
+                                HandMade,Amman ,Jordan 2023
+                            </address>
+                        </li>
+
+                        <li class="footer-list-item">
+                            <ion-icon name="call-sharp" aria-hidden="true"></ion-icon>
+
+                            <a href="tel:+1234567890" class="footer-link">tel:+1234567890</a>
+                        </li>
+
+                        <li>
+                           <ul class="social-list">
+
+                                <li>
+                                   <a href="#" class="social-link">
+                                    <ion-icon name="logo-facebook" ></ion-icon>
+                                   </a> 
+                                </li>
+
+                                <li>
+                                    <a href="#" class="social-link">
+                                     <ion-icon name="logo-linkedin" ></ion-icon>
+                                    </a> 
+                                 </li>
+
+                                 <li>
+                                    <a href="#" class="social-link">
+                                     <ion-icon name="logo-instagram" ></ion-icon>
+                                    </a> 
+                                 </li>
+                           </ul> 
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="footer-list">
+                    <li>
+                    <p class="footer-list-title">Help and Information</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Help and Contact Us</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link"> Returns and Refunds</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link"> Online store</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Terms and Conditions</a>
+                    </li>
+                </ul>
+
+
+
+                <ul class="footer-list">
+                    <li>
+                    <p class="footer-list-title">About Us</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">About Us</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">What We Do </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link"> FAQ Pages</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Contact Us</a>
+                    </li>
+                </ul>
+
+                <div class="footer-list">
+                    <p class="footer-list-title">Newsletter</p>
+                    
+                    <form action="" class="footer-form">
+                        <input type="email" name="email_address" placeholder="Your email address" required class="email-field">
+
+                        <button type="submit" class="footer-form-btn">
+                            <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                        </button>
+                    </form>
+
+                    <div class="wrapper">
+
+                        <a href="#" class="footer-link">Term and Condition</a>
+                        <a href="#" class="footer-link">Policy</a>
+                        <a href="#" class="footer-link">Map</a>
+                    </div>
+                     
+                </div>
+
+                
+            </div>
+        </div>
+     </footer>
 
 
 

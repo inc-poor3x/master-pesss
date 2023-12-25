@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("Error fetching products:", error));
 });
-
 function displayProducts(products) {
   const productList = document.querySelector(".product-list");
 
@@ -22,29 +21,26 @@ function displayProducts(products) {
   // Add the generated HTML to the product list
   productList.innerHTML = productsHTML;
 }
+
 let Dec;
+
 function createProductHTML(product) {
-  // if(product.Description==NUll){
-  //     Dec = " ";
-  // } else{
-  //     Dec=product.Description;
-  // }
   return `
     <li class="decoration">
         <div class="product-card">
             <div class="card-banner img-holder has-before" style="--width:300; --height:200;">
-                <img src="../../assets/images/${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
+                <img src="../assets/images/${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
                 <ul class="card-action-list">
-                <li>
-                <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">
-                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </li>
-            <li>
-                <button class="card-action-btn add-to-wish-list"  aria-label="add to wishlist" title="add to wishlist" data-product-id="${product.ProductID}">
-                    <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </li>
+                    <li>
+                        <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">
+                            <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="card-action-btn add-to-wish-list"  aria-label="add to wishlist" title="add to wishlist" data-product-id="${product.ProductID}">
+                            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                        </button>
+                    </li>
                     <li>
                         <a href="../details.html?id=${product.ProductID}">
                             <button class="card-action-btn show-more" aria-label="show more" title="show more">
@@ -57,7 +53,7 @@ function createProductHTML(product) {
             <a href="" style="--width:300; --height:200;">
                 <span class="visually-hidden">${product.ProductName}</span>
             </a>
-             <div class="card-price">
+            <div class="card-price">
                 <data class="price" value="${product.Price}">$${product.Price}.00</data>
             </div>
             <div class="more-details" style="display: none;">
@@ -67,6 +63,121 @@ function createProductHTML(product) {
     </li>
     `;
 }
+
+// Pagination
+let url = 'http://localhost/Master-pes/master-pesss/API/proudcte/show.php';
+let currentPage = 1;
+const itemsPerPage = 12;
+let filteredData = []; // Declare filteredData array
+
+function fetchProducts() {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      filteredData = data; // Assign data to filteredData
+      displayProducts(); // Initial fetch and display
+      renderPagination();
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+function displayProducts() {
+  const productContainer = document.querySelector('.product-list');
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedProducts = filteredData.slice(startIndex, endIndex);
+  productContainer.innerHTML = '';
+  displayedProducts.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'decoration';
+    card.innerHTML = createProductHTML(product);
+    productContainer.appendChild(card);
+  });
+}
+
+function generatePageNumbers(totalPages) {
+  let pageNumbers = '';
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers += `<button class="page-number" onclick="goToPage(${i})">${i}</button>`;
+  }
+  return pageNumbers;
+}
+
+function renderPagination() {
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = `
+    <div class="pagination" id="pagination">
+      ${generatePageNumbers(Math.ceil(filteredData.length / itemsPerPage))}
+    </div>
+  `;
+}
+
+function goToPage(page) {
+  currentPage = page;
+  displayProducts();
+}
+
+// Initial fetch and render
+fetchProducts();
+
+
+
+
+// Helper function to go to a specific page
+function goToPage(pageNumber) {
+  currentPage = pageNumber;
+  fetchProducts();
+}
+
+// Helper function to generate dynamic page numbers
+function generatePageNumbers(totalPages) {
+  let pageNumbersHTML = '';
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbersHTML += `
+    <button onclick="goToPage(${i})" id="pagination_button">${i}</button>`;
+  }
+  return pageNumbersHTML;
+}
+
+fetchProducts();
+
+
+
+
+
+
+
+
+function searchProduct() {
+  const input = document.getElementById('nameInput');
+  const name = input.value.trim().toLowerCase();
+
+  fetch(`http://localhost/Master-pes/master-pesss/API/filters/serach.php?name=${name}`)
+      .then(response => response.json())
+      .then(data => {
+          // Assuming data is an array of products
+          const productList = document.querySelector('.product-list');
+          productList.innerHTML = ''; // Clear current products
+          data.forEach(product => {
+              productList.innerHTML += createProductHTML(product);
+          });
+      })
+      .catch(error => {
+          console.error('Error fetching data:', error);
+      });
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -224,7 +335,6 @@ function addToWishlist(productId) {
         // ...
 
         if (wishlistButton) {
-          // Change the style of the heart button to indicate it's already in the wishlist
           wishlistButton.innerHTML = '<ion-icon name="heart"></ion-icon>';
           wishlistButton.classList.add("already-in-wishlist");
         }

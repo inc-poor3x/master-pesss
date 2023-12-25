@@ -12,7 +12,8 @@
 
     <!--=============== FLATICON ===============-->
    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
- 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
    
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="../assets/css/style.css" />
@@ -66,7 +67,12 @@
    </li>
    </ul>
 
-   
+     <!--search-->
+     <div class="header__search">
+        <i class="fa-solid fa-magnifying-glass" style="font-size: medium;"></i>
+        <input oninput="searchProduct()" id="nameInput" placeholder="Product name ...">
+    </div>
+    
 
 <!--card and wishlist and person-->
     <!--WishList-->
@@ -128,22 +134,6 @@
 
 
 
-   <!--card and wishlist and person-->
-        <!--WishList-->
-        <div class="header__user-actions">
-            <a href="wishlist.html" class="header__action-btn">
-                 <img src="../assets/images/icon-heart.svg" alt="">
-    
-                <span class="count" >0</span>
-            </a>
-    
-    
-            <!--card -->
-            <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
-                <img src="../assets/images/icon-cart.svg" alt="">
-                <span class="count" id="cartCount">0</span>
-            </a>
-    </div>
 </nav>
 </header>    
 
@@ -170,10 +160,12 @@
                         <!-- Products will be dynamically added here using JavaScript -->
                     </ul>
                 </div>
+                <div id="pagination">  </div>
+
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
 
-           
+          
             </section>
  
     </main>

@@ -136,6 +136,39 @@
 </div>
 <script src="../assets/js/script.js"></script>
 <script src="login.js"></script>
+<script>
+  function validateForm() {
+    var isValid = true;
+    var email = document.getElementById('email_log').value;
+    var password = document.getElementById('password_log').value;
+    
+    // Reset previous errors
+    document.getElementById('email_error').textContent = '';
+    document.getElementById('error_pass').textContent = '';
+
+    // Email validation
+    if (email === '') {
+        document.getElementById('email_error').textContent = 'Email is required.';
+        isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('email_error').textContent = 'Invalid email format.';
+        isValid = false;
+    }
+
+    // Password validation
+    if (password === '') {
+        document.getElementById('error_pass').textContent = 'Password is required.';
+        isValid = false;
+    } else if (password.length < 8) {
+        document.getElementById('error_pass').textContent = 'Password must be at least 8 characters.';
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+
+</script>
   </body>
   </html>
 
