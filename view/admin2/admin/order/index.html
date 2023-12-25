@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Candal|Lora"
+            rel="stylesheet">
+
+        <!-- Custom Styling -->
+        <link rel="stylesheet" href="../../css/style.css">
+
+        <!-- Admin Styling -->
+        <link rel="stylesheet" href="../../css/admin.css">
+
+        <title>Admin Section - Manage Posts</title>
+        <style>
+            .popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border: 1px solid #ddd;
+                background-color: white;
+                padding: 20px;
+                z-index: 1000;
+            }
+    
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 500;
+            }
+            /* Style for View Button */
+#ordersTable button {
+    color: rgb(11, 10, 10);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#ordersTable button i {
+    margin-right: 5px;
+}
+
+/* Style for Close Button in Popup */
+#orderDetailsPopup button {
+    background-color: #dc3545; /* Red color, change as needed */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#orderDetailsPopup button i {
+    margin-right: 5px;
+}
+
+        </style>
+    
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <h1 class="logo-text"><img src="../img/1-removebg-preview (1).png" alt="" width="130px" height="70px"></h1>
+            </div>
+            <i class="fa fa-bars menu-toggle"></i>
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        Awa Melvine
+                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+                    </a>
+                    <ul>
+                        <li><a href="#" class="logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+
+        <!-- Admin Page Wrapper -->
+        <div class="admin-wrapper">
+
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <ul>
+                    <li><a href="../product/index.html">Manage Product </a></li>
+                    <li><a href="../users/index.html">Manage Users</a></li>
+                    <li><a href="../categorey/index.html">Manage Category</a></li>
+                    <li><a href="../store/index.html">Manage Stores</a></li>
+                    <li><a href="../order/index.html">Manage order</a></li>
+                    <li><a href="../rating/index.html">Manage Rating</a></li>
+
+
+                </ul>
+            </div>
+            <!-- // Left Sidebar -->
+
+
+            <!-- Admin Content -->
+            <div class="admin-content">
+                <h2 class="page-title">Manage Orders</h2>
+        
+                <table>
+                    <thead>
+                        <th>Order ID</th>
+                        <th>User ID</th>
+                        <th>Total Price</th>
+                        <th>Order Date</th>
+                        <th>User Name</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody id="ordersTable">
+                        <!-- Orders will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Popup for Order Details -->
+            <div class="overlay" id="overlay"></div>
+            <div class="popup" id="orderDetailsPopup">
+                <h3>Order Details</h3>
+                <p id="orderDetails"></p>
+                <button onclick="closePopup()">Close</button>
+            </div>
+ 
+
+
+        <!-- JQuery -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Custom Script -->
+
+
+
+<!----------------------------to show the products in the table------------------------------------------------------------------------------------->
+        <script>
+       function fetchOrders() {
+            fetch('http://localhost/Master-pes/master-pesss/API/admin/order/show_admin.php')
+                .then(response => response.json())
+                .then(data => {
+                    const ordersTable = document.getElementById('ordersTable');
+                    ordersTable.innerHTML = '';
+                    data.forEach(order => {
+                        const orderRow = document.createElement('tr');
+                        orderRow.innerHTML = `
+                            <td>${order.OrderID}</td>
+                            <td>${order.UserID}</td>
+                            <td>${order.TotalPrice}</td>
+                            <td>${order.OrderDate}</td>
+                            <td>${order.UserName}</td>
+                            <td><button onclick="viewOrderDetails('${order.OrderID}')"><i class="fas fa-eye"></i></button></td>
+                        `;
+                        ordersTable.appendChild(orderRow);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Function to show order details in a popup
+        function viewOrderDetails(orderId) {
+            // Here you can fetch and show more details from the API if available
+            document.getElementById('orderDetails').innerText = 'Details of Order ID: ' + orderId;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('orderDetailsPopup').style.display = 'block';
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('orderDetailsPopup').style.display = 'none';
+        }
+
+        // Initial call to fetch orders
+        fetchOrders();
+
+        function viewOrderDetails(orderId) {
+    fetch(`http://localhost/Master-pes/master-pesss/API/admin/order_item/orderitem.php?orderID=${orderId}`)
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                const orderDetails = document.getElementById('orderDetails');
+                orderDetails.innerHTML = '<h4>Order Items:</h4>';
+                data.data.forEach(item => {
+                    orderDetails.innerHTML += `
+                        <p>Product Name: ${item.productName}</p>
+                        <p>Description: ${item.description}</p>
+                        <p>Price: ${item.price}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                        <hr>
+                    `;
+                });
+            } else {
+                document.getElementById('orderDetails').innerText = 'No details found for Order ID: ' + orderId;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('orderDetails').innerText = 'Error fetching details for Order ID: ' + orderId;
+        });
+
+    // Display the popup
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('orderDetailsPopup').style.display = 'block';
+}
+
+
+if (sessionStorage.getItem('UserID')) {
+    // If it exists, redirect to a specific page
+    // window.location.href = 'yourTargetPage.html';
+} else {
+    // If it does not exist, you can redirect to another page or do nothing
+    window.location.href = '../../../Home/index.html';
+}
+
+
+
+
+
+
+        
+            </script>
+
+    </body>
+
+</html>

@@ -36,7 +36,7 @@ function createProductHTML(product) {
     <li class="decoration">
     <div class="product-card">
         <div class="card-banner img-holder has-before" style="--width:300; --height:200;">
-            <img src="${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
+            <img src="../../assets/images/${product.Image}" width="100" height="200" loading="lazy" alt="${product.ProductName}" class="img-cover" >
             <ul class="card-action-list">
                 <li>
                     <button type="button" class="card-action-btn add-to-cart" aria-label="add to cart" title="add to cart" data-product-id="${product.ProductID}">
@@ -49,7 +49,7 @@ function createProductHTML(product) {
                         </button>
                     </li>
                 <li>
-                <a href="details.html"     <button class="card-action-btn show-more" aria-label="show more" title="show more">
+                <a href="details.html?id=${product.ProductID}"     <button class="card-action-btn show-more" aria-label="show more" title="show more">
                         <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
                     </button> </a>
                 </li>
@@ -73,14 +73,27 @@ function createProductHTML(product) {
 </li>
 
 `;
+
 }
 
+function searchProduct() {
+    const input = document.getElementById('nameInput');
+    const name = input.value.trim().toLowerCase();
 
-
-
-
-
-
+    fetch(`http://localhost/Master-pes/master-pesss/API/filters/serach.php?name=${name}`)
+        .then(response => response.json())
+        .then(data => {
+            // Assuming data is an array of products
+            const productList = document.querySelector('.product-list');
+            productList.innerHTML = ''; // Clear current products
+            data.forEach(product => {
+                productList.innerHTML += createProductHTML(product);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
 
 
 

@@ -88,3 +88,11 @@ function createUser() {
         console.error('Error:', error);
     });
 }
+
+if (sessionStorage.getItem('UserID')) {
+    // If it exists, redirect to a specific page
+    // window.location.href = 'yourTargetPage.html';
+} else {
+    // If it does not exist, you can redirect to another page or do nothing
+    window.location.href = '../../../Home/index.html';
+}

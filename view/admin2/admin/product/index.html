@@ -56,8 +56,8 @@
                     <li><a href="../users/index.html">Manage Users</a></li>
                     <li><a href="../categorey/index.html">Manage Category</a></li>
                     <li><a href="../store/index.html">Manage Stores</a></li>
-
-
+                    <li><a href="../order/index.html">Manage order</a></li>
+                    <li><a href="../rating/index.html">Manage Rating</a></li>
                 </ul>
             </div>
             <!-- // Left Sidebar -->
@@ -103,8 +103,9 @@
         </div>
         <!-- // Page Wrapper -->
  
- 
-
+<div>
+    <img src="../" alt="">
+</div> 
 
         <!-- JQuery -->
         <script
@@ -115,40 +116,48 @@
 
 <!----------------------------to show the products in the table------------------------------------------------------------------------------------->
         <script>
-            document.addEventListener("DOMContentLoaded",  () => {
-                const eventContainer = document.getElementById('tablee');
-                
+     document.addEventListener("DOMContentLoaded", () => {
+    const eventContainer = document.getElementById('tablee');
+    let categories = {};
+
+    // Fetch categories and store them in a variable
+    fetch('http://localhost/Master-pes/master-pesss/API/admin/category/show.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(category => {
+                categories[category.categoryID] = category.Category_name;
+            });
+
+            // Fetch products
             fetch('http://localhost/Master-pes/master-pesss/API/proudcte/show.php')
                 .then(response => response.json())
                 .then(data => {
-                data.forEach(user => {
-                const productRow = document.createElement('tr');
-                productRow.className = 'products-row';
+                    data.forEach(user => {
+                        const productRow = document.createElement('tr');
+                        productRow.className = 'products-row';
 
-                productRow.innerHTML = `
+                        // Use category name instead of category ID
+                        const categoryName = categories[user.categoryID] || 'Unknown Category';
 
-               
-                                <td>${user.ProductName }</td>
-                                <td>${user.Description }</td>
-                                <td>${user.Price }</td>
-                                <td>${user.Quantity }</td>
-                                <td>${user.categoryID }</td>
-                                <td><img src="${user.Image }" width="50px" height="50px"></td>
+                        productRow.innerHTML = `
+                            <td>${user.ProductName}</td>
+                            <td>${user.Description}</td>
+                            <td>${user.Price}</td>
+                            <td>${user.Quantity}</td>
+                            <td>${categoryName}</td>
+                            <td><img src="../../../Home/assets/images/${user.Image}" width="50px" height="50px"></td>
+                            <td class="edit"><a href="edit2.html?id=${user.ProductID}"> <i class="fa-solid fa-pen"></i></a></td>
+                            <td class="delete" onclick="DeleteUser(${user.ProductID})"> <i class="fa-solid fa-trash"></i></td>
+                        `;
 
- 
-                               
-                                <td class="edit"><a href="edit2.html#${user.ProductID } "> <i class="fa-solid fa-pen"></i></a></td>
-                                <td class="delete"  onclick="DeleteUser(${user.ProductID })"> <i class="fa-solid fa-trash"></i></td>
-                           
+                        eventContainer.appendChild(productRow);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error:', error));
+});
 
-                `
-        ;
-
-        eventContainer.appendChild(productRow);
-        });
-      })
-      .catch(error => console.error('Error:', error));
-  });
 
 
 
@@ -179,6 +188,14 @@
         .catch(error => console.error(`Error deleting user with ID ${productId}:`, error));
 
                 }
+                if (sessionStorage.getItem('UserID')) {
+    // If it exists, redirect to a specific page
+    // window.location.href = 'yourTargetPage.html';
+} else {
+    // If it does not exist, you can redirect to another page or do nothing
+    window.location.href = '../../../Home/index.html';
+}
+
             </script>
 
     </body>

@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const listItem = document.createElement('li');
         
         const imageElement = document.createElement('img');
-        imageElement.src = item.Image;
- 
+        imageElement.src = `../../assets/images/${item.Image}`;
+        imageElement.alt = item.ProductName;
+
         const productNameElement = document.createElement('p');
         productNameElement.textContent = item.ProductName;
 

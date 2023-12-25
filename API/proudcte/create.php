@@ -1,44 +1,60 @@
 <?php
-
 include '../conction.php';
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
+    $storeId = isset($_POST['StoreID']) ? $_POST['StoreID'] : null;
+    $productName = isset($_POST['ProductName']) ? $_POST['ProductName'] : null;
+    $description = isset($_POST['Description']) ? $_POST['Description'] : null;
+    $price = isset($_POST['Price']) ? $_POST['Price'] : null;
+    $quantity = isset($_POST['Quantity']) ? $_POST['Quantity'] : null;
+    $categoryId = isset($_POST['categoryID']) ? $_POST['categoryID'] : null;
 
-    // Check if required fields are set
-    if (
-        isset($data['StoreID']) &&
-        isset($data['ProductName']) &&
-        isset($data['Description']) &&
-        isset($data['Price']) &&
-        isset($data['Quantity']) &&
-        isset($data['categoryID'])&&
-        isset($data['Image'])
-       
-    ) {
-        // Use prepared statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO product (StoreID, ProductName, Description, Price, Quantity, categoryID,Image) VALUES (?, ?, ?, ?, ?, ?,?)");
-        $stmt->bind_param("isssiis", $data['StoreID'], $data['ProductName'], $data['Description'], $data['Price'], $data['Quantity'], $data['categoryID'],$data['Image']);
-        
+    if ($storeId && $productName && $description && $price && $quantity && $categoryId) {
+        $image = null;
 
-        if ($stmt->execute()) {
-            echo "data inserted successfully";
+        if (isset($_FILES['Image']) && $_FILES['Image']['error'] == 0) {
+            $target_dir = "../../view/Home/assets/images/";
+            $target_file = $target_dir . basename($_FILES["Image"]["name"]);
 
-            // You should probably return the inserted data as JSON, so encode and echo it
-            echo json_encode($data);
-        } else {
-            echo "data not inserted: " . $stmt->error;
+            // Image validation logic here
+
+            if (move_uploaded_file($_FILES["Image"]["tmp_name"], $target_file)) {
+                $image = basename($_FILES["Image"]["name"]); // Store only the file name
+            } else {
+                echo json_encode(["error" => "Sorry, there was an error uploading your file."]);
+                exit;
+            }
         }
 
-        // Close the statement
+        $stmt = $conn->prepare("INSERT INTO product (StoreID, ProductName, Description, Price, Quantity, categoryID, Image) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("isssiis", $storeId, $productName, $description, $price, $quantity, $categoryId, $image);
+
+        if ($stmt->execute()) {
+            $insertedData = [
+                'StoreID' => $storeId,
+                'ProductName' => $productName,
+                'Description' => $description,
+                'Price' => $price,
+                'Quantity' => $quantity,
+                'categoryID' => $categoryId,
+                'Image' => $image
+            ];
+
+            echo json_encode(['message' => 'Data inserted successfully', 'data' => $insertedData]);
+        } else {
+            echo json_encode(['message' => 'Data not inserted: ' . $stmt->error]);
+        }
+
         $stmt->close();
     } else {
-        echo "required fields not set";
+        echo json_encode(['message' => 'Required fields not set']);
     }
 } else {
-    echo "request method false";
+    echo json_encode(['message' => 'Invalid request method']);
 }
+?>
