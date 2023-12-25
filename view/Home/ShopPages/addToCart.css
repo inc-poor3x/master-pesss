@@ -28,40 +28,9 @@ section {
  
 
 /* home */
-.home {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(/home/image/flat-lay-healthy-vegetables-frame.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-top: 17rem;
-    padding-bottom: 10rem;
-}
+ 
 
-.home .content {
-    text-align: center;
-    width: 60rem;
-}
-
-.home .content h3 {
-    color: var(--black);
-    font-size: 3rem;
-}
-
-.home .content h3 span {
-    color: var(--orange);
-
-}
-
-.home .content p {
-    color: var(--light-color);
-    font-size: 1.7rem;
-    padding: 1rem 0;
-    line-height: 1.8;
-
-}
+  
 
 
 
@@ -142,10 +111,10 @@ section {
     align-items: center;
 }
 
+
+/*For The  Main Table */
 #products {
     width: 100%;
-    display: flex;
-    flex-direction: column;
     margin-bottom: 50px;
     margin-bottom: 30px;
     border: 1px solid #e2e9e1;
@@ -154,8 +123,7 @@ section {
     padding: 3rem 3rem;
     outline: var(--outline);
     outline-offset: -1rem;
-    box-shadow: var(--box-shadow);
-
+ 
 }
 
 #products table {
@@ -182,7 +150,7 @@ section {
 #products table td:nth-child(4),
 #products table td:nth-child(5) {
     width: 100px;
-    text-align: center;
+    padding-left: 5px;
 }
 
 #products table td:nth-child(4) input {
@@ -226,3 +194,24 @@ section {
 .fa-solid:hover {
     color: #090909;
 } 
+
+@media screen and (max-width: 768px) {
+    #products,
+    #subtotal {
+        padding: 1rem;
+    }
+
+    #subtotal table td {
+        width: 100%;
+    }
+
+    #products table td,
+    #products table th {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    #products table img {
+        width: 50px;
+    }
+}

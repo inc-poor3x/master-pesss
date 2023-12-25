@@ -151,10 +151,7 @@ function validateForm() {
     return true 
 } */
 
-function registerUser1() {
-    // Add any specific registration logic here
-   
-}
+
 
 
 

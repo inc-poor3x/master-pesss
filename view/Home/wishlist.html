@@ -12,6 +12,9 @@
 
     <!--=============== FLATICON ===============-->
    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
+ 
+    
+  
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!--=============== SWIPER CSS ===============-->
@@ -46,58 +49,53 @@
     </style>
   </head>
   <body>
-    <!--=============== HEADER ===============-->
     <header class="header">
+        <!--header top-->
+       
         <!--nav par-->
              <!--logo-->
-        <nav class="nav container1">
+        <nav class="nav container1 ">
           <a href="index.html" class="nav__logo">
-             <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
-          </a>
-  <!--list-->
-  <div class="nav__menu" id="nav-menu">
-    <ul class="nav__list">
-        <li class="nav__item">
-            <a href="../Home/index.html" class="nav__link ">Home</a>
+             <img src="../Home/assets/images/1.PNG" alt="" class="nav__logo-img"> 
+            </a>
+    <!-----------------------menu main --------------------------------------->
+    <!--list-->
+    
+    <div class="nav__menu " id="nav-menu" >
+    <ul class="nav__list ">
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/index.html" class="nav__link active-link">Home</a>
         </li>
-
-        <li class="nav__item">
-            <a href="../ShopPages/shop.html" class="nav__link active-link">Shop</a>
+    
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/ShopPages/shop.html" class="nav__link">Shop</a>
         </li>
-
-        <li class="nav__item">
-            <a href="../profilePage/profile.html" class="nav__link">My Account</a>
+    
+        
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/contact-us-page/index.html" class="nav__link">Contact.Us</a>
         </li>
-
-        <li class="nav__item">
-            <a href="../blog.html" class="nav__link">stories</a>
+    
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/profilePage/profile.html" class="nav__link">My.Account</a>
         </li>
-
-        <li class="nav__item">
-            <a href="../Login/login.html" class="nav__link">Login</a>
+    
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/blog.html" class="nav__link">Stories</a>
         </li>
-
-        <li class="nav__item">
-            <a href="../Login/bussiness.html" class="nav__link">Create Store</a>
+    
+        <li class="nav__item hideOnMobile">
+            <a href="../Home/Login/login.html" class="nav__link"></a>
         </li>
-    </ul>
-
-    <!--search-->
-<div class="header__search">
-    <input 
-        type="text"
-        placeholder="search items"
-        class="form__input"
-    />
-
-    <button class="search__btn">
-        <ion-icon name="search-outline"></ion-icon>    </button>
-</div>
-
-
- </div>
-
-   <!--card and wishlist and person-->
+    
+        <li class="nav__item  menu-Button" onclick="showSideBar()">
+            <a href="#"><ion-icon name="menu-outline" style="font-size: 50px;"></ion-icon></a>
+       </li>
+       </ul>
+    
+       
+    
+    <!--card and wishlist and person-->
         <!--WishList-->
         <div class="header__user-actions">
             <a href="wishlist.html" class="header__action-btn">
@@ -113,19 +111,81 @@
                 <span class="count" id="cartCount">0</span>
             </a>
     </div>
-</nav>
-</header>    
-
+    
+    
+    </div>
+    </header>
+    <!---------------------------------------------- parmenant menu------------------------------------------------------------------>
+    <header>
+    
+    <!--list-->
+    <div class="nav__menu " id="nav-menu" >
+    <ul class="nav__list sidebar">
+        <li onclick="hideSidebar()"><a href="#"><ion-icon name="close-circle-outline"></ion-icon></a></li>
+        <li class="nav__item">
+            <a href="../Home/index.html" class="nav__link active-link">Home</a>
+        </li>
+    
+        <li class="nav__item">
+            <a href="../Home/ShopPages/shop.html" class="nav__link">Shop</a>
+        </li>
+    
+        
+        <li class="nav__item">
+            <a href="../Home/contact-us-page/index.html" class="nav__link">Contact Us</a>
+        </li>
+    
+        <li class="nav__item">
+            <a href="../Home/profilePage/profile.html" class="nav__link">My Account</a>
+        </li>
+    
+        <li class="nav__item">
+            <a href="../Home/blog.html" class="nav__link">Stories</a>
+        </li>
+    
+        <li class="nav__item">
+            <a href="../Home/Login/login.html" class="nav__link"></a>
+        </li>
+    
+      
+    
+    
+    
+    </ul>
+    
+    
+    
+    <!--card and wishlist and person-->
+        <!--WishList-->
+        <!-- <div class="header__user-actions">
+            <a href="wishlist.html" class="header__action-btn">
+                 <img src="assets/images/img/icon-heart.svg" alt="">
+    
+                <span class="count" >0</span>
+            </a>
+    
+     -->
+            <!--card -->
+            <!-- <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+                <img src="assets/images/img/icon-cart.svg" alt="">
+                <span class="count" id="cartCount">0</span>
+            </a>
+    </div> -->
+    </nav>
+    </header>
+ 
 
     <!--=============== MAIN ===============-->
     <main class="main">
       <!--=============== BREADCRUMB ===============-->
       <section class="breadcrumb">
         <ul class="breadcrumb__list flex container">
-            <li><a href="./index.html">Home</a></li>
+            <li><a href="../Home/index.html">Home</a></li>
             <li><span class="breadcrumb__link">></span></li>
-            <li><span class="breadcrumb__link">Shop</span></li>
+            <li><a href="../Home/ShopPages/shop.html">Shop</a></li>
+            <li><a href="../Home/index.html">></a></li>
 
+            <li><a href="../Home/wishlist.html">Add to Wishlist</a></li>
         </ul>
       </section>
 
@@ -272,11 +332,10 @@
             </div>
         </div>
      </footer>
-    <!--=============== SWIPER JS ===============-->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <script src="./assets/js/addtowishlist.js"></script>
 
     <!--=============== MAIN JS ===============-->
+     <script src="../Home/assets/js/addtowishlist.js"></script>
+     <script src="../Home/assets/js/script.js"></script>
   </body>
 </html>

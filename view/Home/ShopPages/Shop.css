@@ -39,8 +39,10 @@ a{
     letter-spacing: 7px;
     font-size: small;
 }
-/* detail page */
 
+/* 
+/* detail page */
+/* 
 .detail{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -112,20 +114,20 @@ a{
 }
 .detail .description{
     font-weight: 300;
-}
+} */
 /* // ipad */
-@media only screen and (max-width: 992px) {
+/* @media only screen and (max-width: 992px) {
     .listProduct{
         grid-template-columns: repeat(3, 1fr);
     }
     .detail{
         grid-template-columns:  40% 1fr;
     }
-}
+} */
 
 
 /* mobile */
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     .listProduct{
         grid-template-columns: repeat(2, 1fr);
     }
@@ -148,4 +150,4 @@ a{
     .detail .buttons{
         justify-content: center;
     }
-}
+} */

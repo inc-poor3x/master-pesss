@@ -1,5 +1,7 @@
 let wish =document.querySelectorAll('.add-to-wish-list');
 
+
+
 for(let i=0;i<wish.length;i++){
     wish[i].addEventListener('click',() =>{
         console.log("added to wishlist");
@@ -30,8 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
         return listItem;
     }
-    
 
+
+ /**********************************Fetch data Wishlist ********************************************/   
     function fetchWishlistData() {
         const userID = sessionStorage.getItem('UserID');
 
@@ -46,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching wishlist data:', error));
     }
 
+/*********************************Deleting Data from Wishlist*****************************************/
     function removeFromWishlist(productID) {
         const userID = sessionStorage.getItem('UserID');
 
