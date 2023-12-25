@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 postBox.className = 'post-box';
 
                 const img = document.createElement('img');
+
                 img.src =`../../assets/images/${postData.StoreImage}`;
                 img.alt = '';
-
+                img.className='ahmad';         
                 const title = document.createElement('a');
                 title.href = '#';
                 title.className = 'post-title';

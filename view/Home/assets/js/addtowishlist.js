@@ -13,31 +13,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function createListItem(item) {
         const listItem = document.createElement('li');
-        
-        const imageElement = document.createElement('img');
-        imageElement.src = `../../assets/images/${item.Image}`;
-        imageElement.alt = item.ProductName;
-
-        const productNameElement = document.createElement('p');
-        productNameElement.textContent = item.ProductName;
-
-        const priceElement = document.createElement('p');
-        priceElement.textContent = `$${item.Price}`;
-
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove from Wishlist';
-        removeButton.addEventListener('click', function () {
+        listItem.innerHTML = `
+            <img src="../../assets/images/${item.Image}" alt="${item.ProductName}">
+            <p>${item.ProductName}</p>
+            <p>$${item.Price}</p>
+            <button class="remove-button">
+            <i class="fas fa-trash-alt"></i> Remove
+        </button>
+        `;
+    
+        // Adding event listener to the remove button after setting innerHTML
+        listItem.querySelector('.remove-button').addEventListener('click', function () {
             removeFromWishlist(item.ProductID);
             listItem.remove();
         });
-
-        listItem.appendChild(imageElement);
-        listItem.appendChild(productNameElement);
-        listItem.appendChild(priceElement);
-        listItem.appendChild(removeButton);
-
+    
         return listItem;
     }
+    
 
     function fetchWishlistData() {
         const userID = sessionStorage.getItem('UserID');

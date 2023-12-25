@@ -7,10 +7,16 @@ header("Access-Control-Allow-Headers: Content-Type, Content-Disposition");
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+    // Get the store_id from the URL parameter
+    $storeIdToUpdate = isset($_GET['store_id']) ? $_GET['store_id'] : null;
+    
+    if (!$storeIdToUpdate) {
+        echo json_encode(["error" => "Missing or invalid store_id parameter in the URL"]);
+        exit;
+    }
+
     parse_str(file_get_contents("php://input"), $data);
 
-    $userIdToUpdate = isset($data['user_id']) ? $data['user_id'] : null;
-    $storeIdToUpdate = isset($data['store_id']) ? $data['store_id'] : null;
     $updateClause = [];
 
     if ($newStoreName = isset($data['new_store_name']) ? $data['new_store_name'] : null) {
@@ -34,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         }
     }
 
-    if ($userIdToUpdate && $storeIdToUpdate && !empty($updateClause)) {
+    if (!empty($updateClause)) {
         $updateSQL = implode(", ", $updateClause);
-        $sql = "UPDATE store SET $updateSQL WHERE UserID = '" . $conn->real_escape_string($userIdToUpdate) . "' AND StoreID = '" . $conn->real_escape_string($storeIdToUpdate) . "'";
+        $sql = "UPDATE store SET $updateSQL WHERE StoreID = '" . $conn->real_escape_string($storeIdToUpdate) . "'";
 
         if ($conn->query($sql) === TRUE) {
             echo json_encode(["message" => "Store updated successfully"]);
@@ -44,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
             echo json_encode(["error" => "Error updating store: " . $conn->error]);
         }
     } else {
-        echo json_encode(["error" => "Invalid or missing parameters for store update"]);
+        echo json_encode(["error" => "No valid update parameters provided"]);
     }
 } else {
     echo json_encode(["error" => "Invalid request method"]);

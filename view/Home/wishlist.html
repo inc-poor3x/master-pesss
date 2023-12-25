@@ -12,7 +12,8 @@
 
     <!--=============== FLATICON ===============-->
    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
- 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <!--=============== SWIPER CSS ===============-->
     <link
     rel="stylesheet"
@@ -22,6 +23,27 @@
     <link rel="stylesheet" href="../Home/assets/css/style.css" />
 
     <title>Ecommerce Website</title>
+
+
+    <style>
+
+.remove-button {
+    background-color: #f44336; /* Red color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.remove-button i {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+
+    </style>
   </head>
   <body>
     <!--=============== HEADER ===============-->
@@ -36,7 +58,7 @@
   <div class="nav__menu" id="nav-menu">
     <ul class="nav__list">
         <li class="nav__item">
-            <a href="../index.html" class="nav__link ">Home</a>
+            <a href="../Home/index.html" class="nav__link ">Home</a>
         </li>
 
         <li class="nav__item">
@@ -79,14 +101,15 @@
         <!--WishList-->
         <div class="header__user-actions">
             <a href="wishlist.html" class="header__action-btn">
-                <ion-icon name="heart-outline"></ion-icon>    
+                 <img src="../Home/assets/images/icon-heart.svg" alt="">
+    
                 <span class="count" >0</span>
             </a>
     
     
             <!--card -->
             <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
-                <ion-icon name="bag-outline"></ion-icon>
+                <img src="../Home/assets/images/icon-cart.svg" alt="">
                 <span class="count" id="cartCount">0</span>
             </a>
     </div>
@@ -255,7 +278,5 @@
     <script src="./assets/js/addtowishlist.js"></script>
 
     <!--=============== MAIN JS ===============-->
-    <script src="../assets/js/shop.js"></script>
-    <script src="shop.js"></script>
   </body>
 </html>

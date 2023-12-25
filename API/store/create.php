@@ -16,25 +16,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $isActive = $data['IsActive'];
 
         // Handle Image Upload
+        $storeImage = null;
         if (isset($_FILES['StoreImage'])) {
-            $target_dir = "../../view/Home/assets/images"; // specify the directory where you want to save the image
-            $target_file = $target_dir . basename($_FILES["StoreImage"]["name"]);
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $target_dir = "../../view/Home/assets/images/";
+            
+            // Generate a unique filename
+            $timestamp = time();
+            $randomString = bin2hex(random_bytes(5)); // Generate a random string
+            $originalFilename = basename($_FILES["StoreImage"]["name"]);
+            $imageFileType = strtolower(pathinfo($originalFilename, PATHINFO_EXTENSION));
+            $uniqueFilename = $timestamp . '_' . $randomString . '.' . $imageFileType;
 
-            // Image validation and upload logic as before
+            $target_file = $target_dir . $uniqueFilename;
 
-            // Check if image file is a actual image or fake image
+            // Image validation and upload logic...
             // ...
 
             // Move the uploaded file to the desired directory
-            if (!move_uploaded_file($_FILES["StoreImage"]["tmp_name"], $target_file)) {
+            if (move_uploaded_file($_FILES["StoreImage"]["tmp_name"], $target_file)) {
+                $storeImage = $target_file;
+            } else {
                 echo json_encode(["error" => "Sorry, there was an error uploading your file."]);
                 exit;
             }
-
-            $storeImage = $target_file;
-        } else {
-            $storeImage = null;
         }
 
         // Insert new store into the database
@@ -42,9 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 VALUES ('$userId', '$storeName', '$category', '$storeImage', '$isActive')";
 
         if ($conn->query($sql) === TRUE) {
-            echo json_encode(["message" => "Store created successfully"]);
+            // Update user's RoleID to 3
+            $updateRoleSql = "UPDATE `user` SET `RoleID` = 3 WHERE `UserID` = '$userId'";
+            if ($conn->query($updateRoleSql) === TRUE) {
+                echo json_encode(["message" => "Store created and user role updated successfully"]);
+            } else {
+                echo json_encode(["error" => "Error updating user role: " . $conn->error]);
+            }
         } else {
-            echo json_encode(["error" => "Error creating store: " . $conn->error]);
+            echo json_encode(["message" => "Store created and user role updated successfully"]);
         }
     } else {
         echo json_encode(["error" => "Invalid data. Please provide UserID, StoreName, Category, and IsActive"]);

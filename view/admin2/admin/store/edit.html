@@ -75,27 +75,31 @@
                     <h2 class="page-title">Add Store</h2>
 
                     <form action="create.html" method="post" id="">
-                        <div>
-                            <label>Username</label>
-                            <input type="text" name="username"
-                                class="text-input" id="UserName">
-                        </div>
+                <!-- Inside the <form> tag -->
+<div>
+    <label>Store ID</label>
+    <input type="text" name="store_id" class="text-input" id="StoreID">
+</div>
+<div>
+    <label>New Store Name</label>
+    <input type="text" name="new_store_name" class="text-input" id="NewStoreName">
+</div>
+<div>
+    <label>New Category</label>
+    <input type="text" name="new_category" class="text-input" id="NewCategory">
+</div>
+<div>
+    <label>Is Active</label>
+    <input type="checkbox" name="new_is_active" id="NewIsActive">
+</div>
+<div>
+    <label>Store Image</label>
+    <input type="file" name="new_store_image" id="NewStoreImage">
+</div>
+<div>
+    <button type="button" class="btn btn-big" onclick="updateStore()"> Update Store </button>
+</div>
 
-                        <div>
-                            <label>Email</label>
-                            <input type="email" name="email"
-                             class="text-input" id="Email">
-                        </div>
-
-                        <div>
-                            <label>Password</label>
-                            <input type="password" name="password"
-                                class="text-input" id="pass">
-                        </div>
-                       
-                        <div>
-                            <button type="button" class="btn btn-big" onclick="UpdateElement()"> Update </button>
-                        </div>
                     </form>
 
                 </div>
@@ -109,50 +113,63 @@
 
         
         <script>
-             const UserId = window.location.hash.substring(1);//تمشي بعد الهاش واحد 
+         // ... existing code ...
+         async function updateStore() {
+    const storeId = document.getElementById('StoreID').value;
+    const newStoreName = document.getElementById('NewStoreName').value;
+    const newCategory = document.getElementById('NewCategory').value;
+    const newIsActive = document.getElementById('NewIsActive').checked ? 1 : 0;
+    const newStoreImage = document.getElementById('NewStoreImage').files[0];
 
-            //read for the form  (get function)
-           document.addEventListener("DOMContentLoaded",  () => {
-                // const eventContainer = document.getElementById('tablee');
+    let formData = new FormData();
+    formData.append('store_id', storeId);
+    formData.append('new_store_name', newStoreName);
+    formData.append('new_category', newCategory);
+    formData.append('new_is_active', newIsActive);
+    formData.append('new_store_image', newStoreImage);
 
-            fetch('http://localhost/master-pesss-main/API/admin/user_crud/show.php')
-                .then(response => response.json())
-                .then(user => {
-                    document.getElementById('UserName').value = user.UserName;
-                    document.getElementById('Email').value = user.Email;
-                    document.getElementById('pass').value = user.Password;
+    try {
+        const response = await fetch('http://localhost/Master-pes/master-pesss/API/store/update.php', {
+            method: 'PUT',
+            body: formData
+        });
 
-         });
-      })
-      .catch(error => console.error('Error:', error));
-
-
-      
-                    
- 
-      function UpdateElement(){ 
-        
-        const createdate={
-                        userID:UserId,
-                        UserName: document.getElementById('UserName').value,
-                        Password: document.getElementById('Email').value ,
-                        Email: document.getElementById('pass').value,  
-                     };
+        const data = await response.json();
+        console.log(data); // Handle the response data
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
 
-        console.log(createdate);
-         fetch('http://localhost/Master-pes/master-pesss/API/admin/user_crud/update.php', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(createdate),
-                       
-  
-                    }) 
-         
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
-      }
+// Usage
+window.onload = function() {
+    var storeId = getParameterByName('id'); // 'id' is the URL parameter name
+    if(storeId) {
+        document.getElementById('StoreID').value = storeId;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
       if (sessionStorage.getItem('UserID')) {
     // If it exists, redirect to a specific page
     // window.location.href = 'yourTargetPage.html';
@@ -163,12 +180,7 @@
 
   </script>
 
-        <!-- JQuery -->
-        <script 
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Ckeditor -->
-        <script
-            src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+  
         <!-- Custom Script -->
         <script src="../../js/scripts.js"></script>
 
