@@ -1,3 +1,27 @@
+
+
+
+
+
+
+#error_pass,
+#email_error,
+#User_error {
+    width: 300px;
+    font-size: 14px;
+    color: #ee3301;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+
+
+
+
+
+
+
+
+
 .container4 {
     max-width: 800px;
     margin: 20px auto;

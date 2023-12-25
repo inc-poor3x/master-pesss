@@ -1,0 +1,53 @@
+ *{
+    text-align: center;
+    color:#fff;
+    line-height: 1.5;
+    letter-spacing: 1px;
+
+
+ }
+
+ .wrapper10{
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),url('../assets/images/Darzahroundtwo6_60969895-2135-4cbf-a829-dc29c0e26aab_1597x1065.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+
+ .test10{
+    padding: 30px 100px;
+ }
+
+ article h1{
+    
+    font-size: 50px;
+    font-weight: 800;
+     letter-spacing: 1.5px;
+
+ }
+ 
+ article img{
+    height: 200px;
+    width: 200px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    margin-top: 60px;
+    margin: auto;
+ }
+ blockquote{
+    font-size: 20px;
+    margin-top: 30px;
+ }
+ article h5{
+    text-transform: uppercase;
+    font-size: 30px;
+    margin-top: 30px;
+    letter-spacing: 1.5px;
+
+ }
+
+ article p{
+    font-size: 17px;
+ }

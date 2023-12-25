@@ -1,5 +1,7 @@
 let wish =document.querySelectorAll('.add-to-wish-list');
 
+
+
 for(let i=0;i<wish.length;i++){
     wish[i].addEventListener('click',() =>{
         console.log("added to wishlist");
@@ -16,8 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         const imageElement = document.createElement('img');
         imageElement.src = item.Image;
-        imageElement.alt = item.ProductName;
-
+ 
         const productNameElement = document.createElement('p');
         productNameElement.textContent = item.ProductName;
 
@@ -25,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
         priceElement.textContent = `$${item.Price}`;
 
         const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove from Wishlist';
+        removeButton.textContent = 'Remove';
+
+        //to get a right Removing when click Remove From Wishlist
         removeButton.addEventListener('click', function () {
             removeFromWishlist(item.ProductID);
             listItem.remove();
@@ -39,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return listItem;
     }
 
+
+ /**********************************Fetch data Wishlist ********************************************/   
     function fetchWishlistData() {
         const userID = sessionStorage.getItem('UserID');
 
@@ -53,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching wishlist data:', error));
     }
 
+/*********************************Deleting Data from Wishlist*****************************************/
     function removeFromWishlist(productID) {
         const userID = sessionStorage.getItem('UserID');
 

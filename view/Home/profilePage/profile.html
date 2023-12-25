@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="profile.css">
 
+     
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
@@ -18,26 +19,96 @@
 </head>
 <body>
 <!---------------------------------------------------------------------->
+
+<!--=========================================== HEADER ==========================================================-->
 <header class="header">
+    <!--header top-->
+   
     <!--nav par-->
          <!--logo-->
-    <nav class="nav container1">
+    <nav class="nav container1 ">
       <a href="index.html" class="nav__logo">
-         <img src="../assets/images/1.PNG" alt="" class="nav__logo-img">
-      </a>
+         <img src="../assets/images/1.PNG" alt="" class="nav__logo-img"> 
+        </a>
+<!-----------------------menu main --------------------------------------->
 <!--list-->
-<div class="nav__menu" id="nav-menu">
-<ul class="nav__list">
+
+<div class="nav__menu " id="nav-menu" >
+<ul class="nav__list ">
+    <li class="nav__item hideOnMobile">
+        <a href="../index.html" class="nav__link active-link">Home</a>
+    </li>
+
+    <li class="nav__item hideOnMobile">
+        <a href="../ShopPages/shop.html" class="nav__link">Shop</a>
+    </li>
+
+    
+    <li class="nav__item hideOnMobile">
+        <a href="../contact-us-page/index.html" class="nav__link">Contact.Us</a>
+    </li>
+
+    <li class="nav__item hideOnMobile">
+        <a href="../profilePage/profile.html" class="nav__link">My.Account</a>
+    </li>
+
+    <li class="nav__item hideOnMobile">
+        <a href="../blog.html" class="nav__link">Stories</a>
+    </li>
+
+    <li class="nav__item hideOnMobile">
+        <a href="../Home/Login/login.html" class="nav__link"></a>
+    </li>
+
+    <li class="nav__item  menu-Button" onclick="showSideBar()">
+        <a href="#"><ion-icon name="menu-outline" style="font-size: 50px;"></ion-icon></a>
+   </li>
+   </ul>
+
+   
+
+<!--card and wishlist and person-->
+    <!--WishList-->
+    <div class="header__user-actions">
+        <a href="../wishlist.html" class="header__action-btn">
+            <ion-icon name="heart-outline"></ion-icon>
+
+            <span class="count" >0</span>
+        </a>
+
+
+        <!--card -->
+        <a href="../ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+            <ion-icon name="bag-outline"></ion-icon>
+            <span class="count" id="cartCount">0</span>
+        </a>
+</div>
+
+
+</div>
+</header>
+<!---------------------------------------------- parmenant menu------------------------------------------------------------------>
+<header>
+
+<!--list-->
+<div class="nav__menu " id="nav-menu" >
+<ul class="nav__list sidebar">
+    <li onclick="hideSidebar()"><a href="#"><ion-icon name="close-circle-outline"></ion-icon></a></li>
     <li class="nav__item">
-        <a href="../index.html" class="nav__link ">Home</a>
+        <a href="../index.html" class="nav__link active-link">Home</a>
     </li>
 
     <li class="nav__item">
-        <a href="../ShopPages/shop.html" class="nav__link active-link">Shop</a>
+        <a href="../ShopPages/shop.html" class="nav__link">Shop</a>
+    </li>
+
+    
+    <li class="nav__item">
+        <a href="../contact-us-page/index.html" class="nav__link">Contact Us</a>
     </li>
 
     <li class="nav__item">
-        <a href="profile.html" class="nav__link">My Account</a>
+        <a href="../profilePage/profile.html" class="nav__link">My Account</a>
     </li>
 
     <li class="nav__item">
@@ -45,47 +116,47 @@
     </li>
 
     <li class="nav__item">
-        <a href="../Login/login.html" class="nav__link">Login</a>
+        <a href="../Home/Login/login.html" class="nav__link"></a>
     </li>
 
-    <li class="nav__item">
-        <a href="../Login/bussiness.html" class="nav__link">Create store</a>
-    </li>
+  
+
+
+
 </ul>
 
-<!--search-->
-<div class="header__search">
-<input 
-    type="text"
-    placeholder="search items"
-    class="form__input"
-/>
 
-<button class="search__btn">
-    <ion-icon name="search-outline"></ion-icon>    </button>
-</div>
-
-
-</div>
 
 <!--card and wishlist and person-->
     <!--WishList-->
-<div class="header__user-actions">
-    <a href="wishlist.html" class="header__action-btn">
-        <ion-icon name="heart-outline" width="200px"></ion-icon>
-        <span class="count" >3</span>
-    </a>
+    <!-- <div class="header__user-actions">
+        <a href="wishlist.html" class="header__action-btn">
+             <img src="assets/images/img/icon-heart.svg" alt="">
 
+            <span class="count" >0</span>
+        </a>
 
-    <!--card -->
-    <a href="../ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
-        <ion-icon name="bag-outline"></ion-icon>
-        <span class="count" id="cartCount">0</span>
-    </a>
-    <script src="./assets/js/home.js"></script>
-</div>
+ -->
+        <!--card -->
+        <!-- <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+            <img src="assets/images/img/icon-cart.svg" alt="">
+            <span class="count" id="cartCount">0</span>
+        </a>
+</div> -->
 </nav>
-</header>
+</header>    
+
+    <!--=============== MAIN ===============-->
+    <main class="main">
+    <!--=============== BREADCRUMB ===============-->
+      <section class="breadcrumb">
+        <ul class="breadcrumb__list flex container">
+            <li><a href="../index.html">Home</a></li>
+            <li><span class="breadcrumb__link">></span></li>
+            <li><span class="breadcrumb__link">My Account </span></li>
+
+        </ul>
+      </section>
 
 
 <!---------------------------------------------------------------------->
@@ -93,43 +164,176 @@
 
     <div class="container4" id="profile-container">
         <img id="profile-image" src="../assets/images/vector-flat-illustration-grayscale-avatar-600nw-2264922221.webp" alt="Profile Image">
+        
         <h2 id="profile-username">Your Username</h2>
         <p id="profile-email">your.email@example.com</p>
         <button class="bttn" onclick="toggleEditMode()">Edit Profile</button>
     </div>
 
+
     <form id="edit-form" class="container4 edit-mode">
         <label for="newUsername">Username:</label>
         <input type="text" id="newUsername" placeholder="Enter your new username" required>
+        <div class="Errors"><span id="User_error"></span></div>
 
         <label for="newEmail">Email:</label>
         <input type="email" id="newEmail" placeholder="Enter your new email" required>
+        <div class="Errors"><span id="email_error"></span></div>
 
         <label for="newPassword">Password:</label>
         <input type="password" id="newPassword" placeholder="Enter your new password" required>
+        <div class="Errors"><span id="error_pass"></span></div>
 
         <button class="bttn" type="button" onclick="updateProfile()">Update Profile</button>
         <button class="bttn" type="button" onclick="toggleEditMode()">Cancel</button>
     </form>
 
     <script>
+
+        //this function for editing the form
         function toggleEditMode() {
             var container = document.getElementById("profile-container");
             var form = document.getElementById("edit-form");
-            
             container.classList.toggle("edit-mode");
+            //if the class exit it'll add , 
+            //If the form is currently hidden (display is "none" or an empty string),
+            // it sets the display property to "block" (showing the form); 
+            //otherwise, it sets it to "none" (hiding the form).
             form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
         }
+
+
+
+const UserId = window.location.hash.substring(1);//تمشي بعد الهاش واحد 
+ var userId = sessionStorage.getItem("UserID");
 
         function updateProfile() {
             var newUsername = document.getElementById("newUsername").value;
             var newEmail = document.getElementById("newEmail").value;
+            var newPassword = document.getElementById('newPassword').value;
+            let Error =document.getElementById('User_error')
 
-            document.getElementById("profile-username").innerText = newUsername;
-            document.getElementById("profile-email").innerText = newEmail;
 
-            toggleEditMode(); // Hide the form after updating
-        }
+            
+
+    /********************The validation Form ********************/
+            // Check if any field is empty
+   
+
+    // let confirmpass = document.getElementById('confirm').value;
+
+
+    // Validate username
+    if (newUsername.trim() === '') {
+        document.getElementById('User_error').innerText = 'Username is required';
+        return false;
+    } else {
+        document.getElementById('User_error').innerText = '';
+    }
+
+    // Validate email
+    if (newEmail.trim() === '' || !/^\S+@\S+\.\S+$/.test(newEmail)) {
+        document.getElementById('email_error').innerText = 'Email is required and should written in a right format';
+        return false;
+    } else {
+        document.getElementById('email_error').innerText = '';
+    }
+
+    // Validate password
+    // if (newPassword.length < 5 || !/[a-zA-Z]/.test(password) || !/\d/.test(password)) {
+    //     document.getElementById('error_pass').innerText = 'Password should be at least 5 characters and Password should have both letters and numbers';
+    //     return false;
+    // }  
+    //     else {
+    //     document.getElementById('error_pass').innerText = '';
+    // }
+
+    // return true;
+
+        // If all validation passes, you can proceed with updating the profile
+        // Add your updateProfile() logic here
+  
+
+
+/*************************************************************************************/
+//for updating
+
+     const createdate={
+                        userID:userId,
+                        UserName: document.getElementById('newUsername').value,
+                        Password: document.getElementById('newPassword').value ,
+                        Email: document.getElementById('newEmail').value,  
+                     };
+
+
+        console.log(createdate);
+         fetch('http://localhost/Master-pes/master-pesss/API/admin/user_crud/update.php', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(createdate),
+                       
+  
+                    }) 
+
+                    toggleEditMode(); // Hide the form after updating
+
+}
+
+
+
+
+ /********************Fetching the profile (Reading the information as an ID of the user)********************/
+ 
+            //read for the form  (get function)
+    document.addEventListener("DOMContentLoaded",  () => {
+                // const eventContainer = document.getElementById('tablee');
+               
+                console.log(userId)
+
+               
+        fetch(`http://localhost/Master-pes/master-pesss/API/admin/user_crud/show_id.php?id=${userId}`)
+                .then(response => response.json())
+                .then(user => {
+                    console.log(user)
+                    document.getElementById("profile-username").innerText = user[0].UserName;
+                    document.getElementById("profile-email").innerText = user[0].Email;
+
+
+                    document.getElementById('profile-username').value = user[0].UserName;
+                    document.getElementById('profile-email').value = user[0].Email;
+                    document.getElementById('newUsername').value = user[0].UserName;
+                    document.getElementById('newEmail').value = user[0].Email;
+                 
+                    // document.getElementById('newPassword').value = user[0].Password;
+
+         });
+      })
+      .catch(error => console.error('Error:', error));
+
+
+      
+    /********************************Updating Fetch*************************************/                
+ 
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
     </script>
 
 </body>

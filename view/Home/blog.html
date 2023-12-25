@@ -8,6 +8,16 @@
     <!-- Box-icon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!--
+        ion icon
+    -->
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,400&display=swap');
 *{
@@ -465,75 +475,130 @@ header.shadow .logo{
     </style>
 </head>
 <body>
-    <header class="header">
-     
-        <!--nav par-->
-             <!--logo-->
-        <nav class="nav container1">
-          <a href="index.html" class="nav__logo">
-             <img src="assets/images/1.PNG" alt="" class="nav__logo-img">
-          </a>
-  <!--list-->
-  <div class="nav__menu" id="nav-menu">
-    <ul class="nav__list">
-        <li class="nav__item">
-            <a href="index.html" class="nav__link ">Home</a>
-        </li>
+    
+<!--=========================================== HEADER ==========================================================-->
+<header class="header">
+    <!--header top-->
+   
+    <!--nav par-->
+         <!--logo-->
+    <nav class="nav container1 ">
+      <a href="index.html" class="nav__logo">
+         <img src="../Home/assets/images/1.PNG" alt="" class="nav__logo-img"> 
+        </a>
+<!-----------------------menu main --------------------------------------->
+<!--list-->
 
-        <li class="nav__item">
-            <a href="../Home/ShopPages/shop.html" class="nav__link">Shop</a>
-        </li>
+<div class="nav__menu " id="nav-menu" >
+<ul class="nav__list ">
+    <li class="nav__item hideOnMobile">
+        <a href="../index.html" class="nav__link active-link">Home</a>
+    </li>
 
-        <li class="nav__item">
-            <a href="../Home/profilePage/profile.html" class="nav__link">My Account</a>
-        </li>
+    <li class="nav__item hideOnMobile">
+        <a href="../ShopPages/shop.html" class="nav__link">Shop</a>
+    </li>
 
-        <li class="nav__item">
-            <a href="blog.html" class="nav__link active-link">Stories</a>
-        </li>
+    
+    <li class="nav__item hideOnMobile">
+        <a href="../contact-us-page/index.html" class="nav__link">Contact.Us</a>
+    </li>
 
-        <li class="nav__item">
-            <a href="Login/login.html" class="nav__link">Login</a>
-        </li>
+    <li class="nav__item hideOnMobile">
+        <a href="../profilePage/profile.html" class="nav__link">My.Account</a>
+    </li>
 
-        <li class="nav__item">
-            <a href="../Home/Login/bussiness.html" class="nav__link">Create Store</a>
-        </li>
+    <li class="nav__item hideOnMobile">
+        <a href="../blog.html" class="nav__link">Stories</a>
+    </li>
 
-    </ul>
+    <li class="nav__item hideOnMobile">
+        <a href="../Home/Login/login.html" class="nav__link"></a>
+    </li>
 
-    <!--search-->
-<div class="header__search">
-    <input 
-        type="text"
-        placeholder="search items"
-        class="form__input"
-    />
+    <li class="nav__item  menu-Button" onclick="showSideBar()">
+        <a href="#"><ion-icon name="menu-outline" style="font-size: 50px;"></ion-icon></a>
+   </li>
+   </ul>
 
-    <button class="search__btn">
-        <img src="assets/images/img/search.png" alt="" />
-    </button>
+   
+
+<!--card and wishlist and person-->
+    <!--WishList-->
+    <div class="header__user-actions">
+        <a href="../wishlist.html" class="header__action-btn">
+            <ion-icon name="heart-outline" style="color: #000;"></ion-icon>
+
+            <span class="count" >0</span>
+        </a>
+
+
+        <!--card -->
+        <a href="../ShopPages/addToCart.html "  class="header__action-btn add-to-cart-btn" id="cartButton">
+            <ion-icon name="bag-outline" style="color: #000;"></ion-icon>
+            <span class="count" id="cartCount">0</span>
+        </a>
 </div>
 
 
- </div>
+</div>
+</header>
+<!---------------------------------------------- parmenant menu------------------------------------------------------------------>
+<header>
 
-   <!--card and wishlist and person-->
-        <!--WishList-->
-        <div class="header__user-actions">
-            <a href="wishlist.html" class="header__action-btn">
-                 <img src="assets/images/img/icon-heart.svg" alt="">
+<!--list-->
+<div class="nav__menu " id="nav-menu" >
+<ul class="nav__list sidebar">
+    <li onclick="hideSidebar()"><a href="#"><ion-icon name="close-circle-outline"></ion-icon></a></li>
+    <li class="nav__item">
+        <a href="../index.html" class="nav__link active-link">Home</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../ShopPages/shop.html" class="nav__link">Shop</a>
+    </li>
+
     
-                <span class="count" >0</span>
-            </a>
-    
-    
-            <!--card -->
-            <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
-                <img src="assets/images/img/icon-cart.svg" alt="">
-                <span class="count" id="cartCount">0</span>
-            </a>
-    </div>
+    <li class="nav__item">
+        <a href="../contact-us-page/index.html" class="nav__link">Contact Us</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../profilePage/profile.html" class="nav__link">My Account</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../blog.html" class="nav__link">Stories</a>
+    </li>
+
+    <li class="nav__item">
+        <a href="../Home/Login/login.html" class="nav__link"></a>
+    </li>
+
+  
+
+
+
+</ul>
+
+
+
+<!--card and wishlist and person-->
+    <!--WishList-->
+    <!-- <div class="header__user-actions">
+        <a href="wishlist.html" class="header__action-btn">
+             <img src="assets/images/img/icon-heart.svg" alt="">
+
+            <span class="count" >0</span>
+        </a>
+
+ -->
+        <!--card -->
+        <!-- <a href="../Home/ShopPages/addToCart.html" class="header__action-btn add-to-cart-btn" id="cartButton">
+            <img src="assets/images/img/icon-cart.svg" alt="">
+            <span class="count" id="cartCount">0</span>
+        </a>
+</div> -->
 </nav>
 </header>    
 
